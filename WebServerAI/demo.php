@@ -10,7 +10,7 @@
     </head>
     <body>
     <script type="module">
-        import WebServerAI from 'assets/AI/js/webserverai.js'
+        import WebServerAI from './assets/AI/js/webserverai.js'
         let wsc = new WebServerAI({
             enabled: true,
             theme: 'dark',
