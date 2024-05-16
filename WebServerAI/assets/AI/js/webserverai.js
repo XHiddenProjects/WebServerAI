@@ -79,20 +79,6 @@ class WebServerAI{
          sel = textarea.value.substring(start, end);
         textarea.value =  textarea.value.substring(0,start) + replacementText + textarea.value.substring(end,len);
     }
-    #getApps(){
-        let lng='';
-        const x = JSON.parse(this.request(this.origin+'/WebServerAI/libs/ai_appInstaller.php?apptype=get')),
-            keys = Object.keys(x),
-            values = Object.values(x);
-        for(let i=0;i<keys.length;i++){
-            lng+='<li wsa-app-installed="'+values[i].installed+'" app-name="'+keys[i]+'" class="wsa-app-list-item">'+keys[i]+(values[i].installed ? '<em>(installed)</em>' : '')+'</li>';
-        }
-        return lng;
-    }
-    #getFolders(){
-        const path = this.request(this.origin+'/WebServerAI/libs/ai_scanner.php');
-        return path;
-    }
     /**
      * Loads up the AI chatbox
      */
@@ -108,6 +94,7 @@ class WebServerAI{
             chatBox.setAttribute('ondragstart', 'dragBlock(event)');
             chatBox.setAttribute('ondragend', 'endDragBlock(event)');
             chatBox.innerHTML = `<div class="wsa-toggle-btn wsa-opened"></div>`;
+            document.querySelector('head').innerHTML+='<link rel="stylesheet" href="'+this.origin+'/WebServerAI/assets/AI/css/webserverai.min.css"/>';
             const container = document.createElement('div');
             container.classList.add('wsa-container');
             container.innerHTML = `<h2 class="wsa-title">WebServerAI - XHiddenProjects <span class="wsa-version">v`+this.request(this.origin+'/WebServerAI/data/settings.json?u='+this.uniqid(),true)['AI']['Version']+`</span></h2>
