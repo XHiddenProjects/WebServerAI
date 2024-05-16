@@ -6,11 +6,11 @@
         <meta name="author" content="XHiddenProjects">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="./assets/AI/css/webserverai.css"/>
+        <link rel="stylesheet" href="assets/AI/css/webserverai.css"/>
     </head>
     <body>
     <script type="module">
-        import WebServerAI from './assets/AI/js/webserverai.js'
+        import WebServerAI from 'assets/AI/js/webserverai.js'
         let wsc = new WebServerAI({
             enabled: true,
             theme: 'dark',
