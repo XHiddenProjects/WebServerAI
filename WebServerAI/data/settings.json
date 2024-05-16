@@ -1,0 +1,9 @@
+{
+    "AI":{
+        "Name": "WebServerAI",
+        "Version": "0.0.1",
+        "Updated": "05/03/2024",
+        "ResponceTime": 1000
+    },
+    "User": "Guest"
+}
