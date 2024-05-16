@@ -106,6 +106,90 @@ class Listener{
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'textarea',style:{}});
                             break;
+                            case 'button':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'button',type: 'button',style:{}});
+                            break;
+                            case 'submit':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'button',type: 'submit',style:{}});
+                            break;
+                            case 'reset':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'button',type: 'reset',style:{}});
+                            break;
+                            case 'checkbox':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'checkbox',style:{}});
+                            break;
+                            case 'radio':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'radio',style:{}});
+                            break;
+                            case 'inputcolor':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'color',style:{}});
+                            break;
+                            case 'inputdate':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'date',style:{}});
+                            break;
+                            case 'inputdatetimelocal':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'datetime-local',style:{}});
+                            break;
+                            case 'inputemail':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'email',style:{}});
+                            break;
+                            case 'inputfile':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'file',style:{}});
+                            break;
+                            case 'inputhidden':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'hidden',style:{}});
+                            break;
+                            case 'inputimg':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'image',style:{}});
+                            break;
+                            case 'inputmonth':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'month',style:{}});
+                            break;
+                            case 'inputnumber':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'number',style:{}});
+                            break;
+                            case 'inputpsw':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'password',style:{}});
+                            break;
+                            case 'inputrange':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'range',style:{}});
+                            break;
+                            case 'inputsearch':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'search',style:{}});
+                            break;
+                            case 'inputtel':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'tel',style:{}});
+                            break;
+                            case 'inputtime':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'time',style:{}});
+                            break;
+                            case 'inputurl':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'url',style:{}});
+                            break;
+                            case 'inputweek':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'input',type: 'week',style:{}});
+                            break;
                         }
                     break;
                     case 'remove':

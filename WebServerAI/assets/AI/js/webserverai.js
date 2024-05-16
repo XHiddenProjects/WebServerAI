@@ -126,9 +126,9 @@ class WebServerAI{
                                 <button class="wsa-btn wsa-clearBox" title="Clear"><i class="fa-solid fa-eraser"></i></button>
                             </div>
                             <div class="wsa-btn-group">
-                                <button class="wsa-btn wsa-dbq" title="Insert in-text Double quotes"><i class="fa-solid fa-quotes"></i></button>
-                                <button class="wsa-btn wsa-sgq" title="Insert in-text Single quotes"><i class="fa-solid fa-quote-left"></i></button>
-                                <button class="wsa-btn wsa-apt" title="Insert in-text Apostrophe"><i class="fa-solid fa-apostrophe"></i></button>
+                                <button class="wsa-btn wsa-dbq" title="Insert In-Text Double quotes"><i class="fa-solid fa-quotes"></i></button>
+                                <button class="wsa-btn wsa-sgq" title="Insert In-Text Single quotes"><i class="fa-solid fa-quote-left"></i></button>
+                                <button class="wsa-btn wsa-apt" title="Insert In-Text Apostrophe"><i class="fa-solid fa-apostrophe"></i></button>
                             </div>
                         </div>
                     </div>
@@ -313,7 +313,7 @@ class WebServerAI{
             });
             //hover selected element
             document.querySelector('html[wsa-active]').addEventListener('mouseover',(e)=>{
-                if(!e.target.matches('.wsa, .wsa *')){
+                if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName')){
                     e.target.classList.add('wsa-elemfocus');
                     e.target.addEventListener('mouseout',(o)=>{
                         e.target.classList.remove('wsa-elemfocus');

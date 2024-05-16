@@ -14,6 +14,25 @@ class Trainer{
        return preg_replace('/\.|\,|\;|\:|\?|\!/','',$str);
     }
     public function format(string $str){
+        # Reframe keywords
+        $str = preg_replace('/multiple choice/i','MultipleChoice',$str);
+        $str = preg_replace('/input color|color input/i','InputColor',$str);
+        $str = preg_replace('/input date|date input/i','InputDate',$str);
+        $str = preg_replace('/input datetime-local|datetime-local input/i','InputDateTimeLocal',$str);
+        $str = preg_replace('/input email|email input/i','InputEmail',$str);
+        $str = preg_replace('/input file|file input/i','InputFile',$str);
+        $str = preg_replace('/input hidden|hidden input/i','InputHidden',$str);
+        $str = preg_replace('/input image|input img|image input|img input/i','InputImg',$str);
+        $str = preg_replace('/input month|month input/i','InputMonth',$str);
+        $str = preg_replace('/input phone number|input telephone|input tel|phone number input|telephone input|tel input/i','InputTel',$str);
+        $str = preg_replace('/input number|number input/i','InputNumber',$str);
+        $str = preg_replace('/input password|input psw|password input|psw input/i','InputPsw',$str);
+        $str = preg_replace('/input range|range input/i','InputRange',$str);
+        $str = preg_replace('/input search|search input/i','InputSearch',$str);
+        $str = preg_replace('/input time|time input/i','InputTime',$str);
+        $str = preg_replace('/input url|url input/i','InputUrl',$str);
+        $str = preg_replace('/input week|week input/i','InputWeek',$str);
+        # Quotations/Apostrophe
         $str = preg_replace('/\\\"/','\\\\qq',$str);
         $str = preg_replace("/\\\'/",'\\\\q',$str);
         $str = preg_replace('/\\\`/','\\\\a',$str);
@@ -54,6 +73,71 @@ class Trainer{
                 break;
                 case 'textbox':
                     $AIStr.='INPUTTEXTBOX}||';
+                break;
+                case 'button':
+                    $AIStr.='BUTTON}||';
+                break;
+                case 'submit':
+                    $AIStr.='SUBMIT}||';
+                break;
+                case 'reset':
+                    $AIStr.='RESET}||';
+                break;
+                case 'checkbox':
+                    $AIStr.='CHECKBOX}||';
+                break;
+                case 'radio':
+                case 'multiplechoice':
+                    $AIStr.='RADIO}||';
+                break;
+                case 'inputcolor':
+                    $AIStr.='INPUTCOLOR}||';
+                break;
+                case 'inputdate':
+                    $AIStr.='INPUTDATE}||';
+                break;
+                case 'inputdatetimelocal':
+                    $AIStr.='INPUTDATETIMELOCAL}||';
+                break;
+                case 'inputemail':
+                    $AIStr.='INPUTEMAIL}||';
+                break;
+                case 'inputfile':
+                case 'upload':
+                    $AIStr.='INPUTFILE}||';
+                break;
+                case 'inputhidden':
+                    $AIStr.='INPUTHIDDEN}||';
+                break;
+                case 'inputimg':
+                    $AIStr.='INPUTIMG}||';
+                break;
+                case 'inputmonth':
+                    $AIStr.='INPUTMONTH}||';
+                break;
+                case 'inputnumber':
+                    $AIStr.='INPUTNUMBER}||';
+                break;
+                case 'inputpsw':
+                    $AIStr.='INPUTPSW}||';
+                break;
+                case 'inputrange':
+                    $AIStr.='INPUTRANGE}||';
+                break;
+                case 'inputsearch':
+                    $AIStr.='INPUTSEARCH}||';
+                break;
+                case 'inputtel':
+                    $AIStr.='INPUTTEL}||';
+                break;
+                case 'inputtime':
+                    $AIStr.='INPUTTIME}||';
+                break;
+                case 'inputurl':
+                    $AIStr.='INPUTURL}||';
+                break;
+                case 'inputweek':
+                    $AIStr.='INPUTWEEK}||';
                 break;
                 default:break;
             }
