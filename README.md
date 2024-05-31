@@ -37,3 +37,55 @@ In your _MAIN_ global `JavaScript` file. You must enter enter this
          * Checks the commands and then sends it to the AI and to process then execute.
         */
 ```
+***
+### Using the AI
+This AI uses _direct quotations_. 
+
+Examples:
+```
+Example 1:
+"Hello World" is the example of a statment to print
+> Insert a heading of a size of 1 that says "Hello World"
+
+Example 2:
+"div" is the location where the paragraph should be placed
+> Insert paragraph and place it inside of "div"
+
+Example 3:
+"div" is the element to look for. "32px" is the size to update
+> Update "div" to size "32px"
+```
+
+This also comes with a _cursor-targeting element (CTE)_ where you can hover over elements and click to quick insert the correct elements` tagName, class names, and IDs in the correct format.
+
+***
+## Extensions
+
+### Adding Extensions
+To add extensions place the following order:
+```js
+   // Make sure this is added inside of the WebServerAI object!
+   extensions:{
+      extension_name:{
+         active: true, //true to activate
+         config:{
+            //configuration (optional, if extension doesn't require it)
+         },
+         startup:{
+            styles:[], // Extensions` style files
+            scripts:[] // Extensions` script files
+         }
+      }
+   }
+```
+
+### Creating an Extensions
+Create your extension in the _/WebServerAI/build/`{your_extension_name}`_
+
+**Note: Excepted Files**
+* HTML/HTM
+* CSS
+* JS
+* Media files: _(Images, Videos, Audios, ...)_
+
+
