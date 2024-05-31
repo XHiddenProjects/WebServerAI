@@ -1,5 +1,5 @@
-import Listener from '/WebServerAI/assets/AI/js/Learner.js';
-import Extensions from '/WebServerAI/assets/AI/js/extenstions.js';
+import Listener from '/WebServerAI/assets/AI/js/components/Learner.js';
+import Extensions from '/WebServerAI/assets/AI/js/components/extenstions.js';
 var responce;
 
 window.WebServerAI = class {
@@ -352,7 +352,7 @@ window.WebServerAI = class {
             });
             window.addEventListener('load',()=>{
                     const sc = document.createElement('script');
-                    sc.src = this.origin+'/WebServerAI/assets/AI/js/dragdrop.min.js';
+                    sc.src = this.origin+'/WebServerAI/assets/AI/js/components/dragdrop.min.js';
                     sc.type = 'text/javascript';
                     document.body.appendChild(sc);
             });

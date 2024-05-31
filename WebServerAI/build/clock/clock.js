@@ -1,5 +1,5 @@
 // Import "Extensions" from extension.js to allow usages
-import Extensions from "/WebServerAI/assets/AI/js/extenstions.js";
+import Extensions from "/WebServerAI/assets/AI/js/components/extenstions.js";
 // START LOAD-UP (Required)
 const url = new URL(import.meta.url),
 ext = new Extensions(),
