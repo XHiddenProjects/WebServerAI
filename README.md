@@ -13,6 +13,7 @@ In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
   // Import WebServerAI from the location of the WebServerAI folder
   import WebServerAI from '//WebServerAI/assets/AI/js/webserverai.js';
   // Access the class from WebServerAI
+   if(window.WebServerAI!==undefined){
         let wsc = new WebServerAI({
             enabled: true, // Activate the AI
             theme: 'dark', // Light/Dark theme
@@ -36,6 +37,7 @@ In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
          * Waits until user press "enter" on the UI textbox.
          * Checks the commands and then sends it to the AI and to process then execute.
         */
+      }
 ```
 ***
 ### Using the AI
