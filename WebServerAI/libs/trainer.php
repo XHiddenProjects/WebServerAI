@@ -32,6 +32,20 @@ class Trainer{
         $str = preg_replace('/input time|time input/i','InputTime',$str);
         $str = preg_replace('/input url|url input/i','InputUrl',$str);
         $str = preg_replace('/input week|week input/i','InputWeek',$str);
+        $str = preg_replace('/title page/i','TitlePage',$str);
+        $str = preg_replace('/bi-directional isolation|bi directional isolation/i','bdi',$str);
+        $str = preg_replace('/bi-directional override|bi directional override/i','bdo',$str);
+        $str = preg_replace('/line break|break line/i','br',$str);
+        $str = preg_replace('/select all/i','selectall',$str);
+        $str = preg_replace('/block code|code block/i','CodeBlock',$str);
+        $str = preg_replace('/inline code|code inline/i','CodeInline',$str);
+        $str = preg_replace('/column group/i','colgroup',$str);
+        $str = preg_replace('/data block/i','datablock',$str);
+        $str = preg_replace('/data list/i','datalist',$str);
+        $str = preg_replace('/delete part/i','del',$str);
+        $str = preg_replace('/definition element/i','dfn',$str);
+        $str = preg_replace('/description list/i','dl',$str);
+        $str = preg_replace('/description term/i','dt',$str);
         # Quotations/Apostrophe
         $str = preg_replace('/\\\"/','\\\\qq',$str);
         $str = preg_replace("/\\\'/",'\\\\q',$str);
@@ -41,17 +55,108 @@ class Trainer{
         for($i=0;$i<count($str);$i++){
             switch(strtolower($this->removeGrammar($str[$i]))){
                 case 'add':
+                case 'added':
                 case 'insert':
-                case 'build':
                     $AIStr .= '{ADD_';
                 break;
                 case 'remove':
                 case 'delete':
                      $AIStr .= '{REMOVE_';
                 break;
+                case 'build':
+                    $AIStr.='{BUILD_';
+                break;
                 default:break;
             }   
             switch(strtolower($this->removeGrammar($str[$i]))){
+                case 'abbr':
+                case 'abbreviation':
+                    $AIStr.='ABBR}||';
+                break;
+                case 'address':
+                    $AIStr.='ADDRESS}||';
+                break;
+                case 'area':
+                    $AIStr.='AREA}||';
+                break;
+                case 'article':
+                    $AIStr.='ARTICLE}||';
+                break;
+                case 'aside':
+                    $AIStr.='ASIDE}||';
+                break;
+                case 'audio':
+                    $AIStr.='AUDIO}||';
+                break;
+                case 'base':
+                    $AIStr.='BASE}||';
+                break;
+                case 'bdi':
+                    $AIStr.='BDI}||';
+                break;
+                case 'bdo':
+                    $AIStr.='BDO}||';
+                break;
+                case 'blockquote':
+                    $AIStr.='BLOCKQUOTE}||';
+                break;
+                case 'br':
+                case 'break':
+                    $AIStr.='BR}||';
+                break;
+                case 'canvas':
+                    $AIStr.='CANVAS}||';
+                break;
+                case 'caption':
+                    $AIStr.='CAPTION}||';
+                break;
+                case 'codeinline':
+                    $AIStr.='CODEINLINE}||';
+                break;
+                case 'codeblock':
+                    $AIStr.='CODEBLOCK}||';
+                break;
+                case 'col':
+                case 'column':
+                    $AIStr.='COL}||';
+                break;
+                case 'colgroup':
+                case 'columngroup':
+                    $AIStr.='COLGROUP}||';
+                break;
+                case 'data':
+                case 'datablock':
+                    $AIStr.='DATABLOCK}||';
+                break;
+                case 'datalist':
+                    $AIStr.='DATALIST}||';
+                break;
+                case 'dd':
+                case 'description':
+                    $AIStr.='DD}||';
+                break;
+                case 'del':
+                    $AIStr.='DEL}||';
+                break;
+                case 'details':
+                    $AIStr.='DETAILS}||';
+                break;
+                case 'dfn':
+                    $AIStr.='DFN}||';
+                break;
+                case 'dialog':
+                    $AIStr.='DIALOG}||';
+                break;
+                case 'div':
+                case 'container':
+                    $AIStr.='DIV}||';
+                break;
+                case 'dl':
+                    $AIStr.='DL}||';
+                break;
+                case 'dt':
+                    $AIStr.='DT}||';
+                break;
                 case 'heading':
                     $AIStr.='HEADING}||';
                 break;
@@ -61,10 +166,17 @@ class Trainer{
                 case 'paragraph':
                     $AIStr.='PARAGRAPH}||';
                 break;
+                case 'titlepage':
+                    $AIStr.='TITLEPAGE}||';
+                break;
                 case 'link':
                 case 'hyperlink':
                     $AIStr.='HLINK}||';
                 break;
+                case 'source':
+                    $AIStr.='SOURCE}||';
+                break;
+                # Form elements
                 case 'form':
                     $AIStr.='FORM}||';
                 break;
@@ -139,9 +251,16 @@ class Trainer{
                 case 'inputweek':
                     $AIStr.='INPUTWEEK}||';
                 break;
+
                 default:break;
             }
             switch(strtolower($this->removeGrammar($str[$i]))){
+                case 'select':
+                    $AIStr.='{QUERY_';
+                break;
+                case 'selectall':
+                    $AIStr.='{QUERYALL_';
+                break;
                 case 'size':
                     $AIStr.='{SIZE_';
                 break;
@@ -155,11 +274,16 @@ class Trainer{
                 case 'name':
                     $AIStr.='{NAME_';
                 break;
+                case 'value':
+                case 'val':
+                    $AIStr.='{VALUE_';
+                break;
                 #attributes
                 case 'url':
                 case 'href':
                 case 'goes':
                 case 'redirects':
+                case 'locates':
                     $AIStr.='{HURL_';
                 break;
                 case 'target':
@@ -170,13 +294,44 @@ class Trainer{
                 case 'title':
                     $AIStr.='{TITLE_';
                 break;
-
+                case 'dir':
+                case 'direction':
+                    $AIStr.='{DIR_';
+                break;
+                case 'cite':
+                case 'citation':
+                    $AIStr.='{CITE_';
+                break;
+                case 'src':
+                    $AIStr.='{SRC_';
+                break;
+                case 'controls':
+                    $AIStr.='{CONTROLS}||';
+                break;
                 case 'inside':
+                case 'located':
                     $AIStr.='{LOCATION_';
+                break;
+                case 'shape':
+                    $AIStr.='{SHAPE_';
+                break;
+                case 'coords':
+                case 'coordinates':
+                    $AIStr.='{COORDS_';
+                break;
+                case 'alt':
+                    $AIStr.='{ALT_';
+                break;
+                case 'type':
+                    $AIStr.='{TYPE_';
+                break;
+                case 'open':
+                case 'opened':
+                    $AIStr.='{OPEN}||';
                 break;
                 # form
                 case 'required':
-                    $AIStr.='{REQUIRED}';
+                    $AIStr.='{REQUIRED}||';
                 break;
                 case 'placeholder':
                     $AIStr.='{PLACEHOLDER_';
@@ -201,6 +356,9 @@ class Trainer{
                 case 'strikethrough':
                     $AIStr.='{STRIKETHROUGH}||';
                 break;
+                case 'align':
+                    $AIStr.='{ALIGN_';
+                break;
                 default:break;
             }
             switch(strtolower($str[$i])){
@@ -222,7 +380,8 @@ class Trainer{
             }
             if(preg_match('/[\"](.*?)[\"]/',$str[$i])){
                 preg_match('/[\"](.*?)[\"]/',$str[$i],$matches);
-                $AIStr.=preg_replace('/\\\\a/','`',preg_replace('/\\\\q/',"'",preg_replace('/\\\\qq/','"',$matches[1]))).'}||';
+                $AIStr.=preg_replace('/\\\\a/','`',preg_replace('/\\\\q/',"'",preg_replace('/\\\\qq/','"',preg_replace('/\\\\n/','
+',$matches[1])))).'}||';
             }
             
         }

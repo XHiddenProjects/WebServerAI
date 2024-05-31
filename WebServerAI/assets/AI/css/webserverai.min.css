@@ -1,3 +1,4 @@
+:host, 
 :root{
     --wsa-light-bg: #dedede;
     --wsa-light-color: #000;
@@ -51,9 +52,11 @@
     --wsa-element-focus: #124254;
     --wsa-target-tag: rgba(149,0,209,0.70);
     --wsa-target-attr: rgba(14,37,227,0.70);
+    --wsa-elemName-bg: rgba(241, 241, 241, 0.8);
 
 }
-*{
+.wsa,
+.wsa *{
     margin: 0;
     padding: 0;
     box-sizing: content-box;
@@ -152,6 +155,7 @@
 .wsa .wsa-title .wsa-version{
     font-size: 15px;
     font-weight: bold;
+    cursor: help;
 }
 .wsa .wsa-container{
     position: relative;
@@ -216,9 +220,8 @@
     border:0;
     outline: none;
     resize: none;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
     font-size: var(--wsa-txtarea-size);
+    padding: 5px;
 }
 .wsa[wsa-theme="light"] .wsa-ui textarea{
     background-color: var(--wsa-light-txtarea-bg);
@@ -297,8 +300,11 @@
 .wsa .wsa-editor .wsa-controllers{
     display: flex;
     flex-direction: column;
-    flex: 1 4 auto;
+    flex: 1 2 auto;
     align-items: center;
+}.wsa .wsa-editor .wsa-controllers:last-child{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 .wsa[wsa-theme="light"] .wsa-editor .wsa-controllers{
     background-color: var(--wsa-light-editor-controller);
@@ -332,7 +338,24 @@
 .wsa .wsa-btn-group{
     display: inline-flex;
 }
-
+.wsa .wsa-editor-actions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.wsa .wsa-editor-actions button{
+    background: transparent;
+    height: 100%;
+    border: 0;
+    cursor: pointer;
+    font-size: 5vh;
+    padding: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
 .wsa-drop-bubble{
     position: absolute;
     z-index: 2000;
@@ -347,7 +370,7 @@
     width: 410px;
 }
 
-.wsa-elemfocus{
+[wsa-elemfocus]{
     border: 3px dotted var(--wsa-element-focus);
     padding: .8rem;
 }
@@ -356,6 +379,8 @@
     top:0;
     left:5px;
     z-index: 2000;
+    background-color: var(--wsa-elemName-bg);
+    font-weight: 500;
 }
 [wsa-target-container]{
     position: relative;
@@ -368,4 +393,3 @@
     color: var(--wsa-target-attr);
     font-weight: 600;
 }
-

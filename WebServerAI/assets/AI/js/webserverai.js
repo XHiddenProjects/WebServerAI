@@ -1,6 +1,8 @@
 import Listener from '/WebServerAI/assets/AI/js/Learner.js';
+import Extensions from '/WebServerAI/assets/AI/js/extenstions.js';
 var responce;
-class WebServerAI{
+
+window.WebServerAI = class {
     /**
      * Create the WebServerAI library
      * @param {Object} settings Settings to the UI
@@ -14,9 +16,42 @@ class WebServerAI{
             save: (settings.hasOwnProperty('history') ? (settings.history.hasOwnProperty('save') ? settings.history.save : 'session') : 'session')
         }
         this.enabled = (settings.hasOwnProperty('enabled') ? settings.enabled : true);
+        const extensions = new Extensions();
         this.origin = window.location.origin;
+        if(settings.hasOwnProperty('extensions')){
+            for(let e in settings.extensions){
+                if(settings.extensions[e].active){
+                    extensions.activate(e, (settings.extensions[e].hasOwnProperty('config') ? settings.extensions[e].config : null));
+                        if(settings.extensions[e].hasOwnProperty('startup')){
+                            for(let s in settings.extensions[e].startup){
+                                if(s==='styles'){
+                                    for(let i=0;i<settings.extensions[e].startup[s].length;i++){
+                                        const style = document.createElement('link');
+                                        style.rel = 'stylesheet';
+                                        style.setAttribute('wsa-build',e);
+                                        style.href = this.origin+settings.extensions[e].startup[s][i]+'?extensionID='+extensions.lookup(e,'id',extensions.list());
+                                        document.head.appendChild(style);
+                                    }
+                                }else if(s==='scripts'){
+                                    for(let i=0;i<settings.extensions[e].startup[s].length;i++){
+                                        const script = document.createElement('script');
+                                        script.type = 'module';
+                                        script.setAttribute('wsa-build',e);
+                                        script.src = this.origin+settings.extensions[e].startup[s][i]+'?extensionID='+extensions.lookup(e,'id',extensions.list())+(extensions.getBuildConfig(e,extensions.list()).length>0 ? '&'+extensions.getBuildConfig(e,extensions.list()).join('&') : '');
+                                        document.body.appendChild(script);
+                                    }
+                                }
+                            }
+                        }
+                }
+            }
+            sessionStorage.setItem('wsa_extensions', JSON.stringify(extensions.list()));
+        }
+
+       
         this.cmdID = 0;
         this.botName='';
+        this.lang = '';
         this.botInfo;
         this.getHistory = sessionStorage.getItem('wsa-history')||localStorage.getItem('wsa-history');
         this.history=(this.getHistory ? this.getHistory.split(',') : []);
@@ -29,7 +64,7 @@ class WebServerAI{
      * @param {Boolean} [more_entropy=false] Generate 23 characters instend of 13 
      * @returns 
      */
-    uniqid(prefix='', more_entropy=false){
+    #uniqid(prefix='', more_entropy=false){
         return prefix+(Date.now().toString(36) + Math.random().toString(36).substr(2)).substr(0,(more_entropy ? 23 : 13));
     }
     /**
@@ -80,10 +115,23 @@ class WebServerAI{
         textarea.value =  textarea.value.substring(0,start) + replacementText + textarea.value.substring(end,len);
     }
     /**
+     * Converts datetime to current users timezone
+     * @param {String} date DateTime to format
+     * @returns {String} Formatted datetime
+     */
+    #formatDate(date){
+        const splitDate = date.split('/');
+        const d = new Date(parseInt(splitDate[2]),parseInt(splitDate[0])-1,parseInt(splitDate[1]));
+        return d.toLocaleDateString(navigator.language);
+    }
+    /**
      * Loads up the AI chatbox
      */
     load(){
         if(this.enabled){
+            this.botInfo = this.request(this.origin+'/WebServerAI/data/settings.json?u='+this.#uniqid(),true)['AI'];
+            this.lang = this.request(this.origin+'/WebServerAI/data/languages.json?u='+this.#uniqid(),true)['languages'][navigator.language];
+            this.botName = this.botInfo['Name'];
             document.querySelector('html').setAttribute('wsa-active','');
             let chatBox = document.createElement('div');
             chatBox.setAttribute('wsa-theme',this.theme);
@@ -97,25 +145,32 @@ class WebServerAI{
             document.querySelector('head').innerHTML+='<link rel="stylesheet" href="'+this.origin+'/WebServerAI/assets/AI/css/webserverai.min.css"/>';
             const container = document.createElement('div');
             container.classList.add('wsa-container');
-            container.innerHTML = `<h2 class="wsa-title">WebServerAI - XHiddenProjects <span class="wsa-version">v`+this.request(this.origin+'/WebServerAI/data/settings.json?u='+this.uniqid(),true)['AI']['Version']+`</span></h2>
+            container.innerHTML = `<h2 class="wsa-title">`+this.lang['dictionary'].title+` <span class="wsa-version" title="`+this.#formatDate(this.botInfo['Updated'])+`">v`+this.botInfo['Version']+` (`+this.lang.name+`)</span></h2>
                 <div class="wsa-ui">
                     <div class="wsa-history"></div>
                     <div class="wsa-editor">
-                        <textarea class="wsa-userinput" tab-index="1"></textarea>
+                        <div class="wsa-editor-actions wsa-controllers">
+                            <button type="button" class="wsa-editor-send wsa-btn" title="`+this.lang['dictionary'].nav.send+`">
+                                <i class="fa-solid fa-share fa-rotate-180"></i>
+                            </button>
+                        </div>
+                        <textarea class="wsa-userinput" tab-index="1" spellcheck="false" autocomplete="off"></textarea>
                         <div class="wsa-controllers">
                             <div class="wsa-btn-group">
-                                <button class="wsa-btn wsa-history-up" title="Latest History"><i class="fa-solid fa-clock-rotate-left fa-flip-horizontal"></i></button>
-                                <button class="wsa-btn wsa-history-down" title="Past History"><i class="fa-solid fa-clock-rotate-left"></i></button>
-                                <button class="wsa-btn wsa-history-clear" title="Clear History"><i class="fa-solid fa-broom-wide"></i></button>
+                                <button class="wsa-btn wsa-history-up" title="`+this.lang['dictionary'].nav.lastestHistory+`"><i class="fa-solid fa-clock-rotate-left fa-flip-horizontal"></i></button>
+                                <button class="wsa-btn wsa-history-down" title="`+this.lang['dictionary'].nav.pastHistory+`"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                                <button class="wsa-btn wsa-history-clear" title="`+this.lang['dictionary'].nav.clearHistory+`"><i class="fa-solid fa-broom-wide"></i></button>
                             </div>
                             <div class="wsa-btn-group">
-                                <button class="wsa-btn wsa-theme-change" wsa-current-theme="`+this.theme+`" title="Change theme">`+(this.theme==='light' ?  '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon-stars"></i>')+`</button>
-                                <button class="wsa-btn wsa-clearBox" title="Clear"><i class="fa-solid fa-eraser"></i></button>
+                                <button class="wsa-btn wsa-theme-change" wsa-current-theme="`+this.theme+`" title="`+this.lang['dictionary'].nav.changeTheme+`">`+(this.theme==='light' ?  '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon-stars"></i>')+`</button>
+                                <button class="wsa-btn wsa-clearBox" title="`+this.lang['dictionary'].nav.clear+`"><i class="fa-solid fa-eraser"></i></button>
+                                <a href="https://github.com/XHiddenProjects/WebServerAI#readme" target="_blank"><button class="wsa-btn wsa-help" title="`+this.lang['dictionary'].nav.help+`"><i class="fa-solid fa-circle-question"></i></button></a>
                             </div>
                             <div class="wsa-btn-group">
-                                <button class="wsa-btn wsa-dbq" title="Insert In-Text Double quotes"><i class="fa-solid fa-quotes"></i></button>
-                                <button class="wsa-btn wsa-sgq" title="Insert In-Text Single quotes"><i class="fa-solid fa-quote-left"></i></button>
-                                <button class="wsa-btn wsa-apt" title="Insert In-Text Apostrophe"><i class="fa-solid fa-apostrophe"></i></button>
+                                <button class="wsa-btn wsa-dbq" title="`+this.lang['dictionary'].nav.intxtdbl+`"><i class="fa-solid fa-quotes"></i></button>
+                                <button class="wsa-btn wsa-sgq" title="`+this.lang['dictionary'].nav.intxtsgl+`"><i class="fa-solid fa-quote-left"></i></button>
+                                <button class="wsa-btn wsa-apt" title="`+this.lang['dictionary'].nav.intxtaps+`"><i class="fa-solid fa-apostrophe"></i></button>
+                                <button class="wsa-btn wsa-nl" title="`+this.lang['dictionary'].nav.intxtnl+`"><i class="fa-solid fa-file-dashed-line"></i></button>
                             </div>
                         </div>
                     </div>
@@ -123,8 +178,7 @@ class WebServerAI{
             `;
             chatBox.appendChild(container);
             document.body.appendChild(chatBox);
-            this.botInfo = this.request(this.origin+'/WebServerAI/data/settings.json?u='+this.uniqid(),true)['AI'];
-            this.botName = this.botInfo['Name'];
+            
         
             window.addEventListener('keydown',(e)=>{
                     let key = e.keyCode || e.which;
@@ -255,6 +309,10 @@ class WebServerAI{
                     const txtarea = document.querySelector('.wsa-userinput');
                     this.#replaceSelection(txtarea, this.#getSel(txtarea)+'\\\`');
                 });
+                document.querySelector('.wsa-nl').addEventListener('click',()=>{
+                    const txtarea = document.querySelector('.wsa-userinput');
+                    this.#replaceSelection(txtarea, this.#getSel(txtarea)+'\\n');
+                });
             const txtarea = document.querySelector('.wsa-userinput'),
                     historyUp = document.querySelector('.wsa-history-up'),
                     historyDown = document.querySelector('.wsa-history-down');
@@ -266,31 +324,31 @@ class WebServerAI{
                         e.preventDefault();
                         inc+=1;
                         if(inc > this.history.length-1){
-                            inc = inc-1;
+                            inc = 0;
                         }
-                        txtarea.value = (this.history[inc] ? this.history[inc] : '');
+                        txtarea.value = (this.history[inc] ? this.history[inc].replaceAll('&#34;','"').replaceAll('&#39;',"'") : '');
                     }else if(k==40){
                         e.preventDefault();
                         inc-=1;
                         if(inc < 0){
-                            inc = 0;
+                            inc = this.history.length-1;
                         }
-                        txtarea.value = (this.history[inc] ? this.history[inc] : '');
+                        txtarea.value = (this.history[inc] ? this.history[inc].replaceAll('&#34;','"').replaceAll('&#39;',"'") : '');
                     }
             });
             historyUp.addEventListener('click',()=>{
                 inc+=1;
                         if(inc > this.history.length-1){
-                            inc = inc-1;
+                            inc = 0;
                         }
-                        txtarea.value = (this.history[inc] ? this.history[inc] : '');
+                        txtarea.value = (this.history[inc] ? this.history[inc].replaceAll('&#34;','"').replaceAll('&#39;',"'")  : '');
             });
             historyDown.addEventListener('click',()=>{
                 inc-=1;
                         if(inc < 0){
-                            inc = 0;
+                            inc = this.history.length-1;
                         }
-                        txtarea.value = (this.history[inc] ? this.history[inc] : '');
+                        txtarea.value = (this.history[inc] ? this.history[inc].replaceAll('&#34;','"').replaceAll('&#39;',"'")  : '');
             });
             window.addEventListener('load',()=>{
                     const sc = document.createElement('script');
@@ -300,10 +358,10 @@ class WebServerAI{
             });
             //hover selected element
             document.querySelector('html[wsa-active]').addEventListener('mouseover',(e)=>{
-                if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName')){
-                    e.target.classList.add('wsa-elemfocus');
+                if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName, pre code, pre code *, code * , html, .code-toolbar .toolbar, .code-toolbar .toolbar *')){
+                    e.target.setAttribute('wsa-elemfocus','');
                     e.target.addEventListener('mouseout',(o)=>{
-                        e.target.classList.remove('wsa-elemfocus');
+                        e.target.removeAttribute('wsa-elemfocus');
                         if(e.target.parentElement.querySelector('.wsa-targetName'))
                             e.target.parentElement.querySelector('.wsa-targetName').remove();
                         e.target.parentElement.removeAttribute('wsa-target-container');
@@ -315,7 +373,25 @@ class WebServerAI{
                     e.target.parentElement.setAttribute('wsa-target-container','');
                 }
             });
+            document.querySelector('html[wsa-active]').addEventListener('click',(e)=>{
+                if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName')){
+                    const uit = e.target.tagName.toLowerCase()+(e.target.id ? '#'+e.target.id : '')+(e.target.classList.length > 0 ? '.'+e.target.className.replace(' ','.') : '');
+                    document.querySelector('.wsa-userinput').value+='"'+uit+'"';
+                }
+            });
         }
+        window.addEventListener('load',()=>{
+            //syntax hightlight
+            const hightlightStyle = document.createElement('link'),
+                highlightScript = document.createElement('script');
+            hightlightStyle.href = this.origin+'/WebServerAI/assets/AI/css/prismjs/default/prism.min.css';
+            hightlightStyle.rel = 'stylesheet';
+            hightlightStyle.type = 'text/css';
+            document.head.appendChild(hightlightStyle);
+            highlightScript.src =  this.origin+'/WebServerAI/assets/AI/js/prismjs/prism.min.js';
+            highlightScript.type = 'text/javascript';
+            document.body.appendChild(highlightScript);
+        });
     }
     /**
      * Triggers on users input from textarea
@@ -324,7 +400,8 @@ class WebServerAI{
      */
     submit(callback){
         if(this.enabled){
-            const txt = document.querySelector('.wsa-ui textarea');
+            const txt = document.querySelector('.wsa-ui textarea'),
+                submitbtn = document.querySelector('.wsa-ui .wsa-editor-send');
             txt.addEventListener('keydown', (e)=>{
                 let key = e.keyCode || e.which;
                 if(key===13){
@@ -332,6 +409,11 @@ class WebServerAI{
                     callback(this.#filter(txt.value));
                     txt.value = '';
                 }
+            });
+            submitbtn.addEventListener('click',(e)=>{
+                e.preventDefault();
+                callback(this.#filter(txt.value));
+                txt.value = '';
             });
         }
     }
@@ -384,7 +466,7 @@ class WebServerAI{
         }
         if(str.match(/^wsa --info$/)){
             setTimeout(()=>{
-            this.createCmd(this.botName, 'Name: '+this.botName+'<br/>Version: '+this.botInfo['Version']+'<br/>Updated: '+
+            this.createCmd(this.botName, this.lang['dictionary'].name+': '+this.botName+'<br/>'+this.lang['dictionary'].version+' '+this.botInfo['Version']+'<br/>'+this.lang['dictionary'].updated+': '+
             this.botInfo['Updated'], 'info');
             document.querySelector('.wsa-userinput').disabled = false;
             },this.botInfo['ResponceTime']);
@@ -399,10 +481,10 @@ class WebServerAI{
         if(str.match(/^wsa --help$/)){
             setTimeout(()=>{
                 this.createCmd(this.botName, `
-                <b>help</b> - Gives the list of commands<br/>
-                <b>clear{:int?}</b> - Clears out the entire history or a certain index<br/>
-                <b>info</b> - Returns the AI information<br/>
-                <b>connect {url}</b> - Connects you to another page<br/>
+                <b>help</b> - `+this.lang['dictionary'].cmd.help+`<br/>
+                <b>clear{:int?}</b> - `+this.lang['dictionary'].cmd.clear+`<br/>
+                <b>info</b> - `+this.lang['dictionary'].cmd.info+`<br/>
+                <b>connect {url}</b> - `+this.lang['dictionary'].cmd.connect+`<br/>
             `,'info');
             document.querySelector('.wsa-userinput').disabled = false;
         },this.botInfo['ResponceTime']);
@@ -419,10 +501,10 @@ class WebServerAI{
                     addElem.innerHTML = `<p class="wsa-user">`+user+`:</p>`;
                     addElem.innerHTML += `<p class="wsa-cmd"><span class="wsa-txt">`+msg+`</span> <button class="wsa-copymsg"><i class="fa-solid fa-copy"></i></button></p>`;
                     addElem.classList.add('wsa-history-item');
-                    addElem.querySelector('button').addEventListener('click',function(){
-                        navigator.clipboard.writeText(this.parentElement.querySelector('.wsa-txt').innerText)
-                        .then(() => alert('Copied to clipboard'))
-                        .catch((error) => alert('Error writing to clipboard:', error));
+                    addElem.querySelector('button').addEventListener('click',()=>{
+                        navigator.clipboard.writeText(addElem.querySelector('button').parentElement.querySelector('.wsa-txt').innerText)
+                        .then(() => alert(this.lang['dictionary'].clipboard.success))
+                        .catch((error) => alert(this.lang['dictionary'].clipboard.error, error));
                     });
                     ui.appendChild(addElem);
     }
@@ -432,12 +514,12 @@ class WebServerAI{
        console.log(res);
        if(res){
         setTimeout(()=>{
-            this.createCmd(this.botName, 'Successfully executed', 'success');
+            this.createCmd(this.botName, this.lang['dictionary'].ai.success, 'success');
                 document.querySelector('.wsa-userinput').disabled = false;
             },this.botInfo['ResponceTime']);
        }else{
         setTimeout(()=>{
-            this.createCmd(this.botName, 'There was an error with this statement', 'danger');
+            this.createCmd(this.botName, this.lang['dictionary'].ai.error, 'danger');
             document.querySelector('.wsa-userinput').disabled = false;
             },this.botInfo['ResponceTime']);
        }
@@ -449,7 +531,7 @@ class WebServerAI{
      * @returns {void}
      */
     send(msg,checkNull=false){
-        const user = this.request(this.origin+'/WebServerAI/data/settings.json?u='+this.uniqid(),true)['User'];
+        const user = this.request(this.origin+'/WebServerAI/data/settings.json?u='+this.#uniqid(),true)['User'];
         document.querySelector('.wsa-userinput').disabled = true;
         if(checkNull){
             if(msg){
@@ -474,4 +556,4 @@ class WebServerAI{
     }
 }
 
-export default WebServerAI;
+export default window.WebServerAI;
