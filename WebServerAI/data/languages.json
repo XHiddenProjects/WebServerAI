@@ -1,0 +1,40 @@
+{
+    "languages":{
+        "en-US":{
+            "name":"English",
+            "dictionary":{
+                "title": "WebServerAI - XHiddenProjects",
+                "name":"Name",
+                "version":"Version",
+                "updated":"Updated",
+                "nav":{
+                    "send": "Send (Enter)",
+                    "lastestHistory": "Latest History",
+                    "pastHistory": "Past History",
+                    "clearHistory": "Clear History",
+                    "clear":"Clear",
+                    "help": "Extra information",
+                    "changeTheme":"Change theme",
+                    "intxtdbl":"Insert In-Text Double quotes",
+                    "intxtsgl":"Insert In-Text Single quotes",
+                    "intxtaps":"Insert In-Text Apostrophe",
+                    "intxtnl": "Insert In-Text New Line"
+                },
+                "cmd":{
+                    "help":"Gives the list of commands",
+                    "clear":"Clears out the entire history or a certain index",
+                    "info":"Returns the AI information",
+                    "connect":"Connects you to another page"
+                },
+                "clipboard":{
+                    "success":"Copied to clipboard",
+                    "error":"Error writing to clipboard"
+                },
+                "ai":{
+                    "success": "Successfully executed",
+                    "error": "There was an error with this statement"
+                }
+            }
+        }
+    }
+}
