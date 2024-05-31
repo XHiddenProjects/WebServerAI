@@ -1,7 +1,7 @@
 # WebServerAI
 An AI that develops and Designs website from any work folder and very little coding experience. This AI will be able to remember what your latest history, clear and etc.
 
-**(Stil in development)**
+**(STILL IN DEVELOPMENT)**
 ### Installation
 1. Download and take out the **WebServerAI** folder from the _WebServerAI_Master_ folder.
 2. Place the folder in the **ROOT** directory to allow all folders to be accessed.
