@@ -20,12 +20,17 @@ In your _MAIN_ global `JavaScript` file. You must enter enter this
             position: 'bottom right', // Position of the UI: top left, top center, top right, center left, center right, bottom left, bottom center, bottom right
             history:{
                 save: 'session' // Save history as a session/local
+            },
+            extensions:{
+               // Add extensions here
             }
         });
         wsc.load(); // Loads the UI and the necessary scripts
         wsc.submit(($input)=>{
-            wsc.addCmd($input);
-            wsc.send($input, true);
+            if($input){
+               wsc.addCmd($input);
+               wsc.send($input, true);
+            }
         });
         /*
          * Waits until user press "enter" on the UI textbox.
