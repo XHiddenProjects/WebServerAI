@@ -58,8 +58,8 @@ Example 3:
 
 Using in-text special character must be escaped.
 
-| escaped character  | return   |
-| ------------------ | ------   |
+| Escaped Char.      | return   |
+| ------------------ | -------- |
 | `\"`               |   "      |
 | `\'`               |   '      |
 | <code>\\`</code>   |   `      |
