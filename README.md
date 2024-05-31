@@ -56,6 +56,16 @@ Example 3:
 > Update "div" to size "32px"
 ```
 
+Using in-text special character must be escaped.
+
+| escaped character  | return   |
+| ------------------ | ------   |
+| `\"`               |   "      |
+| `\'`               |   '      |
+| <code>\\`</code>   |   `      |
+| `\n`               | new line |
+
+
 This also comes with a _cursor-targeting element (CTE)_ where you can hover over elements and click to quick insert the correct elements` tagName, class names, and IDs in the correct format.
 
 ![Live Demo](https://github.com/XHiddenProjects/WebServerAI/blob/main/extras/LiveDemo.gif)
