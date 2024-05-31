@@ -8,7 +8,7 @@ An AI that develops and Designs website from any work folder and very little cod
 3. Go to an project to work with and enter the following instructions to enable it.
    
 ### How to enable to AI
-In your _MAIN_ global `JavaScript` file. You must enter enter this
+In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
 ```js
   // Import WebServerAI from the location of the WebServerAI folder
   import WebServerAI from '//WebServerAI/assets/AI/js/webserverai.js';
