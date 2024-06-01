@@ -2,6 +2,20 @@
 An AI that develops and Designs website from any work folder and very little coding experience. This AI will be able to remember what your latest history, clear and etc.
 
 **(STILL IN DEVELOPMENT)**
+
+***
+
+## Utilities
+* _Cursor-Targeting Element (CTE)_ where you can hover over elements and click to quick insert the correct elements` tagName, class names, and IDs in the correct format.
+* Drag-Drop method (works for both PC/Mobile devices)
+* Light/Dark mode toggle
+* History Storage(session/local)
+* Flexable and moves on page scroll
+* Configuration
+* Extensions
+
+***
+
 ### Installation
 1. Download and take out the **WebServerAI** folder from the _WebServerAI_Master_ folder.
 2. Place the folder in the **ROOT** directory to allow all folders to be accessed.
@@ -67,12 +81,10 @@ Using in-text special character must be escaped.
 | <code>\\`</code>   |   `      |
 | `\n`               | new line |
 
-
-This also comes with a _cursor-targeting element (CTE)_ where you can hover over elements and click to quick insert the correct elements` tagName, class names, and IDs in the correct format.
-
 ![Live Demo](https://github.com/XHiddenProjects/WebServerAI/blob/main/extras/LiveDemo.gif)
 
 ***
+
 ## Extensions
 
 ### Adding Extensions
