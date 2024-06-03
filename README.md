@@ -5,16 +5,14 @@ An AI that develops and Designs website from any work folder and very little cod
 
 ***
 
-## Utilities
+### Utilities
 * _Cursor-Targeting Element (CTE)_ where you can hover over elements and click to quick insert the correct elements` tagName, class names, and IDs in the correct format.
 * Drag-Drop method (works for both PC/Mobile devices)
 * Light/Dark mode toggle
 * History Storage(session/local)
 * Flexable and moves on page scroll
-* Configuration
-* Extensions
-
-***
+* Easy to use configuration to name and change the repsonce timeout.
+* Extensions that be used to make the AI more efficient.
 
 ### Installation
 1. Download and take out the **WebServerAI** folder from the _WebServerAI_Master_ folder.
