@@ -179,7 +179,12 @@ GeoLocation can be loaded using this following code:
 ```js
 import GeoLocation from '/WebServerAI/assets/AI/js/components/geolocation.js'
 const location = new GeoLocation();// IPV4 or "auto"
-location.displayRecords(ipapiKey, info="*");// IP-API key, "*" - return all statments or [list of items to collect]
+/*
+* @param {String} ipapiKey IP-API key goes here
+* @param {String|String[]} [info='*'] Selections go in an array or use "*" for all selections
+* @returns {JSON} JSON of IPA info 
+*/
+location.displayRecords(ipapiKey, info="*");
 ```
 
 
