@@ -175,7 +175,7 @@ These are extra `imports` that you can add to your extensions which allows more 
 ### GeoLocation
 GeoLocation can be loaded using this following code:
 
-**Note: This does require an API key from [IP-API](https://members.ip-api.com)**
+**Note: This does require an API key from [IPInfo](https://ipinfo.io)**
 ```js
 import GeoLocation from '/WebServerAI/assets/AI/js/components/geolocation.js'
 const location = new GeoLocation();// IPV4 or "auto"
