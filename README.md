@@ -227,7 +227,7 @@ console.log(Security.validate('127.0.0.1',Security.FILTER_VALIDATE_IP)); //Retur
 | FILTER_SANITIZE_URL | 518 | Sanitizes string to a valid URL |
 
 **Flags:**
-| Flag Name | ID | Description | merge |
+| Flag Name | ID | Description | Merge |
 | --------- | -- | ----------- | ----- |
 | FILTER_FLAG_ALLOW_FRACTION | 4096 | Allows `.` in floats | FILTER_SANITIZE_NUMBER_FLOAT |
 | FILTER_FLAG_ALLOW_THOUSAND | 8192 | Allows `,` in floats | FILTER_SANITIZE_NUMBER_FLOAT |
