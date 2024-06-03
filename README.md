@@ -32,8 +32,9 @@ In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
             status: 'opened', // Opened/Closed status of the UI
             position: 'bottom right', // Position of the UI: top left, top center, top right, center left, center right, bottom left, bottom center, bottom right
             history:{
-                save: 'session' // Save history as a session/local
+                save: 'session' // Save history as a session/local storage
             },
+            cte: true, // Activates Cursor-Targeting Element
             extensions:{
                // Add extensions here
             }
