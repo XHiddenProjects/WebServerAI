@@ -26,10 +26,20 @@
         return $ipaddress;
     }
 
+    /**
+     * Gets IP Records in JSON format from the API
+     * @param string $ipapi IP-API URL
+     * @return JSON format of IP info
+    */
     function getIPRecord(string $ipapi){
         $responce = file_get_contents($ipapi);
         echo $responce;
     }
+    /**
+     * Gets Domain IP
+     * @param string $domain Domain to grab
+     * @return string Domains` IPV4 address
+     */
     function getDomainIP(string $domain){
         return gethostbyname($domain);
     }
