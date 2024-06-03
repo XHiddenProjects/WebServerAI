@@ -54,7 +54,7 @@ In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
       }
 ```
 ***
-### Using the AI
+## Using the AI
 This AI uses _direct quotations_. 
 
 Examples:
@@ -122,41 +122,62 @@ You do not need to have any templates, but this is if you are going to create a 
 
    _**FYI: ALL extensions use the `build` keyword**_
 
-_`/WebServerAI/build/clock/clock.html`_
+_`/WebServerAI/build/{extension_name}/{extension_name}.html`_
 ```html
-<!--HTML template-->
-<span class="clock">
-    <span class="datetime"></span>
-</span>
+<!--START HTML TEMPLATE-->
+...
+<!--END HTML TEMPLATE-->
 ```
 
-_`/WebServerAI/build/clock/clock.js`_
+_`/WebServerAI/build/{extension_name}/{extension_name}.css`_
+```css
+   /*START STYLESHEET CODE*/
+
+   /*END STYLESHEET CODE*/
+```
+
+_`/WebServerAI/build/{extension_name}/{extension_name}.js`_
 ```js
-// Import "Extensions" from extension.js to allow usages
+/*
+   * Import "Extensions" from extension.js to allow usages.
+   * You can import more componetents under the import Extensions.
+*/
 import Extensions from "/WebServerAI/assets/AI/js/components/extenstions.js";
+
 // START LOAD-UP (Required)
 const url = new URL(import.meta.url),
+//Load the "Extensions" class
 ext = new Extensions(),
+//Gets build name
 buildName = ext.getBuildName(url),
+//Gets build ID
 buildID = ext.getBuildID(url),
-config = ext.configSearch(url,['options'],[{}]);
+//url, {configNames}, {configNullValues}
+config = ext.configSearch(url,[],[]);
+// Save the HTML template and parses the HTML to be executed to the page
 ext.saveTemplate(buildName,ext.parse(buildName));
 // END LOAD-UP
 //USE "wsa-build" to trigger on build-submit
 window.addEventListener('wsa-build',(e)=>{
     // Your code goes in here
-    const lang = navigator.language,
-        timezone = Intl.DateTimeFormat(lang).resolvedOptions().timeZone;
-    config.options.timeZone = timezone;
-    setInterval(()=>{
-        document.querySelectorAll('.clock').forEach((clock)=>{
-            clock.querySelector('.datetime').innerText = new Intl.DateTimeFormat(lang,config.options).format(new Date()); 
-        }); 
-    },1000);
+
+
+
     // Give elements based on your build name a unique ID
     ext.update(buildName);
 });
 ```
+***
 
+## Components
+These are extra `imports` that you can add to your extensions which allows more open-source and flexability.
+
+### GeoLocation
+GeoLocation can be loaded using this following code:
+
+**Note: This does require an API key from [IP-API](https://members.ip-api.com)**
+```js
+import GeoLocation from '/WebServerAI/assets/AI/js/components/geolocation.js'
+```
 
 
