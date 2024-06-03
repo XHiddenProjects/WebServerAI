@@ -187,4 +187,57 @@ const location = new GeoLocation();// IPV4 or "auto"
 location.displayRecords(ipapiKey, info="*");
 ```
 
+### Security
+These are security to inputs which can _sanitize_ and _validate_ certain text
+```js
+import * as Security from '/WebServerAI/assets/AI/js/components/security.js';
+console.log(Security.validate('127.0.0.1',Security.FILTER_VALIDATE_IP)); //Returns 127.0.0.1
+```
+
+**Functions:**
+
+`validate` - Returns validated string/int/float/boolean
+
+`sanitize` - Returns sanitized string/int/float/boolean
+
+**Valdate Filters:**
+
+| Filter Name | ID | Description |
+| ----------- | -- | ----------- |
+| FILTER_VALIDATE_INT | 257 | Make sure the value is a _intager_ |
+| FILTER_VALDATE_BOOLEAN | 258 | Make sure the value is a _boolean_ |
+| FILTER_VALIDATE_FLOAT | 259 | Make sure the value is a _float_ | 
+| FILTER_VALIDATE_REGEXP | 260 | Make sure the value is a _RegExp_ |
+| FILTER_VALIDATE_DOMAIN | 277 | Make sure the value is a _Domain_ |
+| FILTER_VALIDATE_URL | 273 | Make sure the value is a _URL_ |
+| FILTER_VALIDATE_EMAIL | 274 | Make sure the value is a _Email_ |
+| FILTER_VALIDATE_IP | 275 | Make sure the value is a _IP_ |
+| FILTER_VALIDATE_MAC | 276 | Make sure the value is a _MAC Address_ |
+
+**Sanitize Filters:**
+
+| Filter Name | ID | Description |
+| ----------- | -- | ----------- |
+| FILTER_SANITIZE_ADD_SLASHES | 523 | Adds slashes to special characters |
+| FILTER_SANITIZE_EMAIL | 517 | Sanitizes string to a valid email address |
+| FILTER_SANITIZE_ENCODED | 514 | Encodes the string |
+| FILTER_SANITIZE_NUMBER_FLOAT | 520 | Removes all non-digit characters but keeps `+`,`-` |
+| FILTER_SANITIZE_NUMBER_INT | 519 | Removes all non-digit characters |
+| FILTER_SANITIZE_SPECIAL_CHARS | 515 | Converts special characters to _HTML Entities_ |
+| FILTER_SANITIZE_URL | 518 | Sanitizes string to a valid URL |
+
+**Flags:**
+| Flag Name | ID | Description | merge |
+| --------- | -- | ----------- | ----- |
+| FILTER_FLAG_ALLOW_FRACTION | 4096 | Allows `.` in floats | FILTER_SANITIZE_NUMBER_FLOAT |
+| FILTER_FLAG_ALLOW_THOUSAND | 8192 | Allows `,` in floats | FILTER_SANITIZE_NUMBER_FLOAT |
+| FILTER_FLAG_ALLOW_SCIENTIFIC | 16384 | Allows `e` or `E` in floats | FILTER_SANITIZE_NUMBER_FLOAT |
+| FILTER_FLAG_STRIP_LOW | 4 | Adds slashes to special characters | FILTER_SANITIZE_SPECIAL_CHARS |
+| FILTER_FLAG_STRIP_HIGH | 8 | Adds slashes to special characters | FILTER_SANITIZE_SPECIAL_CHARS |
+| FILTER_FLAG_ENCODE_HIGH | 32 | Adds slashes to special characters | FILTER_SANITIZE_SPECIAL_CHARS |
+| FILTER_FLAG_IPV4 | 1048576 | Checks if IP is a _IPV4_ | FILTER_VALIDATE_IP |
+| FILTER_FLAG_IPV6 | 2097152 | Checks if IP is a _IPV6_ | FILTER_VALIDATE_IP |
+| FILTER_FLAG_NO_PRIV_RANGE | 8388608 | Checks if IP is not in a private range | FILTER_VALIDATE_IP |
+| FILTER_FLAG_NO_RES_RANGE | 4194304 | Checks if IP is not in a reserived range | FILTER_VALIDATE_IP |
+
 
