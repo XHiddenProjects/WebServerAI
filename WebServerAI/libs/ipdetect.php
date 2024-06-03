@@ -28,7 +28,7 @@
 
     /**
      * Gets IP Records in JSON format from the API
-     * @param string $ipapi IP-API URL
+     * @param string $ipapi IPInfo URL
      * @return JSON format of IP info
     */
     function getIPRecord(string $ipapi){

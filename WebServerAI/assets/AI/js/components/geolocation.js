@@ -60,15 +60,15 @@ class GeoLocation{
     /**
      * Returns all or certain attributes. 
      * 
-     * @param {String} ipClient Get an _"IP-API"_ key
-     * @api [IP-API](https://members.ip-api.com/)
+     * @param {String} ipClient Get an _"IPInfo"_ key
+     * @api [IPInfo](https://ipinfo.io/)
      * @param {String|Array<string>} [info='*'] Selects a certain information 
      * @returns 
      */
     displayRecords(ipapiKey,info='*'){
         const listObj = {};
         if(this.#ip!==null){
-            this.#request(this.origin+'/WebServerAI/libs/ipdetect.php?action=getRecords&clienturl=https://api.ipapi.com/api/'+this.#ip+'/?access_key='+ipapiKey,true);
+            this.#request(this.origin+'/WebServerAI/libs/ipdetect.php?action=getRecords&clienturl=https://ipinfo.io/'+this.#ip+'?token='+ipapiKey,true);
             if(info==='*')
                 return responce;
             else if(Array.isArray(info)){

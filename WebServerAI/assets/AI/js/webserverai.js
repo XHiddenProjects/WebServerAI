@@ -1,11 +1,16 @@
+/**
+ * WebServerAI
+ * @description
+ */
 import Listener from '/WebServerAI/assets/AI/js/components/Learner.js';
 import Extensions from '/WebServerAI/assets/AI/js/components/extenstions.js';
 var responce;
 
 window.WebServerAI = class {
+ 
     /**
-     * Create the WebServerAI library
-     * @param {Object} settings Settings to the UI
+     * @constructor Loads up the WebServerAI module
+     * @param {{}} [settings={}]
      */
     constructor(settings={}){
         document.head.innerHTML+='<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tkbviet/font-awesome-6.5.2-pro-full@main/css/all.css"/>';
@@ -58,22 +63,26 @@ window.WebServerAI = class {
         this.listen = new Listener();
         this.checked=false;
     }
+    
     /**
-     * Generates a random ID
-     * @param {String} [prefix=''] Start your id with a prefix 
-     * @param {Boolean} [more_entropy=false] Generate 23 characters instend of 13 
-     * @returns 
+     * Generate a unique id
+     *
+     * @param {string} [prefix=''] Prefix to the start of the ID
+     * @param {boolean} [more_entropy=false] add more to the list
+     * @returns {string}
      */
     #uniqid(prefix='', more_entropy=false){
         return prefix+(Date.now().toString(36) + Math.random().toString(36).substr(2)).substr(0,(more_entropy ? 23 : 13));
     }
+   
     /**
-     * Gets file content
-     * @param {String} url Location to get the file content
-     * @param {Boolean} [isJSON=false] Converts string to JSON object
-     * @param {Boolean} [async=false] Wait until page load
-     * @param {Boolean} [retReq=false] Return as a XMLHttpRequest object
-     * @returns {JSON|String}
+     * Sets a request to the file to select
+     *
+     * @param {*} url URL to receive information
+     * @param {boolean} [isJSON=false] Output as a JSON format
+     * @param {boolean} [async=false] Async the request
+     * @param {boolean} [retReq=false] Return as a request object
+     * @returns {*}
      */
     request(url, isJSON=false, async=false, retReq=false){   
         let req = new XMLHttpRequest();
@@ -124,8 +133,9 @@ window.WebServerAI = class {
         const d = new Date(parseInt(splitDate[2]),parseInt(splitDate[0])-1,parseInt(splitDate[1]));
         return d.toLocaleDateString(navigator.language);
     }
+    
     /**
-     * Loads up the AI chatbox
+     * Loads up the WebServerAI module
      */
     load(){
         if(this.enabled){

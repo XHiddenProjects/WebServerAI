@@ -219,7 +219,7 @@ validate=(str, filterID)=>{
  * Sanitizes the string
  * @param {String} str String to sanitize
  * @param {Number|Number[]} sanitizeID Sanitize id
- * @returns {any} Sanitized item
+ * @returns {*} Sanitized item
  */
 sanitize=(str,sanitizeID)=>{
     if(Array.isArray(sanitizeID)){
