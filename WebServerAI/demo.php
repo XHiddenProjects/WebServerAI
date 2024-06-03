@@ -19,6 +19,7 @@
                 history:{
                     save: 'session'
                 },
+                cte: true, // Activates Cursor-Targeting Element
                 extensions:{
                     clock:{
                         active: true,
