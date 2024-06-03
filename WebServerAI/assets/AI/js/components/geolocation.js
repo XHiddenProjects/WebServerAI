@@ -1,23 +1,19 @@
 var responce;
+import { validate, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4, FILTER_FLAG_NO_PRIV_RANGE, FILTER_FLAG_NO_RES_RANGE, FILTER_VALIDATE_DOMAIN} from "/WebServerAI/assets/AI/js/components/security.js";
 class GeoLocation{
     #ip = null;
     origin=null;
     #filterIP(ip){
-        const ipRegex = /\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b/;
-        const filteredIPs = ipRegex.test(ip);
+        const filteredIPs = validate(ip,[FILTER_VALIDATE_IP,FILTER_FLAG_IPV4,FILTER_FLAG_NO_PRIV_RANGE,FILTER_FLAG_NO_RES_RANGE]);
         if(filteredIPs)
             return ip;
     }
     #filterDomain(domain){
-        const dmRegex = /([a-z0-9A-Z]\.)*[a-z0-9-]+\.([a-z0-9]{2,24})+(\.co\.([a-z0-9]{2,24})|\.([a-z0-9]{2,24}))*/;
-        const filteredDomains = dmRegex.test(domain);
+        const filteredDomains = validate(domain,FILTER_VALIDATE_DOMAIN);
         if(filteredDomains){
             this.#request('/WebServerAI/libs/ipdetect.php?action=getDomainIP&domain='+domain.match(dmRegex)[0]);
             return responce;
         }
-    }
-    #getIP(){
-
     }
     /**
      * Sets the IP address to a IP/Domain

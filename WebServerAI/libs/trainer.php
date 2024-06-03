@@ -253,7 +253,7 @@ class Trainer{
                 break;
 
                 default:break;
-            }
+            } 
             switch(strtolower($this->removeGrammar($str[$i]))){
                 case 'select':
                     $AIStr.='{QUERY_';
