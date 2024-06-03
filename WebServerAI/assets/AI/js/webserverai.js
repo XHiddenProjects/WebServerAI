@@ -21,6 +21,7 @@ window.WebServerAI = class {
             save: (settings.hasOwnProperty('history') ? (settings.history.hasOwnProperty('save') ? settings.history.save : 'session') : 'session')
         }
         this.enabled = (settings.hasOwnProperty('enabled') ? settings.enabled : true);
+        this.cte = (settings.hasOwnProperty('cte') ? settings.cte : true);
         const extensions = new Extensions();
         this.origin = window.location.origin;
         if(settings.hasOwnProperty('extensions')){
@@ -367,28 +368,31 @@ window.WebServerAI = class {
                     document.body.appendChild(sc);
             });
             //hover selected element
-            document.querySelector('html[wsa-active]').addEventListener('mouseover',(e)=>{
-                if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName, pre code, pre code *, code * , html, .code-toolbar .toolbar, .code-toolbar .toolbar *')){
-                    e.target.setAttribute('wsa-elemfocus','');
-                    e.target.addEventListener('mouseout',(o)=>{
-                        e.target.removeAttribute('wsa-elemfocus');
-                        if(e.target.parentElement.querySelector('.wsa-targetName'))
-                            e.target.parentElement.querySelector('.wsa-targetName').remove();
-                        e.target.parentElement.removeAttribute('wsa-target-container');
-                    });
-                    const elem = document.createElement('div');
-                    elem.classList.add('wsa-targetName');
-                    elem.innerHTML = '<span class="wsa-target-tag">'+e.target.tagName+'</span><span class="wsa-target-attr">'+ (e.target.id ? '#'+e.target.id : '') + (e.target.classList.length > 0 ? '.'+e.target.className.replace(' ','.') : '')+'</span>';
-                    e.target.parentElement.appendChild(elem);
-                    e.target.parentElement.setAttribute('wsa-target-container','');
-                }
-            });
-            document.querySelector('html[wsa-active]').addEventListener('click',(e)=>{
-                if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName')){
-                    const uit = e.target.tagName.toLowerCase()+(e.target.id ? '#'+e.target.id : '')+(e.target.classList.length > 0 ? '.'+e.target.className.replace(' ','.') : '');
-                    document.querySelector('.wsa-userinput').value+='"'+uit+'"';
-                }
-            });
+            if(this.cte){
+                document.querySelector('html[wsa-active]').addEventListener('mouseover',(e)=>{
+                    if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName, pre code, pre code *, code * , html, .code-toolbar .toolbar, .code-toolbar .toolbar *')){
+                        e.target.setAttribute('wsa-elemfocus','');
+                        e.target.addEventListener('mouseout',(o)=>{
+                            e.target.removeAttribute('wsa-elemfocus');
+                            if(e.target.parentElement.querySelector('.wsa-targetName'))
+                                e.target.parentElement.querySelector('.wsa-targetName').remove();
+                            e.target.parentElement.removeAttribute('wsa-target-container');
+                        });
+                        const elem = document.createElement('div');
+                        elem.classList.add('wsa-targetName');
+                        elem.innerHTML = '<span class="wsa-target-tag">'+e.target.tagName+'</span><span class="wsa-target-attr">'+ (e.target.id ? '#'+e.target.id : '') + (e.target.classList.length > 0 ? '.'+e.target.className.replace(' ','.') : '')+'</span>';
+                        e.target.parentElement.appendChild(elem);
+                        e.target.parentElement.setAttribute('wsa-target-container','');
+                    }
+                });
+
+                document.querySelector('html[wsa-active]').addEventListener('click',(e)=>{
+                    if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName')){
+                        const uit = e.target.tagName.toLowerCase()+(e.target.id ? '#'+e.target.id : '')+(e.target.classList.length > 0 ? '.'+e.target.className.replace(' ','.') : '');
+                        document.querySelector('.wsa-userinput').value+='"'+uit+'"';
+                    }
+                });
+            }
         }
         window.addEventListener('load',()=>{
             //syntax hightlight
