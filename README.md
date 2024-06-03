@@ -178,6 +178,8 @@ GeoLocation can be loaded using this following code:
 **Note: This does require an API key from [IP-API](https://members.ip-api.com)**
 ```js
 import GeoLocation from '/WebServerAI/assets/AI/js/components/geolocation.js'
+const location = new GeoLocation();// IPV4 or "auto"
+location.displayRecords(ipapiKey, info="*");// IP-API key, "*" - return all statments or [list of items to collect]
 ```
 
 
