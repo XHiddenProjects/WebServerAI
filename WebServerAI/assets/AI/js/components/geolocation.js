@@ -19,7 +19,7 @@ class GeoLocation{
      * Sets the IP address to a IP/Domain
      * @param {String} ip IP|Domain|"auto" to check
      */
-    constructor(ip){
+    constructor(ip='auto'){
         this.origin = window.location.origin;
         if(ip==='auto'){
             this.#request(this.origin+'/WebServerAI/libs/ipdetect.php?action=getClientIP');
