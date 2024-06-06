@@ -35,6 +35,42 @@
                     "error": "There was an error with this statement"
                 }
             }
+        },
+        "de-DE":{
+            "name":"Deutsch",
+            "dictionary":{
+                "title": "WebServerAI - XHiddenProjects",
+                "name":"Name",
+                "version":"Ausführung",
+                "updated":"Aktualisiert",
+                "nav":{
+                    "send": "Senden (Eingabe)",
+                    "lastestHistory": "Neueste Geschichte",
+                    "pastHistory": "Vergangene Geschichte",
+                    "clearHistory": "Verlauf löschen",
+                    "clear":"Klar",
+                    "help": "Zusatzinformation",
+                    "changeTheme":"Design ändern",
+                    "intxtdbl":"Einfügen von doppelten Anführungszeichen im Text",
+                    "intxtsgl":"Einfache Anführungszeichen in den Text einfügen",
+                    "intxtaps":"Apostroph im Text einfügen",
+                    "intxtnl": "Neue Zeile im Text einfügen"
+                },
+                "cmd":{
+                    "help":"Gibt die Liste der Befehle an",
+                    "clear":"Löscht den gesamten Verlauf oder einen bestimmten Index",
+                    "info":"Gibt die KI-Informationen zurück",
+                    "connect":"Verbindet Sie mit einer anderen Seite"
+                },
+                "clipboard":{
+                    "success":"In die Zwischenablage kopiert",
+                    "error":"Fehler beim Schreiben in die Zwischenablage"
+                },
+                "ai":{
+                    "success": "Erfolgreich ausgeführt",
+                    "error": "Bei dieser Anweisung ist ein Fehler aufgetreten"
+                }
+            }
         }
     }
 }
