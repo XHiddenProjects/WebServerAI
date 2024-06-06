@@ -71,6 +71,42 @@
                     "error": "Bei dieser Anweisung ist ein Fehler aufgetreten"
                 }
             }
+        },
+        "fr-FR":{
+            "name":"Français",
+            "dictionary":{
+                "title": "WebServerAI - XHiddenProjects",
+                "name":"Nom",
+                "version":"Version",
+                "updated":"Mis à jour",
+                "nav":{
+                    "send": "Envoyer (Entrer)",
+                    "lastestHistory": "Dernière histoire",
+                    "pastHistory": "Histoire passée",
+                    "clearHistory": "Histoire claire",
+                    "clear":"Clair",
+                    "help": "Informations supplémentaires",
+                    "changeTheme":"Change le thème",
+                    "intxtdbl":"Insérer des guillemets doubles dans le texte",
+                    "intxtsgl":"Insérer des guillemets simples dans le texte",
+                    "intxtaps":"Insérer une apostrophe dans le texte",
+                    "intxtnl": "Insérer une nouvelle ligne dans le texte"
+                },
+                "cmd":{
+                    "help":"Donne la liste des commandes",
+                    "clear":"Efface tout l’historique ou un certain index",
+                    "info":"Renvoie les informations de l`IA",
+                    "connect":"Vous connecte à une autre page"
+                },
+                "clipboard":{
+                    "success":"Copié dans le presse-papier",
+                    "error":"Erreur d'écriture dans le presse-papiers"
+                },
+                "ai":{
+                    "success": "Exécuté avec succès",
+                    "error": "Il y a eu une erreur avec cette déclaration"
+                }
+            }
         }
     }
 }
