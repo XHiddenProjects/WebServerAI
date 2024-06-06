@@ -17,7 +17,7 @@ An AI that develops and Designs website from any work folder and very little cod
 
 ### Available Languages
 * English (United States)
-* German (Germany)
+* Deutsch (Deutschland)
 
 ### Installation
 1. Download and take out the **WebServerAI** folder from the _WebServerAI_Master_ folder.
