@@ -13,6 +13,11 @@ An AI that develops and Designs website from any work folder and very little cod
 * Flexable and moves on page scroll
 * Easy to use configuration to name and change the repsonce timeout.
 * Extensions that be used to make the AI more efficient.
+* Multi-language software - Allows translates based browser language.
+
+### Available Languages
+* English (United States)
+* German (Germany)
 
 ### Installation
 1. Download and take out the **WebServerAI** folder from the _WebServerAI_Master_ folder.
