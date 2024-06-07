@@ -250,8 +250,8 @@ console.log(Security.validate('127.0.0.1',Security.FILTER_VALIDATE_IP)); //Retur
 ## Adding Languages
 To add your own or share your own interpeded language please do the following:
 
-1. Go to `/WebServerAI/data/languages.json`
-2. Copy this code and start a new file called `{language_name}-{language_country}.json` example `fr-FR = french-France`:
+1. Start a new file called `{language_name}-{language_country}.json` example `fr-FR = french-France`
+2. Copy this code:
 ```json
    "en-US":{
             "name":"English",
