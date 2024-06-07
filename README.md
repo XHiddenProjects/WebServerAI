@@ -85,6 +85,7 @@ Using in-text special character must be escaped.
 | `\'`               |   '      |
 | <code>\\`</code>   |   `      |
 | `\n`               | new line |
+| `\,`               |   ,      |
 
 ![Live Demo](https://github.com/XHiddenProjects/WebServerAI/blob/main/extras/LiveDemo.gif)
 
