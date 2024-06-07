@@ -245,4 +245,56 @@ console.log(Security.validate('127.0.0.1',Security.FILTER_VALIDATE_IP)); //Retur
 | FILTER_FLAG_NO_PRIV_RANGE | 8388608 | Checks if IP is not in a private range | FILTER_VALIDATE_IP |
 | FILTER_FLAG_NO_RES_RANGE | 4194304 | Checks if IP is not in a reserived range | FILTER_VALIDATE_IP |
 
+***
 
+## Adding Languages
+To add your own or share your own interpeded language please do the following:
+
+1. Go to `/WebServerAI/data/languages.json`
+2. Copy this code and start a new file called `{language_name}-{language_country}.json` example `fr-FR = french-France`:
+```json
+   "en-US":{
+            "name":"English",
+            "dictionary":{
+                "title": "WebServerAI - XHiddenProjects",
+                "name":"Name",
+                "version":"Version",
+                "updated":"Updated",
+                "nav":{
+                    "send": "Send (Enter)",
+                    "lastestHistory": "Latest History",
+                    "pastHistory": "Past History",
+                    "clearHistory": "Clear History",
+                    "clear":"Clear",
+                    "help": "Extra information",
+                    "changeTheme":"Change theme",
+                    "intxtdbl":"Insert In-Text Double quotes",
+                    "intxtsgl":"Insert In-Text Single quotes",
+                    "intxtaps":"Insert In-Text Apostrophe",
+                    "intxtnl": "Insert In-Text New Line"
+                },
+                "cmd":{
+                    "help":"Gives the list of commands",
+                    "clear":"Clears out the entire history or a certain index",
+                    "info":"Returns the AI information",
+                    "connect":"Connects you to another page"
+                },
+                "clipboard":{
+                    "success":"Copied to clipboard",
+                    "error":"Error writing to clipboard"
+                },
+                "ai":{
+                    "success": "Successfully executed",
+                    "error": "There was an error with this statement"
+                }
+            }
+        }
+```
+3. Translate it
+4. **To share** go to `issues > "New Issue"`
+5. ```
+      Title: _your_language_name_
+      Message: whatever you want to write
+      Label: "Language"
+      Upload: Your translated file 
+   ```
