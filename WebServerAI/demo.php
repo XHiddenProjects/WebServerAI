@@ -19,7 +19,7 @@
                 history:{
                     save: 'session'
                 },
-                cte: true, // Activates Cursor-Targeting Element
+                cte: true,
                 extensions:{
                     clock:{
                         active: true,
@@ -38,6 +38,17 @@
                             styles:[],
                             scripts:[
                                 '/WebServerAI/build/clock/clock.js'
+                            ]
+                        }
+                    },
+                    "video-player":{
+                        active: true,
+                        startup:{
+                            styles:[
+                                '/WebServerAI/build/video-player/video-player.css'
+                            ],
+                            scripts:[
+                                '/WebServerAI/build/video-player/video-player.js'
                             ]
                         }
                     }
