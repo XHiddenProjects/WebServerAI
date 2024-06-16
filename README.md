@@ -246,6 +246,25 @@ console.log(Security.validate('127.0.0.1',Security.FILTER_VALIDATE_IP)); //Retur
 | FILTER_FLAG_NO_PRIV_RANGE | 8388608 | Checks if IP is not in a private range | FILTER_VALIDATE_IP |
 | FILTER_FLAG_NO_RES_RANGE | 4194304 | Checks if IP is not in a reserived range | FILTER_VALIDATE_IP |
 
+### Events
+Process the _wsa-build_ events
+```js
+import Events from '/WebServerAI/assets/AI/js/components/Events.js';
+const e = new Events();
+/*
+   * @param CustomEvent event - CustomEvent List
+   * @param String label - What you want to search
+   * @return {*|undefined} Returns any value, UNDEFINED if not found
+*/
+e.get(event, label);
+/**
+     * Returns array of users statements
+     * @param {String} str Users input
+     * @returns {Array<String>} List of matching users dbl quotations
+*/
+e.statement(str)
+```
+
 ***
 
 ## Adding Languages
