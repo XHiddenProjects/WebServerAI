@@ -52,7 +52,8 @@
     --wsa-element-focus: #124254;
     --wsa-target-tag: rgba(149,0,209,0.70);
     --wsa-target-attr: rgba(14,37,227,0.70);
-    --wsa-elemName-bg: rgba(241, 241, 241, 0.8);
+    --wsa-elemName-bg: rgb(212, 212, 212);
+    --wsa-target-size: #6e6d6d;
 
 }
 .wsa,
@@ -370,17 +371,41 @@
     width: 410px;
 }
 
-[wsa-elemfocus]{
+/*[wsa-elemfocus]{
     border: 3px dotted var(--wsa-element-focus);
     padding: .8rem;
-}
+}*/
 .wsa-targetName{
     position: absolute;
-    top:0;
-    left:5px;
     z-index: 2000;
     background-color: var(--wsa-elemName-bg);
     font-weight: 500;
+    width: 260px;
+    padding: 2px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    font-size: 15px;
+}
+.wsa-targetName .wsa-title-bag{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.wsa-color-info{
+    display: flex;
+    align-items: center;
+}
+.wsa-color-info span:first-child{
+    display:block;
+    width:12px;
+    height:12px;
+    margin-right: 3px;
+}
+.wsa-targetName .wsa-title-bag .wsa-swh{
+    color: var(--wsa-target-size);
 }
 [wsa-target-container]{
     position: relative;

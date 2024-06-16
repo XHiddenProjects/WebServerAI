@@ -104,6 +104,10 @@ var floatExtend='',
         518: {
             name: 'sanitize_url',
             exp: /[^0-9a-zA-Z$\-_.+!*'(),{}|\\^~\[\]`"><#%;\/\?:@&=]/g
+        },
+        600:{
+            name: 'sanitize_domain',
+            exp: /([a-z0-9A-Z]\.)*[a-z0-9-]+\.([a-z0-9]{2,24})+(\.co\.([a-z0-9]{2,24})|\.([a-z0-9]{2,24}))*/
         }
     },
     flagsList = {
@@ -327,12 +331,32 @@ sanitize=(str,sanitizeID)=>{
         }else
             return false;
     }  
+},
+/**
+ * Filters out certain words from the string
+ * @param {string} str String to filter out
+ * @param {string[]} removeWords List of words to remove
+ * @returns {string} Filtered string
+ */
+filter=(str, removeWords)=>{
+    removeWords.forEach((words)=>{
+        if(validate(words,FILTER_VALIDATE_DOMAIN)){
+            if(validate(words,FILTER_VALIDATE_DOMAIN)){
+                const removeWWW = validate(words,FILTER_VALIDATE_DOMAIN).replace('www.','');
+                const domain = new RegExp('((http(s)?):\/\/)?(www\.)?'+removeWWW+'([-a-zA-Z0-9@:%_\+.~#?&//=]*)','g');
+                str = str.replaceAll(domain,'');
+            }
+        }else{
+            str = str.replaceAll(words,'');
+        }
+    });
+    return str;
 };
-
 
 
 export {validate,
     sanitize, 
+    filter,
     FILTER_VALIDATE_INT, 
     FILTER_VALDATE_BOOLEAN, 
     FILTER_VALIDATE_FLOAT, 

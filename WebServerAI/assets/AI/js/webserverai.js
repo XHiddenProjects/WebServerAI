@@ -4,7 +4,9 @@
  */
 import Listener from '/WebServerAI/assets/AI/js/components/Learner.js';
 import Extensions from '/WebServerAI/assets/AI/js/components/extenstions.js';
-var responce;
+import { filter } from '/WebServerAI/assets/AI/js/components/security.js';
+import {rgbaToHex, calculateContrastRatio, keyboardFocusable, isDecimal} from '/WebServerAI/assets/AI/js/components/utils.js';
+var responce, elemRole='';
 
 window.WebServerAI = class {
  
@@ -134,12 +136,54 @@ window.WebServerAI = class {
         const d = new Date(parseInt(splitDate[2]),parseInt(splitDate[0])-1,parseInt(splitDate[1]));
         return d.toLocaleDateString(navigator.language);
     }
-    
+    /**
+     * Get all parents to the branch
+     * @param {Element} t Targetted element
+     * @returns {String} Element Path
+     */
+    #branchLoad(t){
+        let branch = [],
+        currentBase = t,
+        toPath = '';
+        while(currentBase.tagName.toLocaleLowerCase()!==document.documentElement.tagName.toLocaleLowerCase()){ 
+                const elem = (currentBase.tagName.toLowerCase()+(currentBase.id ? '#'+currentBase.id : '')+(currentBase.classList.length > 0 ? '.'+currentBase.className.replace(' ','.') : ''));
+                branch.push(elem);
+                currentBase = currentBase.parentElement;
+        }
+        branch.push('html');
+        branch.reverse().forEach((i)=>{
+            toPath += i+' ';
+        });
+        return toPath.replace(/ $/,'');
+    }
+    #getElemRole(){
+        document.querySelectorAll('*:not(.wsa, .wsa *)').forEach((e)=>{
+            const node = window.getComputedAccessibleNode(e);
+            const role = node.then((data)=>{
+                return (data ? data.role : '');
+            }).then((r)=>{
+                (r!=='' ? e.role = r : '');
+            });
+        });
+    }
+    #getElemName(){
+        document.querySelectorAll('*:not(.wsa, .wsa *)').forEach((e)=>{
+            const node = window.getComputedAccessibleNode(e);
+            const name = node.then((data)=>{
+                return (data ? data.name : '');
+            }).then((n)=>{
+                (n!=='' ? e.setAttribute('aria-name',n) : '');
+            });
+        });
+    }
     /**
      * Loads up the WebServerAI module
      */
     load(){
         if(this.enabled){
+            this.#getElemRole();
+            this.#getElemName();
+            document.documentElement.lang = navigator.language.replace(/\-(.*)$/,'');
             this.botInfo = this.request(this.origin+'/WebServerAI/data/settings.json?u='+this.#uniqid(),true)['AI'];
             this.lang = this.request(this.origin+'/WebServerAI/data/languages.json?u='+this.#uniqid(),true)['languages'][navigator.language];
             this.botName = this.botInfo['Name'];
@@ -370,25 +414,97 @@ window.WebServerAI = class {
             //hover selected element
             if(this.cte){
                 document.querySelector('html[wsa-active]').addEventListener('mouseover',(e)=>{
-                    if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName, pre code, pre code *, code * , html, .code-toolbar .toolbar, .code-toolbar .toolbar *')){
+                    if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName, pre code, pre code *, code * , html, .code-toolbar .toolbar, .code-toolbar .toolbar *, .wpa-build-gps, .wpa-build-gps *, body')){
                         e.target.setAttribute('wsa-elemfocus','');
                         e.target.addEventListener('mouseout',(o)=>{
                             e.target.removeAttribute('wsa-elemfocus');
-                            if(e.target.parentElement.querySelector('.wsa-targetName'))
-                                e.target.parentElement.querySelector('.wsa-targetName').remove();
-                            e.target.parentElement.removeAttribute('wsa-target-container');
+                            if(document.querySelector('.wsa-targetName'))
+                                document.querySelector('.wsa-targetName').remove();
+                            e.target.removeAttribute('wsa-target-container');
                         });
                         const elem = document.createElement('div');
                         elem.classList.add('wsa-targetName');
-                        elem.innerHTML = '<span class="wsa-target-tag">'+e.target.tagName+'</span><span class="wsa-target-attr">'+ (e.target.id ? '#'+e.target.id : '') + (e.target.classList.length > 0 ? '.'+e.target.className.replace(' ','.') : '')+'</span>';
-                        e.target.parentElement.appendChild(elem);
-                        e.target.parentElement.setAttribute('wsa-target-container','');
+                        elem.innerHTML = `<div class="wsa-title-bag">
+                                <div>
+                                    <span class="wsa-target-tag">`+e.target.tagName+`</span><span class="wsa-target-attr">`+ (e.target.id ? '#'+e.target.id : '') + (e.target.classList.length > 0 ? '.'+e.target.className.replace(' ','.') : '')+`</span></div>
+                                    <div class="wsa-swh">`+(isDecimal(e.target.getBoundingClientRect().width) ? e.target.getBoundingClientRect().width.toFixed(2) : e.target.getBoundingClientRect().width)+` x `+(isDecimal(e.target.getBoundingClientRect().height) ? e.target.getBoundingClientRect().height.toFixed(1) : e.target.getBoundingClientRect().height)+`
+                                </div>
+                            </div>
+                            <div class="wsa-title-bag">
+                                    <span class="wsa-swh">Background</span>
+                                    <div class="wsa-color-info">
+                                        <span style="background-color:`+rgbaToHex(window.getComputedStyle(e.target,null).backgroundColor)+`;"></span> <span>`+
+                                        rgbaToHex(window.getComputedStyle(e.target,null).backgroundColor)+`</span>
+                                        </div>
+                                </div>
+                                <div class="wsa-title-bag">
+                                    <span class="wsa-swh">Color</span>
+                                    <div class="wsa-color-info">
+                                        <span style="background-color:`+rgbaToHex(window.getComputedStyle(e.target,null).color)+`;"></span> <span>`+
+                                        rgbaToHex(window.getComputedStyle(e.target,null).color)+`</span>
+                                        </div>
+                                </div>
+                                <div class="wsa-title-bag">
+                                    <span class="wsa-swh">Font</span>
+                                    <div class="wsa-font-info">
+                                    `+(window.getComputedStyle(e.target,null).font)+`
+                                    </div>
+                                </div>
+                                `+(parseInt(window.getComputedStyle(e.target,null).margin)!=0 ? `
+                                <div class="wsa-title-bag">
+                                    <span class="wsa-swh">Margin</span>
+                                    <div class="wsa-font-info">
+                                    `+(window.getComputedStyle(e.target,null).margin)+`
+                                    </div>
+                                </div>
+                            </div>`  : ``)+
+                            (parseInt(window.getComputedStyle(e.target,null).padding)!=0 ? `
+                            <div class="wsa-title-bag">
+                                <span class="wsa-swh">Padding</span>
+                                <div class="wsa-font-info">
+                                `+(window.getComputedStyle(e.target,null).padding)+`
+                                </div>
+                            </div>
+                        </div>`  : ``)+`
+                            <span>Accessibility------------------------------------</span>
+                            <div class="wsa-title-bag">
+                                <span class="wsa-swh">Contrast</span>
+                                <div class="wsa-font-info">
+                                <i class="fa-solid fa-font-case" style="font-size:12px;border:1px solid #000;padding:3px;"></i>
+                                `+calculateContrastRatio(window.getComputedStyle(e.target).color, window.getComputedStyle(e.target).backgroundColor)+`
+                                `+(calculateContrastRatio(window.getComputedStyle(e.target).color, window.getComputedStyle(e.target).backgroundColor,false) ? `<i class="fa-regular fa-circle-check" style="color: #008000;"></i>` : `<i class="fa-regular fa-circle-exclamation" style="color: #ffa500;"></i>`)+`
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wsa-title-bag">
+                            <span class="wsa-swh">Name</span>
+                            <div class="wsa-name-info">`+(e.target.hasAttribute('aria-name')&&!e.target.getAttribute('aria-name').match('null') ? e.target.getAttribute('aria-name') : '')+`</div>
+                        </div>
+                        <div class="wsa-title-bag">
+                            <span class="wsa-swh">Role</span>
+                            <div class="wsa-role-info">
+                                `+(e.target.getAttribute('role')||e.target.getAttribute('aria-role'))+`
+                            </div>
+                        </div>
+                        <div class="wsa-title-bag">
+                            <span class="wsa-swh">Keyboard-focusable</span>
+                            <div class="wsa-role-info">
+                                `+(keyboardFocusable(e.target) ? `<i class="fa-regular fa-circle-check" style="color: #008000;"></i>` : `<i class="fa-solid fa-ban" style="color: #808080;"></i>`)+`
+                            </div>
+                        </div>
+                        `;
+                        const width = window.innerWidth;
+                        elem.style.left = (e.clientX<=(width-300) ? e.clientX : width-300)+'px';
+                        elem.style.top = (e.clientY+20)+'px';
+            
+                        document.body.appendChild(elem);
+                        document.body.setAttribute('wsa-target-container','');
                     }
                 });
 
                 document.querySelector('html[wsa-active]').addEventListener('click',(e)=>{
-                    if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName')){
-                        const uit = e.target.tagName.toLowerCase()+(e.target.id ? '#'+e.target.id : '')+(e.target.classList.length > 0 ? '.'+e.target.className.replace(' ','.') : '');
+                    if(!e.target.matches('.wsa, .wsa *, .wsa-drop-bubble, .wsa-targetName, pre code, pre code *, code * , html, .code-toolbar .toolbar, .code-toolbar .toolbar *, .wpa-build-gps, .wpa-build-gps *, input, body, [wsa-noselect], [wsa-noselect] *')){
+                        const uit = this.#branchLoad(e.target);
                         document.querySelector('.wsa-userinput').value+='"'+uit+'"';
                     }
                 });
@@ -523,6 +639,8 @@ window.WebServerAI = class {
                     ui.appendChild(addElem);
     }
     addCmd(msg){
+        const filterWords = this.botInfo['blockWords'].concat(this.botInfo['blockDomains']);
+        msg = filter(msg, filterWords);
        let rsp = this.request(this.origin+'/WebServerAI/libs/ai_sender.php?wsaai='+encodeURIComponent(msg)),
            res = this.listen.render(rsp);
        console.log(res);
@@ -545,6 +663,8 @@ window.WebServerAI = class {
      * @returns {void}
      */
     send(msg,checkNull=false){
+        const filterWords = this.botInfo['blockWords'].concat(this.botInfo['blockDomains']);
+        msg = filter(msg, filterWords);
         const user = this.request(this.origin+'/WebServerAI/data/settings.json?u='+this.#uniqid(),true)['User'];
         document.querySelector('.wsa-userinput').disabled = true;
         if(checkNull){
@@ -562,6 +682,10 @@ window.WebServerAI = class {
             this.createCmd(user,msg);
             document.querySelector('.wsa-userinput').disabled = false;
         }
+        setTimeout(()=>{
+            this.#getElemRole();
+            this.#getElemName();
+        },100);
     }
     copyToClip(e){
         navigator.clipboard.writeText(e.parentElement.querySelector('.wsa-txt').innerText)

@@ -73,13 +73,21 @@ class Extensions{
         }else
             return this.ext[name]['extension_'+type];
     }
+    #isJSON(json){
+        try{
+            JSON.parse(json);
+            return true;
+        }catch(e){
+            return false;
+        }
+    }
     /**
      * Parses string to correct int/float/bool
      * @param {String} str 
      * @returns {Boolean|Number} Parsed object
      */
     #parseTo(str){
-        if(JSON.parse(str)){
+        if(this.#isJSON(str)){
             return JSON.parse(str);
         }else if(str==='true'){
             return true;
@@ -188,5 +196,29 @@ class Extensions{
         });
         u=1;
     }
+    /**
+     * Gets file content
+     * @param {String} url Location to get the file content
+     * @param {Boolean} [isJSON=false] Converts string to JSON object
+     * @param {Boolean} [async=false] Wait until page load
+     * @returns {JSON|String}
+     */
+    request(url, isJSON=false, async=false){   
+        let req = new XMLHttpRequest();
+        req.onreadystatechange = ()=>{
+            if(req.readyState==4&&req.status==200){
+                if(isJSON){
+                    responce = JSON.parse(req.responseText);
+                }
+                else{
+                    responce = req.responseText;
+                }
+            }
+        }
+        req.open("GET", url, async);
+        req.send();
+        return responce;
+    }
+    
 }
 export default Extensions;

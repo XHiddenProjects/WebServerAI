@@ -2,8 +2,10 @@
     "AI":{
         "Name": "WebServerAI",
         "Version": "0.0.1",
-        "Updated": "05/27/2024",
-        "ResponceTime": 1000
+        "Updated": "06/06/2024",
+        "ResponceTime": 1000,
+        "blockWords":[],
+        "blockDomains":[]
     },
     "User": "Guest"
 }

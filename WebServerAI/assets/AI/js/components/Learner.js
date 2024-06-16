@@ -95,6 +95,18 @@ class Listener{
         return str.replaceAll('&lt;','<').replaceAll('&gt;','>');
     }
     /**
+     * Filters out special characters
+     * @param {String} str String to filter
+     * @returns {String} Filtered string
+     */
+    #filter(str){
+        var lt = /</g, 
+            gt = />/g, 
+            ap = /'/g, 
+            ic = /"/g;
+        return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
+    }
+    /**
      * Executes command
      * @param {String} AICode 
      * @returns {Array<boolean,string>|Boolean} Returns information on success
@@ -218,14 +230,89 @@ class Listener{
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'dt',styles:{},scripts:{}});
                             break;
+                            case 'embed':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'embed',styles:{},scripts:{}});
+                            break;
+                            case 'fieldset':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'fieldset',styles:{},scripts:{}});
+                            break;
+                            case 'legend':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'legend',styles:{},scripts:{}});
+                            break;
+                            case 'figcaption':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'figcaption',styles:{},scripts:{}});
+                            break;
+                            case 'figure':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'figure',styles:{},scripts:{}});
+                            break;
+                            case 'footer':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'footer',styles:{},scripts:{}});
+                            break;
+                            case 'iframe':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'iframe',styles:{},scripts:{}});
+                            break;
+                            case 'hgroup':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'hgroup',styles:{},scripts:{}});
+                            break;
+                            case 'hr':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'hr',styles:{},scripts:{}});
+                            break;
+                            case 'ul':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'ul',styles:{},scripts:{}});
+                            break;
+                            case 'ol':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'ol',styles:{},scripts:{}});
+                            break;
+                            case 'li':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'li',styles:{},scripts:{}});
+                            break;
+                            case 'icon':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'link',type: 'icon',styles:{},scripts:{}});
+                            break;
+                            case 'shortcuticon':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'link',type: 'shortcut icon',styles:{},scripts:{}});
+                            break;
+                            case 'appletouchicon':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'link',type: 'apple-touch-icon',styles:{},scripts:{}});
+                            break;
+                            case 'main':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'main',styles:{},scripts:{}});
+                            break;
+                            case 'map':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'map',styles:{},scripts:{}});
+                            break;
                             case 'heading':
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'h',styles:{},scripts:{}});
-                               
                             break;
                             case 'header':
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'header',styles:{},scripts:{}});
+                            break;
+                            case 'image':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'img',styles:{},scripts:{}});
+                            break;
+                            case 'kbd':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'kbd',styles:{},scripts:{}});
                             break;
                             case 'paragraph':
                                 this.holder+=1;
@@ -251,6 +338,10 @@ class Listener{
                             case 'form':
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'form',styles:{},scripts:{}});
+                            break;
+                            case 'label':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'label',styles:{},scripts:{}});
                             break;
                             case 'inputtext':
                                 this.holder+=1;
@@ -348,7 +439,7 @@ class Listener{
                     break;
                     case 'build':
                         this.lineCode.push({tagName: 'div', classes: "wpa-build-"+value ,html: JSON.parse(sessionStorage.getItem('wsa_extensions'))[value]['extension_temp'],styles:{},scripts:{}});
-                        this.buildEvent = new CustomEvent("wsa-build",{detail: value});
+                        this.buildEvent = new CustomEvent("wsa-build",{detail: {type:value, input:document.querySelector('.wsa-userinput').value}});
                     break;
                     case 'remove':
                         switch(value.toLocaleLowerCase()){
@@ -404,6 +495,12 @@ class Listener{
                     case 'query':
                         this.currentTarget = (document.querySelector(value+':not(.wsa '+value+')')!==undefined ? document.querySelector(value+':not(.wsa '+value+')') : null);
                     break;
+                    case 'list':
+                        value.split(/(?<!\\),/).forEach((items)=>{
+                            this.lineCode[this.holder].html = (this.lineCode[this.holder].html ?  this.lineCode[this.holder].html + '<li>'+items.replace(/\\,/g,',')+'</li>' : '<li>'+items.replace(/\\,/g,',')+'</li>');
+                        });
+                    break;
+                    
                     case 'queryall':
                         this.currentTarget = (document.querySelectorAll(value+':not(.wsa '+value+')')!==undefined ? document.querySelectorAll(value+':not(.wsa '+value+')') : null);
                     break;
@@ -429,6 +526,9 @@ class Listener{
                     case 'name':
                         this.lineCode[this.holder].name = value;
                     break;
+                    case 'usemap':
+                        this.lineCode[this.holder].usemap = value;
+                    break;
                     case 'open':
                         this.lineCode[this.holder].open = true;
                     break;
@@ -437,6 +537,9 @@ class Listener{
                     break;
                     case 'src':
                         this.lineCode[this.holder].src = value;
+                    break;
+                    case 'pxs':
+                        this.lineCode[this.holder].pxs = value;
                     break;
                     case 'type':
                         this.lineCode[this.holder].type = value;
@@ -508,9 +611,11 @@ class Listener{
                 (this.lineCode[i].classes ? elem.className = this.lineCode[i].classes : '');
                 (this.lineCode[i].type ? elem.type = this.lineCode[i].type : '');
                 (this.lineCode[i].id ? elem.id = this.lineCode[i].id : '');
+                (this.lineCode[i].pxs ? elem.sizes = this.lineCode[i].pxs : '');
                 (this.lineCode[i].open ? elem.open = this.lineCode[i].open : '');
                 (this.lineCode[i].placeholder ? elem.placeholder = this.lineCode[i].placeholder : '');
-                (this.lineCode[i].name ? elem.setAttribute('name',this.lineCode[i].name) : '');
+                (this.lineCode[i].name ? elem.name = this.lineCode[i].name : '');
+                (this.lineCode[i].usemap ? elem.usemap = this.lineCode[i].usemap : '');
                 (this.lineCode[i].required ? elem.required = this.lineCode[i].required : '');
                 (this.lineCode[i].href ? elem.href = this.lineCode[i].href : '');
                 (this.lineCode[i].dir ? elem.dir = this.#dirName(this.lineCode[i].dir) : '');
@@ -537,8 +642,12 @@ class Listener{
                     }else
                         document.querySelector(this.lineCode[i].location).appendChild(elem);
                 }else{
-                    document.body.insertBefore(elem,document.body.children[this.placeOver]);
-                    this.placeOver+=1;
+                    if(elem.tagName.toLocaleLowerCase()==='link')
+                        document.head.appendChild(elem,document.head);
+                    else{
+                        document.body.insertBefore(elem,document.body.children[this.placeOver]);
+                        this.placeOver+=1;
+                    }
                 }   
             }
             (this.buildEvent!==null ? window.dispatchEvent(this.buildEvent) : ''); this.buildEvent=null;

@@ -46,6 +46,17 @@ class Trainer{
         $str = preg_replace('/definition element/i','dfn',$str);
         $str = preg_replace('/description list/i','dl',$str);
         $str = preg_replace('/description term/i','dt',$str);
+        $str = preg_replace('/image caption/i','figcaption',$str);
+        $str = preg_replace('/group heading/i','hgroup',$str);
+        $str = preg_replace('/horizontal line/i','hr',$str);
+        $str = preg_replace('/keyboard input/i','kbd',$str);
+        $str = preg_replace('/unordered list/i','ul',$str);
+        $str = preg_replace('/ordered list/i','ol',$str);
+        $str = preg_replace('/list of|items of/i','list',$str);
+        $str = preg_replace('/pixel size/i','pxs',$str);
+        $str = preg_replace('/shortcut icon/i','shortcuticon',$str);
+        $str = preg_replace('/apple touch icon|apple-touch|mobile icon/i','appletouchicon',$str);
+        $str = preg_replace('/main content/i','main',$str);
         # Quotations/Apostrophe
         $str = preg_replace('/\\\"/','\\\\qq',$str);
         $str = preg_replace("/\\\'/",'\\\\q',$str);
@@ -157,11 +168,67 @@ class Trainer{
                 case 'dt':
                     $AIStr.='DT}||';
                 break;
+                case 'embed':
+                case 'embedded':
+                    $AIStr.='EMBED}||';
+                break;
+                case 'fieldset':
+                    $AIStr.='FIELDSET}||';
+                break;
+                case 'legend':
+                    $AIStr.='LEGEND}||';
+                break;
+                case 'figcaption':
+                    $AIStr.='FIGCAPTION}||';
+                break;
+                case 'figure':
+                    $AIStr.='FIGURE}||';
+                break;
+                case 'footer':
+                    $AIStr.='FOOTER}||';
+                break;
+                case 'iframe':
+                    $AIStr.='IFRAME}||';
+                break;
+                case 'hgroup':
+                    $AIStr.='HGROUP}||';
+                break;
+                case 'hr':
+                    $AIStr.='HR}||';
+                break;
+                case 'ul':
+                    $AIStr.='UL}||';
+                break;
+                case 'ol':
+                    $AIStr.='OL}||';
+                break;
+                case 'icon':
+                    $AIStr.='ICON}||';
+                break;
+                case 'shortcuticon':
+                    $AIStr.='SHORTCUTICON}||';
+                break;
+                case 'appletouchicon':
+                    $AIStr.='APPLETOUCHICON}||';
+                break;
+                case 'main':
+                    $AIStr.='MAIN}||';
+                break;
+                case 'map':
+                    $AIStr.='MAP}||';
+                break;
                 case 'heading':
                     $AIStr.='HEADING}||';
                 break;
                 case 'header':
                     $AIStr.='HEADER}||';
+                break;
+                case 'img':
+                case 'image':
+                    $AIStr.='IMAGE}||';
+                break;
+                case 'kbd':
+                    $AIStr.='KBD}||';
                 break;
                 case 'paragraph':
                     $AIStr.='PARAGRAPH}||';
@@ -179,6 +246,9 @@ class Trainer{
                 # Form elements
                 case 'form':
                     $AIStr.='FORM}||';
+                break;
+                case 'label':
+                    $AIStr.='LABEL}||';
                 break;
                 case 'text':
                     $AIStr.='INPUTTEXT}||';
@@ -261,6 +331,9 @@ class Trainer{
                 case 'selectall':
                     $AIStr.='{QUERYALL_';
                 break;
+                case 'list':
+                    $AIStr.='{LIST_';
+                break;
                 case 'size':
                     $AIStr.='{SIZE_';
                 break;
@@ -273,6 +346,9 @@ class Trainer{
                 break;
                 case 'name':
                     $AIStr.='{NAME_';
+                break;
+                case 'usemap':
+                    $AIStr.='{USEMAP_';
                 break;
                 case 'value':
                 case 'val':
@@ -304,6 +380,9 @@ class Trainer{
                 break;
                 case 'src':
                     $AIStr.='{SRC_';
+                break;
+                case 'pxs':
+                    $AIStr.='{PXS_';
                 break;
                 case 'controls':
                     $AIStr.='{CONTROLS}||';
