@@ -265,6 +265,54 @@ e.get(event, label);
 e.statement(str)
 ```
 
+### Utils
+Uses the utilites of the AI
+```js
+import { rgbaToHex, 
+    keyboardFocusable, 
+    isDecimal, 
+    version_compare,
+    //CONST
+    VIDEO_PATH,
+    AUDIO_PATH,
+    IMAGE_PATH,
+    DS,
+    ORGIN} FROM "WebServerAI/assets/AI/js/components/utils.js";
+```
+
+RGBA: converts rgb(a)? to hexdecimal
+```js
+rgbaToHex(rgba);
+```
+
+keyboardFocusable: Checks if element is keyboard focusable
+```js
+keyboardFocusable(element);
+```
+
+isDecimal: Checks if number is a decimal
+```js
+isDecimal(number);
+```
+
+version_compare: Compares two versions either _TRUE/FALSE_ or _-1, 0, or 1_
+```js
+/*
+* v1 - version 1
+* v2 - version 2
+* operator [OPTIONAL] - <, >, <=, >=, =, ==, !=, or <>
+*/
+version_compare(v1, v2, '=');
+```
+
+| CONST | VALUE |
+| ----- | ----- |
+| VIDEO_PATH | `/WebServerAI/assets/AI/videos` |
+| AUDIO_PATH | `/WebServerAI/assets/AI/audios` |
+| IMAGE_PATH | `/WebServerAI/assets/AI/images` |
+| DS | `/` |
+| ORGIN | `http(s)?//domain/` |
+
 ***
 
 ## Adding Languages
