@@ -1,3 +1,30 @@
-<div class="video-player">
-    
+<div class="video-player" wsa-noselect tabindex="0">
+    <div class="video-container">
+        <!--Add video here-->
+    </div>
+    <div class="video-settings">
+        <div class="video-progress-container">
+            <div class="video-progress">
+                <div class="video-progress-hover"></div>
+                <div style="width: 0%;" class="video-progress-bar"></div>
+            </div>
+        </div>
+        <div class="video-controls">
+            <div class="video-main-controls">
+                <i class="fa-solid fa-play" video-play-toggle-status title="Play (K)"></i>
+                <div class="volume-control">
+                    <i class="fa-solid fa-volume" title="Mute (M)"></i>
+                    <input type="range" value="1" step="0.1" min="0" max="1"/>
+                </div>
+                <div class="video-time">
+                    <span class="currentTime">00:00</span>
+                    /
+                    <span class="duration">00:00</span>
+                </div>
+            </div>
+            <div class="video-extra-controls">
+                <i class="fa-solid fa-expand" video-toggle-fullscreen title="Fullscreen (F)"></i>
+            </div>
+        </div>
+    </div>
 </div>

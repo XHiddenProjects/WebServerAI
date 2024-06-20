@@ -1,4 +1,5 @@
 var responce;
+import {version_compare} from '/WebServerAI/assets/AI/js/components/utils.js';
 class Extensions{
     constructor(){
         this.base = window.location.origin+'/WebServerAI/build';
@@ -187,13 +188,18 @@ class Extensions{
         html = toHTML.documentElement.querySelector('body').innerHTML;
         return html;
     }
-
+    /**
+     * Updates all extension containers
+     * @param {String} name Name of the extension
+     * @returns {Int} The last container value
+     */
     update(name){
         var u=1;
         document.querySelectorAll('.wpa-build-'+name).forEach((e)=>{
-            e.id = u;
+            e.id = name+'_'+u;
             u+=1;
         });
+        return (u-1);
         u=1;
     }
     /**
@@ -219,6 +225,21 @@ class Extensions{
         req.send();
         return responce;
     }
-    
+    isAllowed(name){
+        const elem = this.request(window.location.origin+'/WebServerAI/libs/ai_checker.php?name='+name, true);
+        const settings = this.request(window.location.origin+'/WebServerAI/data/settings.json',true);
+        if(version_compare(settings['AI']['Version'],elem['ai_version'],'=='))
+            return true;
+        else
+            return false;
+    }
+    /**
+     * Error message when extension is no longer supported
+     * @param {String} str Error message when plugin is no longer supported 
+     * @returns {void}
+     */
+    noSupport(name){
+        throw new Error('[WebServerAI] - "'+name+'" is no longer supported!');
+    }
 }
 export default Extensions;
