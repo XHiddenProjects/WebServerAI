@@ -9,7 +9,7 @@
     </head>
     <body>
     <script type="module">
-        import WebServerAI from '//localhost/WebServerAI/assets/AI/js/webserverai.js';
+        import WebServerAI from '//localhost/WebServerAI/assets/AI/js/webserverai.min.js';
         if(window.WebServerAI!==undefined){
             let wsc = new WebServerAI({
                 enabled: true,
