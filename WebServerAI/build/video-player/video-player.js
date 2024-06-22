@@ -8,8 +8,7 @@ const url = new URL(import.meta.url),
 ext = new Extensions(),
 events = new Events(),
 buildName = ext.getBuildName(url),
-buildID = ext.getBuildID(url),
-config = ext.configSearch(url,['progress-bar'],['']);
+buildID = ext.getBuildID(url);
 ext.saveTemplate(buildName,ext.parse(buildName));
 const sc = new shortcutJS();
 if(ext.isAllowed(buildName)){
