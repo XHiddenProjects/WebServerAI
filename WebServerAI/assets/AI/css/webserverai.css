@@ -169,6 +169,7 @@
     padding: 1rem;
     height: 75%;
     position: relative;
+    overflow-y: auto;
 }
 .wsa .wsa-ui *{
     width: 100%;
