@@ -283,6 +283,7 @@ import { rgbaToHex,
     VIDEO_PATH,
     AUDIO_PATH,
     IMAGE_PATH,
+    SUBTITLE_PATH,
     DS,
     ORGIN} FROM "WebServerAI/assets/AI/js/components/utils.js";
 ```
@@ -317,6 +318,7 @@ version_compare(v1, v2, '=');
 | VIDEO_PATH | `/WebServerAI/assets/AI/videos` |
 | AUDIO_PATH | `/WebServerAI/assets/AI/audios` |
 | IMAGE_PATH | `/WebServerAI/assets/AI/images` |
+| SUBTITLE_PATH | `/WebServerAI/assets/AI/subtitles` |
 | DS | `/` |
 | ORGIN | `http(s)?//domain/` |
 
