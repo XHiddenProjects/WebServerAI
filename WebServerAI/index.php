@@ -49,7 +49,11 @@
                             ],
                             scripts:[
                                 '/WebServerAI/build/video-player/video-player.js'
-                            ]
+                            ],
+                            assets:[{
+                                type: 'style',
+                                url: 'https://fonts.googleapis.com/css2?family=Material+Icons',
+                            }]
                         }
                     }
                 }

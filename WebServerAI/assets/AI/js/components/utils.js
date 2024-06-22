@@ -240,6 +240,7 @@ function version_compare(v1, v2, operator){
 const VIDEO_PATH = window.location.origin+'/WebServerAI/assets/AI/videos',
     AUDIO_PATH = window.location.origin+'/WebServerAI/assets/AI/audios',
     IMAGE_PATH = window.location.origin+'/WebServerAI/assets/AI/images',
+    SUBTITLE_PATH = window.location.origin+'/WebServerAI/assets/AI/subtitles',
     DS = '/',
     ORGIN = window.location.origin;
 
@@ -253,6 +254,7 @@ export {
     VIDEO_PATH,
     AUDIO_PATH,
     IMAGE_PATH,
+    SUBTITLE_PATH,
     DS,
     ORGIN
 };

@@ -48,6 +48,22 @@ window.WebServerAI = class {
                                         script.src = this.origin+settings.extensions[e].startup[s][i]+'?extensionID='+extensions.lookup(e,'id',extensions.list())+(extensions.getBuildConfig(e,extensions.list()).length>0 ? '&'+extensions.getBuildConfig(e,extensions.list()).join('&') : '');
                                         document.body.appendChild(script);
                                     }
+                                }else if(s==='assets'){
+                                    for(let i=0;i<settings.extensions[e].startup[s].length;i++){
+                                        const item = settings.extensions[e].startup[s][i];
+                                        if(item['type']==='style'){
+                                            const style = document.createElement('link');
+                                            style.rel = 'stylesheet';
+                                            style.href = item['url'];
+                                            document.head.appendChild(style);
+                                        }else{
+                                            const script = document.createElement('script');
+                                            script.src = item['url'];
+                                            if(item.hasOwnProperty('module'))
+                                                script.type = 'module';
+                                            document.body.appendChild(script);
+                                        }
+                                    }
                                 }
                             }
                         }

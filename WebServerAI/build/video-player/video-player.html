@@ -1,30 +1,75 @@
-<div class="video-player" wsa-noselect tabindex="0">
+<section class="video-player-section" wsa-noselect>
     <div class="video-container">
-        <!--Add video here-->
-    </div>
-    <div class="video-settings">
-        <div class="video-progress-container">
-            <div class="video-progress">
-                <div class="video-progress-hover"></div>
-                <div style="width: 0%;" class="video-progress-bar"></div>
+        <div class="video_player">
+            <video class="video"></video>
+            <p class="caption_text"></p>
+            <div class="video-progresstime">00:00</div>
+            <div class="video-controls">
+                <div class="video-progress">
+                    <div class="video-progress-bar">
+                        <span></span>
+                    </div>
+                    <div class="buffered-progress-bar"></div>
+                </div>
+                <div class="controls-list">
+                    <div class="controls-left">
+                        <span class="icon">
+                            <i class="material-icons fast-rewind">replay_10</i>
+                        </span>
+                        <span class="icon">
+                            <i class="material-icons play_pause">play_arrow</i>
+                        </span>
+                        <span class="icon">
+                            <i class="material-icons fast-forward">forward_10</i>
+                        </span>
+                        <span class="icon">
+                            <i class="material-icons volume">volume_up</i>
+                            <input type="range" min="0" max="100" value="100" class="volume_range"/>
+                        </span>
+                        <div class="video-timer">
+                            <span class="current">00:00</span>/<span class="duration">0:00</span>
+                        </div>
+                    </div>
+                    <div class="controls-right">
+                        <span class="icon">
+                            <i class="material-icons auto-play"></i>
+                        </span>
+                        <span class="icon">
+                            <i class="material-icons settingsBtn">settings</i>
+                        </span>
+                        <span class="icon">
+                            <i class="material-icons captionsBtn">closed_caption</i>
+                        </span>
+                        <span class="icon">
+                            <i class="material-icons pip">picture_in_picture_alt</i>
+                        </span>
+                        <span class="icon">
+                            <i class="material-icons fullscreen">fullscreen</i>
+                        </span>
+                    </div>
+                </div>
+                <div class="video-settings">
+                    <div class="video-playback">
+                        <span>Playback speed</span>
+                        <ul>
+                            <li data-speed="0.25">0.25</li>
+                            <li data-speed="0.5">0.5</li>
+                            <li data-speed="0.75">0.75</li>
+                            <li data-speed="1" class="active">Normal</li>
+                            <li data-speed="1.25">1.25</li>
+                            <li data-speed="1.5">1.5</li>
+                            <li data-speed="1.75">1.75</li>
+                            <li data-speed="2">2</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="video-captions">
+                    <div class="video-caption">
+                        <span>Select Subtitle</span>
+                        <ul></ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="video-controls">
-            <div class="video-main-controls">
-                <i class="fa-solid fa-play" video-play-toggle-status title="Play (K)"></i>
-                <div class="volume-control">
-                    <i class="fa-solid fa-volume" title="Mute (M)"></i>
-                    <input type="range" value="1" step="0.1" min="0" max="1"/>
-                </div>
-                <div class="video-time">
-                    <span class="currentTime">00:00</span>
-                    /
-                    <span class="duration">00:00</span>
-                </div>
-            </div>
-            <div class="video-extra-controls">
-                <i class="fa-solid fa-expand" video-toggle-fullscreen title="Fullscreen (F)"></i>
-            </div>
-        </div>
     </div>
-</div>
+</section>

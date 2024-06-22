@@ -1,3 +1,4 @@
+var responce;
 class Events{
     constructor(){
 
@@ -12,12 +13,22 @@ class Events{
         return event.detail[label] ? event.detail[label] : undefined;
     }
     /**
+     * Returns the output of a certain command
+     * @param {RegExp} eventPattern Check what to 
+     * @param {String} str String to check
+     * @returns {RegExpMatchArray|null}
+     */
+    cmdLine(eventPattern, str){
+        return str.match(eventPattern);
+    }
+    /**
      * Returns array of users statements
      * @param {String} str Users input
+     * @param {boolean} [sliceStart=true] Remove the first item on the list
      * @returns {Array<String>} List of matching users dbl quotations
      */
-    statement(str){
-        return str.match(/\"(.*?)\"/g).map(a=>a.replace(/\"/g,'')).splice(1);
+    statement(str,sliceStart=true){
+        return (sliceStart ? str.match(/\"(.*?)\"/g).map(a=>a.replace(/\"/g,'')).splice(1) : str.match(/\"(.*?)\"/g).map(a=>a.replace(/\"/g,'')));
     }
     /**
      * Looks up an array to see if value is in-place
@@ -27,6 +38,29 @@ class Events{
      */
     lookup(arr, index){
         return arr.indexOf(index)>=0 ? true : false;
+    }
+    /**
+     * Gets file content
+     * @param {String} url Location to get the file content
+     * @param {Boolean} [isJSON=false] Converts string to JSON object
+     * @param {Boolean} [async=false] Wait until page load
+     * @returns {JSON|String}
+     */
+    request(url, isJSON=false, async=false){   
+        let req = new XMLHttpRequest();
+        req.onreadystatechange = ()=>{
+            if(req.readyState==4&&req.status==200){
+                if(isJSON){
+                    responce = JSON.parse(req.responseText);
+                }
+                else{
+                    responce = req.responseText;
+                }
+            }
+        }
+        req.open("GET", url, async);
+        req.send();
+        return responce;
     }
 }
 export default Events;
