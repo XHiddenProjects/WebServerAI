@@ -164,6 +164,7 @@ config = ext.configSearch(url,[],[]);
 ext.saveTemplate(buildName,ext.parse(buildName));
 // END LOAD-UP
 //USE "wsa-build" to trigger on build-submit
+if(ext.isAllowed(buildName)){
 window.addEventListener('wsa-build',(e)=>{
     // Your code goes in here
 
@@ -171,8 +172,14 @@ window.addEventListener('wsa-build',(e)=>{
 
     // Give elements based on your build name a unique ID
     ext.update(buildName);
+   }else
+      ext.noSupport(buildName);
 });
 ```
+
+
+
+
 ***
 
 ## Components
