@@ -29,7 +29,7 @@ An AI that develops and Designs website from any work folder and very little cod
 In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
 ```js
   // Import WebServerAI from the location of the WebServerAI folder
-  import WebServerAI from '//WebServerAI/assets/AI/js/webserverai.js';
+  import WebServerAI from '//WebServerAI/assets/AI/js/webserverai.min.js';
   // Access the class from WebServerAI
    if(window.WebServerAI!==undefined){
         let wsc = new WebServerAI({
