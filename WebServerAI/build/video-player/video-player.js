@@ -32,20 +32,21 @@ if(ext.isAllowed(buildName)){
         xhr.send();
         const subtitles = events.cmdLine(/subtitles? \"(.*?)\" and label it as \"(.*?)\"/g,events.get(e,'input')),
             lang = events.request('/WebServerAI/data/languagesData.json',true);
-        subtitles.forEach((s)=>{
-            const st = events.statement(s,false),
-            t = document.createElement('track');
-            t.label = st[1];
-            t.src = SUBTITLE_PATH+DS+st[0];
-            t.kind = 'subtitles';   
-            for(let i in lang){
-                if(lang[i].name.toLocaleLowerCase()===st[1].toLocaleLowerCase()){
-                    t.srclang = i.toLocaleLowerCase();
+        if(subtitles){
+            subtitles.forEach((s)=>{
+                const st = events.statement(s,false),
+                t = document.createElement('track');
+                t.label = st[1];
+                t.src = SUBTITLE_PATH+DS+st[0];
+                t.kind = 'subtitles';   
+                for(let i in lang){
+                    if(lang[i].name.toLocaleLowerCase()===st[1].toLocaleLowerCase()){
+                        t.srclang = i.toLocaleLowerCase();
+                    }
                 }
-            }
-             document.querySelector('#'+buildName+'_'+v+' video').appendChild(t);
-        });
-
+                document.querySelector('#'+buildName+'_'+v+' video').appendChild(t);
+            });
+        }
 
         const video_player = document.querySelectorAll('#'+buildName+'_'+v+' .video_player');
         video_player.forEach((elem)=>{
@@ -81,7 +82,7 @@ if(ext.isAllowed(buildName)){
                 }
             }else{
                captionsBtn.setAttribute('disabled',true);
-               captionsBtn.title = 'Captions is not available';
+               captionsBtn.title = 'Captions is unavailable';
             }
             const caption_tracks = captions.querySelectorAll('ul li');
             
