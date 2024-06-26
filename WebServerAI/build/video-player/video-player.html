@@ -1,10 +1,12 @@
 <section class="video-player-section" wsa-noselect>
     <div class="video-container">
         <div class="video_player">
+            <div class="spinner"></div>
             <video class="video"></video>
             <p class="caption_text"></p>
-            <div class="video-progresstime">00:00</div>
             <div class="video-controls">
+                <div class="video-thumbnail"></div>
+                <div class="video-progresstime">00:00</div>
                 <div class="video-progress">
                     <div class="video-progress-bar">
                         <span></span>
@@ -49,8 +51,23 @@
                     </div>
                 </div>
                 <div class="video-settings">
-                    <div class="video-playback">
-                        <span>Playback speed</span>
+                    <div data-label="video-settingsHome">
+                        <ul>
+                            <li data-label="speed">
+                                <span>Speed</span>
+                                <span class="material-icons">arrow_forward_ios</span>
+                            </li>
+                            <li data-label="quality">
+                                <span>Quality</span>
+                                <span class="material-icons">arrow_forward_ios</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="video-playback" data-label="speed" hidden>
+                        <span>
+                            <i class="material-icons icon back_arrow" data-label="video-settingsHome">arrow_back</i>
+                            <span>Playback Speed</span>
+                        </span>
                         <ul>
                             <li data-speed="0.25">0.25</li>
                             <li data-speed="0.5">0.5</li>
@@ -60,6 +77,15 @@
                             <li data-speed="1.5">1.5</li>
                             <li data-speed="1.75">1.75</li>
                             <li data-speed="2">2</li>
+                        </ul>
+                    </div>
+                    <div class="video-quality" data-label="quality" hidden>
+                        <span>
+                            <i class="material-icons icon back_arrow" data-label="video-settingsHome">arrow_back</i>
+                            <span>Playback Quality</span>
+                        </span>
+                        <ul>
+                            <li data-quality="auto" class="active">auto</li>
                         </ul>
                     </div>
                 </div>

@@ -16,10 +16,14 @@ class Events{
      * Returns the output of a certain command
      * @param {RegExp} eventPattern Check what to 
      * @param {String} str String to check
+     * @param {Function|null} [callback=null] Return as a function
      * @returns {RegExpMatchArray|null}
      */
-    cmdLine(eventPattern, str){
-        return str.match(eventPattern);
+    cmdLine(eventPattern, str , callback=null){
+        if(callback)
+            return callback(str.match(eventPattern));
+        else
+            return str.match(eventPattern);
     }
     /**
      * Returns array of users statements

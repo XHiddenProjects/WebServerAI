@@ -370,6 +370,7 @@
 
 .wsa .wsa-txt{
     width: 410px;
+    overflow: auto;
 }
 
 /*[wsa-elemfocus]{
