@@ -5,7 +5,7 @@ An AI that develops and Designs website from any work folder and very little cod
 
 ***
 
-### Utilities
+### What the AI has
 * _Cursor-Targeting Element (CTE)_ where you can hover over elements and click to quick insert the correct elements` tagName, class names, and IDs in the correct format.
 * Drag-Drop method (works for both PC/Mobile devices)
 * Light/Dark mode toggle
