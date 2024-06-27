@@ -5,6 +5,22 @@ An AI that develops and Designs website from any work folder and very little cod
 
 ***
 
+### Table of Contents
+   * [What the AI has](#what-the-ai-has)
+   * [Languages](#available-languages)
+      * [Adding Languages](#adding-languages)
+   * [Installation](#installation)
+      * [How to enable the AI](#how-to-enable-the-ai)
+      * [Using the AI](#using-the-ai)
+   * [Extensions](#extensions)
+      * [Creating the Extensions](#creating-an-extensions)
+   * [Components](#components)
+      * [GeoLocation](#geolocation)
+      * [Security](#security)
+      * [Events](#events)
+      * [Utils](#utils)
+***
+
 ### What the AI has
 * _Cursor-Targeting Element (CTE)_ where you can hover over elements and click to quick insert the correct elements` tagName, class names, and IDs in the correct format.
 * Drag-Drop method (works for both PC/Mobile devices)
@@ -25,7 +41,7 @@ An AI that develops and Designs website from any work folder and very little cod
 2. Place the folder in the **ROOT** directory to allow all folders to be accessed.
 3. Go to an project to work with and enter the following instructions to enable it.
    
-### How to enable to AI
+### How to enable the AI
 In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
 ```js
   // Import WebServerAI from the location of the WebServerAI folder
