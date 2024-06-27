@@ -279,6 +279,7 @@ import { rgbaToHex,
     keyboardFocusable, 
     isDecimal, 
     version_compare,
+   isScrollable,
     //CONST
     VIDEO_PATH,
     AUDIO_PATH,
@@ -311,6 +312,16 @@ version_compare: Compares two versions either _TRUE/FALSE_ or _-1, 0, or 1_
 * operator [OPTIONAL] - <, >, <=, >=, =, ==, !=, or <>
 */
 version_compare(v1, v2, '=');
+```
+
+isScrollable: Checks if element is scrollable
+```js
+/**
+ * Returns if element is scrollable
+ * @param {Element} element Element to check
+ * @returns {Number|Array<Number>} -1 if scrollbar is horizontal, 1 if scrollbar is vertical, 0 if no scrollabars are present
+ */
+isScrollable(elem);
 ```
 
 | CONST | VALUE |
