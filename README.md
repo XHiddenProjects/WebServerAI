@@ -107,9 +107,9 @@ To add extensions place the following order:
             styles:[], // Extensions` style files
             scripts:[], // Extensions` script files
             assets:[{
-               type: "{style/script}",
-               url: "{url}"
-            }] // Add a "style"/"script" from a external website
+               type: "{style/script}", //"style" or "script"
+               url: "{url}" // External URL
+            }]
          }
       }
    }
