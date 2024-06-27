@@ -124,7 +124,7 @@ Create your extension in the _/WebServerAI/build/`{your_extension_name}`_
 * JS
 * Media files: _(Images, Videos, Audios, ...)_
 
-> Extra codes can be placed, but will need to be requested from JS by using the _XMLHttpRequest()_
+> Extra codes can be placed, but will need to be requested from JS by using the _[Events.request()](#events)_
 
 Now this is pretty simple part.
 
