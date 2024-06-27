@@ -105,7 +105,11 @@ To add extensions place the following order:
          },
          startup:{
             styles:[], // Extensions` style files
-            scripts:[] // Extensions` script files
+            scripts:[], // Extensions` script files
+            assets:[{
+               type: "{style/script}",
+               url: "{url}"
+            }] // Add a "style"/"script" from a external website
          }
       }
    }
