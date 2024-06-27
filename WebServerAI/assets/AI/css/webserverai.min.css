@@ -64,7 +64,7 @@
 }
 .wsa{
     display: block;
-    position: absolute;
+    position: fixed;
     z-index: 2000;
     width: var(--wsa-box-width);
     height: var(--wsa-box-height);
@@ -359,7 +359,7 @@
     border-bottom-right-radius: 0;
 }
 .wsa-drop-bubble{
-    position: absolute;
+    position: fixed;
     z-index: 2000;
     background-color: var(--wsa-bubble-color);
     border: 2px solid var(--wsa-bubble-border);

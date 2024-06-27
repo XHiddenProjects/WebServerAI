@@ -236,6 +236,21 @@ function version_compare(v1, v2, operator){
         default:
         return null
     }
+};
+/**
+ * Returns if element is scrollable
+ * @param {Element} element Element to check
+ * @returns {Number|Array<Number>} -1 if scrollbar is horizontal, 1 if scrollbar is vertical, 0 if no scrollabars are present
+ */
+function isScrollable(element){
+    const active = [];
+    if (element.scrollWidth > element.clientWidth)
+        active.push(-1);
+    if(element.scrollHeight > element.clientHeight)
+        active.push(1);
+    if(active.length==0)
+        active.push(0);
+    return (active.length==1 ? active[0] : active);
 }
 const VIDEO_PATH = window.location.origin+'/WebServerAI/assets/AI/videos',
     AUDIO_PATH = window.location.origin+'/WebServerAI/assets/AI/audios',
@@ -250,6 +265,7 @@ export {
     keyboardFocusable, 
     isDecimal, 
     version_compare,
+    isScrollable,
     //CONST
     VIDEO_PATH,
     AUDIO_PATH,
