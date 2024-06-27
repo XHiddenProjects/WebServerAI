@@ -118,11 +118,13 @@ To add extensions place the following order:
 ### Creating an Extensions
 Create your extension in the _/WebServerAI/build/`{your_extension_name}`_
 
-**Note: Excepted Files**
-* HTML/HTM
+**Note: Excepted rendered files**
+* HTML
 * CSS
 * JS
 * Media files: _(Images, Videos, Audios, ...)_
+
+> Extra codes can be placed, but will need to be requested from JS by using the _XMLHttpRequest()_
 
 Now this is pretty simple part.
 
