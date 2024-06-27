@@ -104,8 +104,8 @@ To add extensions place the following order:
             //configuration (optional, if extension doesn't require it)
          },
          startup:{
-            styles:[], // Extensions` style files
-            scripts:[], // Extensions` script files
+            styles:[], // Extensions style files
+            scripts:[], // Extensions script files
             assets:[{
                type: "{style/script}", // "style" or "script"
                url: "{url}" // External URL
