@@ -275,7 +275,30 @@ e.get(event, label);
      * @param {String} str Users input
      * @returns {Array<String>} List of matching users dbl quotations
 */
-e.statement(str)
+e.statement(str);
+/**
+   * Gets file content
+   * @param {String} url Location to get the file content
+   * @param {Boolean} [isJSON=false] Converts string to JSON object
+   * @param {Boolean} [async=false] Wait until page load
+   * @returns {JSON|String}
+   */
+e.request(url, isJson=false, async=false);
+/**
+   * Looks up an array to see if value is in-place
+   * @param {Array<*>} arr Array to lookup
+   * @param {String|Number} index value to look at
+   * @returns {Boolean}
+   */
+e.lookup(arr, index);
+/**
+   * Returns the output of a certain command from the AI
+   * @param {RegExp} eventPattern Check what to 
+   * @param {String} str String to check
+   * @param {Function|null} [callback=null] Return as a function
+   * @returns {RegExpMatchArray|null}
+   */
+e.cmdLine(eventPattern, str , callback=null);
 ```
 
 ### Utils
