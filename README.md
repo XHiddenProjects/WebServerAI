@@ -7,7 +7,8 @@ An AI that develops and Designs website from any work folder and very little cod
 
 ### Table of Contents
    * [What the AI has](#what-the-ai-has)
-   * [Languages](#available-languages)
+   * [Languages](#languages)
+      * [Available Languages](#available-languages)
       * [Adding Languages](#adding-languages)
    * [Installation](#installation)
       * [How to enable the AI](#how-to-enable-the-ai)
@@ -21,7 +22,7 @@ An AI that develops and Designs website from any work folder and very little cod
       * [Utils](#utils)
 ***
 
-### What the AI has
+## What the AI has
 * _Cursor-Targeting Element (CTE)_ where you can hover over elements and click to quick insert the correct elements` tagName, class names, and IDs in the correct format.
 * Drag-Drop method (works for both PC/Mobile devices)
 * Light/Dark mode toggle
@@ -31,12 +32,62 @@ An AI that develops and Designs website from any work folder and very little cod
 * Extensions that be used to make the AI more efficient.
 * Multi-language software - Allows translates based browser language.
 
-### Available Languages
+## Languages
+
+### Available languages
 * English (United States)
 * Deutsch (Deutschland)
 * Francaise (France)
 
-### Installation
+### Adding Languages
+To add your own or share your own interpeded language please do the following:
+
+1. Start a new file called `{language_name}-{language_country}.json` example `fr-FR = french-France`
+2. Copy this code:
+```json
+   "en-US":{
+            "name":"English",
+            "dictionary":{
+                "title": "WebServerAI - XHiddenProjects",
+                "name":"Name",
+                "version":"Version",
+                "updated":"Updated",
+                "nav":{
+                    "send": "Send (Enter)",
+                    "lastestHistory": "Latest History",
+                    "pastHistory": "Past History",
+                    "clearHistory": "Clear History",
+                    "clear":"Clear",
+                    "help": "Extra information",
+                    "changeTheme":"Change theme",
+                    "intxtdbl":"Insert In-Text Double quotes",
+                    "intxtsgl":"Insert In-Text Single quotes",
+                    "intxtaps":"Insert In-Text Apostrophe",
+                    "intxtnl": "Insert In-Text New Line"
+                },
+                "cmd":{
+                    "help":"Gives the list of commands",
+                    "clear":"Clears out the entire history or a certain index",
+                    "info":"Returns the AI information",
+                    "connect":"Connects you to another page"
+                },
+                "clipboard":{
+                    "success":"Copied to clipboard",
+                    "error":"Error writing to clipboard"
+                },
+                "ai":{
+                    "success": "Successfully executed",
+                    "error": "There was an error with this statement"
+                }
+            }
+        }
+```
+3. Translate it
+4. **To share** go to `issues > "New Issue"`
+
+***
+
+## Installation
 1. Download and take out the **WebServerAI** folder from the _WebServerAI_Master_ folder.
 2. Place the folder in the **ROOT** directory to allow all folders to be accessed.
 3. Go to an project to work with and enter the following instructions to enable it.
@@ -74,8 +125,8 @@ In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
         */
       }
 ```
-***
-## Using the AI
+
+### Using the AI
 This AI uses _direct quotations_. 
 
 Examples:
@@ -193,6 +244,8 @@ buildID = ext.getBuildID(url),
 config = ext.configSearch(url,[],[]);
 // Save the HTML template and parses the HTML to be executed to the page
 ext.saveTemplate(buildName,ext.parse(buildName));
+
+const info = getInfo(buildName); // All information will be stored here in a JSON object based on users language
 // END LOAD-UP
 //USE "wsa-build" to trigger on build-submit
 if(ext.isAllowed(buildName)){
@@ -386,54 +439,6 @@ isScrollable(elem);
 | SUBTITLE_PATH | `/WebServerAI/assets/AI/subtitles` |
 | DS | `/` |
 | ORGIN | `http(s)?//domain/` |
-
-***
-
-## Adding Languages
-To add your own or share your own interpeded language please do the following:
-
-1. Start a new file called `{language_name}-{language_country}.json` example `fr-FR = french-France`
-2. Copy this code:
-```json
-   "en-US":{
-            "name":"English",
-            "dictionary":{
-                "title": "WebServerAI - XHiddenProjects",
-                "name":"Name",
-                "version":"Version",
-                "updated":"Updated",
-                "nav":{
-                    "send": "Send (Enter)",
-                    "lastestHistory": "Latest History",
-                    "pastHistory": "Past History",
-                    "clearHistory": "Clear History",
-                    "clear":"Clear",
-                    "help": "Extra information",
-                    "changeTheme":"Change theme",
-                    "intxtdbl":"Insert In-Text Double quotes",
-                    "intxtsgl":"Insert In-Text Single quotes",
-                    "intxtaps":"Insert In-Text Apostrophe",
-                    "intxtnl": "Insert In-Text New Line"
-                },
-                "cmd":{
-                    "help":"Gives the list of commands",
-                    "clear":"Clears out the entire history or a certain index",
-                    "info":"Returns the AI information",
-                    "connect":"Connects you to another page"
-                },
-                "clipboard":{
-                    "success":"Copied to clipboard",
-                    "error":"Error writing to clipboard"
-                },
-                "ai":{
-                    "success": "Successfully executed",
-                    "error": "There was an error with this statement"
-                }
-            }
-        }
-```
-3. Translate it
-4. **To share** go to `issues > "New Issue"`
 5. ```
       Title: _your_language_name_
       Message: whatever you want to write
