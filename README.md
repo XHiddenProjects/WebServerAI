@@ -135,6 +135,7 @@ To add extensions place the following order:
 Create your extension in the _/WebServerAI/build/`{your_extension_name}`_
 
 **Note: Excepted rendered files**
+* info.yaml **(Required)**
 * HTML
 * CSS
 * JS
@@ -149,7 +150,15 @@ All you have to do is `import` the extensions file. For this I am going to use t
 You do not need to have any templates, but this is if you are going to create a new object.
 
    _**FYI: ALL extensions use the `build` keyword**_
-
+_`/WebServerAI/build/{extension_name}/info.yaml`_
+```yaml
+lang-country:
+  name: project_name
+  updated: date_format
+  version: extension_version
+  # Any text goes here
+ai_version: "ai_version_support"
+```
 _`/WebServerAI/build/{extension_name}/{extension_name}.html`_
 ```html
 <!--START HTML TEMPLATE-->
