@@ -386,7 +386,8 @@ import { rgbaToHex,
     keyboardFocusable, 
     isDecimal, 
     version_compare,
-   isScrollable,
+    getInfo,
+    isScrollable,
     //CONST
     VIDEO_PATH,
     AUDIO_PATH,
@@ -419,6 +420,16 @@ version_compare: Compares two versions either _TRUE/FALSE_ or _-1, 0, or 1_
 * operator [OPTIONAL] - <, >, <=, >=, =, ==, !=, or <>
 */
 version_compare(v1, v2, '=');
+```
+
+getInfo: Get extension information based on language
+```js
+/**
+ * Recieves the extensions informations based on language
+ * @param {String} name Extension Name
+ * @returns {String} JSON format of the extension
+ */
+getInfo(name);
 ```
 
 isScrollable: Checks if element is scrollable
