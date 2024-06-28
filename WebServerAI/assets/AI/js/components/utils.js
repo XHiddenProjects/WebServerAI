@@ -253,9 +253,9 @@ function isScrollable(element){
     return (active.length==1 ? active[0] : active);
 }
 /**
- * Recieves the users language
+ * Recieves the extensions informations based on language
  * @param {String} name Extension Name
- * @returns {String} Users language
+ * @returns {String} JSon format of the extension
  */
 function getInfo(name){
     const e = new Events(),
