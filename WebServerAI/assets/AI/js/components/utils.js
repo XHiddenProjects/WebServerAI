@@ -1,4 +1,4 @@
-
+import Events from '/WebServerAI/assets/AI/js/components/Events.js';
 function ColorToHex(color) {
     var hexadecimal = color.toString(16);
     return hexadecimal.length == 1 ? '0' + hexadecimal : hexadecimal;
@@ -252,6 +252,17 @@ function isScrollable(element){
         active.push(0);
     return (active.length==1 ? active[0] : active);
 }
+/**
+ * Recieves the users language
+ * @param {String} name Extension Name
+ * @returns {String} Users language
+ */
+function getInfo(name){
+    const e = new Events(),
+        d = e.request(window.location.origin+'/WebServerAI/libs/ai_checker.php?name='+name, true);
+    return d[navigator.language.toLocaleLowerCase()];
+}
+
 const VIDEO_PATH = window.location.origin+'/WebServerAI/assets/AI/videos',
     AUDIO_PATH = window.location.origin+'/WebServerAI/assets/AI/audios',
     IMAGE_PATH = window.location.origin+'/WebServerAI/assets/AI/images',
@@ -266,6 +277,7 @@ export {
     isDecimal, 
     version_compare,
     isScrollable,
+    getInfo,
     //CONST
     VIDEO_PATH,
     AUDIO_PATH,

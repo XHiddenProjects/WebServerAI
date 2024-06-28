@@ -1,7 +1,7 @@
 // Import "Extensions" from extension.js to allow usages
 import Extensions from "/WebServerAI/assets/AI/js/components/extenstions.js";
 import Events from "/WebServerAI/assets/AI/js/components/Events.js";
-import {VIDEO_PATH, SUBTITLE_PATH, DS} from "/WebServerAI/assets/AI/js/components/utils.js";
+import {VIDEO_PATH, SUBTITLE_PATH, DS, getInfo} from "/WebServerAI/assets/AI/js/components/utils.js";
 import {shortcutJS} from "/WebServerAI/assets/AI/js/components/shortcut.min.js";
 // START LOAD-UP (Required)
 const url = new URL(import.meta.url),
@@ -11,6 +11,9 @@ buildName = ext.getBuildName(url),
 buildID = ext.getBuildID(url);
 ext.saveTemplate(buildName,ext.parse(buildName));
 const sc = new shortcutJS();
+
+const info = getInfo(buildName);
+
 
 if(ext.isAllowed(buildName)){
     // END LOAD-UP
@@ -27,7 +30,7 @@ if(ext.isAllowed(buildName)){
             // Play video
             function playVideo(c){
                 c.querySelector('.play_pause').innerHTML = 'pause';
-                c.querySelector('.play_pause').title = 'Pause';
+                c.querySelector('.play_pause').title = info['pause'];
                 c.classList.add('paused');
                 c.querySelector('video').play();
             }
@@ -35,7 +38,7 @@ if(ext.isAllowed(buildName)){
             // Pause video
             function pauseVideo(c){
                 c.querySelector('.play_pause').innerHTML = 'play_arrow';
-                c.querySelector('.play_pause').title = 'Play';
+                c.querySelector('.play_pause').title = info['play'];
                 c.classList.remove('paused');
                 c.querySelector('video').pause();
             }

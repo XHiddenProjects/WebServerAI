@@ -1,4 +1,5 @@
-name: Clock
-updated: 6/11/24
-version: 0.0.1
+en-us:
+  name: Clock
+  updated: 6/11/24
+  version: 0.0.1
 ai_version: "0.0.1 - Beta"

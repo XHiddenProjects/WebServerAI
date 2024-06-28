@@ -13,7 +13,7 @@ class Events{
         return event.detail[label] ? event.detail[label] : undefined;
     }
     /**
-     * Returns the output of a certain command
+     * Returns the output of a certain command from the AI
      * @param {RegExp} eventPattern Check what to 
      * @param {String} str String to check
      * @param {Function|null} [callback=null] Return as a function
