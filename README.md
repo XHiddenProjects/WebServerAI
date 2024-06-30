@@ -7,6 +7,7 @@ An AI that develops and Designs website from any work folder and very little cod
 
 ### Table of Contents
    * [What the AI has](#what-the-ai-has)
+     * [CTE - Cursor-Targeting Element](#cte)
    * [Languages](#languages)
       * [Available Languages](#available-languages)
       * [Adding Languages](#adding-languages)
@@ -31,6 +32,29 @@ An AI that develops and Designs website from any work folder and very little cod
 * Easy to use configuration to name and change the repsonce timeout.
 * Extensions that be used to make the AI more efficient.
 * Multi-language software - Allows translates based browser language.
+
+### CTE
+CTE (_Cursor-Targeting Element_) Allows you to hover and select a specific target and gets the full element path.
+
+For example:
+```html
+<html>
+  <head>
+  <title>Test</title>
+  </head>
+  <body>
+    <p id="para">This is a paragraph</p>
+  </body>
+</html>
+```
+On hover you will get something like this:
+
+![CTE-Hover](https://github.com/XHiddenProjects/WebServerAI/blob/main/extras/cte-hover.png?raw=true)
+
+If you hold `CTRL+Click` you'll get something like this:
+
+![CTE-Click](https://github.com/XHiddenProjects/WebServerAI/blob/main/extras/cte-click.png?raw=true)
+
 
 ## Languages
 
