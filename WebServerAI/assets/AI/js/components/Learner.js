@@ -298,6 +298,26 @@ class Listener{
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'map',styles:{},scripts:{}});
                             break;
+                            case 'mark':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'mark',styles:{},scripts:{}});
+                            break;
+                            case 'menu':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'menu',styles:{},scripts:{}});
+                            break;
+                            case 'meter':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'meter',styles:{},scripts:{}});
+                            break;
+                            case 'optgroup':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'optgroup',styles:{},scripts:{}});
+                            break;
+                            case 'option':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'option',styles:{},scripts:{}});
+                            break;
                             case 'heading':
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'h',styles:{},scripts:{}});
@@ -326,6 +346,14 @@ class Listener{
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'source',styles:{},scripts:{}});
                             break;
+                            case 'nav':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'nav',styles:{},scripts:{}});
+                            break;
+                            case 'object':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'object',styles:{},scripts:{}});
+                            break;
                             case 'titlepage':
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'title',styles:{},scripts:{}});
@@ -339,7 +367,7 @@ class Listener{
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'form',styles:{},scripts:{}});
                             break;
-                            case 'label':
+                            case 'labelblock':
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'label',styles:{},scripts:{}});
                             break;
@@ -435,6 +463,10 @@ class Listener{
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'input',type: 'week',styles:{},scripts:{}});
                             break;
+                            case 'selectbox':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'select',styles:{},scripts:{}, wsaNoSelect:false});
+                            break;
                         }
                     break;
                     case 'build':
@@ -526,6 +558,9 @@ class Listener{
                     case 'name':
                         this.lineCode[this.holder].name = value;
                     break;
+                    case 'data':
+                        this.lineCode[this.holder].data = value;
+                    break;
                     case 'usemap':
                         this.lineCode[this.holder].usemap = value;
                     break;
@@ -559,6 +594,9 @@ class Listener{
                     case 'title':
                         this.lineCode[this.holder].title = value;
                     break;
+                    case 'label':
+                        this.lineCode[this.holder].label = value;
+                    break;
                     case 'controls':
                         this.lineCode[this.holder].controls = true;
                     break;
@@ -577,6 +615,12 @@ class Listener{
                     break;
                     case 'placeholder':
                         this.lineCode[this.holder].placeholder = value;
+                    break;
+                    case 'min':
+                        this.lineCode[this.holder].min = value;
+                    break;
+                    case 'max':
+                        this.lineCode[this.holder].max = value;
                     break;
                     //css
                     case 'color':
@@ -614,16 +658,21 @@ class Listener{
                 (this.lineCode[i].pxs ? elem.sizes = this.lineCode[i].pxs : '');
                 (this.lineCode[i].open ? elem.open = this.lineCode[i].open : '');
                 (this.lineCode[i].placeholder ? elem.placeholder = this.lineCode[i].placeholder : '');
+                (this.lineCode[i].min ? elem.min = this.lineCode[i].min : '');
+                (this.lineCode[i].max ? elem.max = this.lineCode[i].max : '');
                 (this.lineCode[i].name ? elem.name = this.lineCode[i].name : '');
+                (this.lineCode[i].data ? elem.data = this.lineCode[i].data : '');
                 (this.lineCode[i].usemap ? elem.usemap = this.lineCode[i].usemap : '');
                 (this.lineCode[i].required ? elem.required = this.lineCode[i].required : '');
                 (this.lineCode[i].href ? elem.href = this.lineCode[i].href : '');
                 (this.lineCode[i].dir ? elem.dir = this.#dirName(this.lineCode[i].dir) : '');
                 (this.lineCode[i].cite ? elem.cite = this.lineCode[i].cite : '');
                 (this.lineCode[i].value ? elem.value = this.lineCode[i].value : '');
+                (this.lineCode[i].wsaNoSelect ? elem.setAttribute('wsa-noselect','') : '');
                 (this.lineCode[i].src ? elem.src = this.lineCode[i].src : '');
                 (this.lineCode[i].controls ? elem.controls = this.lineCode[i].controls : '');
                 (this.lineCode[i].title ? elem.title = this.lineCode[i].title : '');
+                (this.lineCode[i].label ? elem.label = this.lineCode[i].label : '');
                 (this.lineCode[i].target ? elem.target = this.#selectATarget(this.lineCode[i].target) : '');
                 (this.lineCode[i].shape ? elem.setAttribute('shape',this.lineCode[i].shape) : '');
                 (this.lineCode[i].coords ? elem.setAttribute('coords',this.lineCode[i].coords) : '');

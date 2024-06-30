@@ -57,6 +57,8 @@ class Trainer{
         $str = preg_replace('/shortcut icon/i','shortcuticon',$str);
         $str = preg_replace('/apple touch icon|apple-touch|mobile icon/i','appletouchicon',$str);
         $str = preg_replace('/main content/i','main',$str);
+        $str = preg_replace('/option group/i','optgroup',$str);
+        $str = preg_replace('/label block/i','labelblock',$str);
         # Quotations/Apostrophe
         $str = preg_replace('/\\\"/','\\\\qq',$str);
         $str = preg_replace("/\\\'/",'\\\\q',$str);
@@ -135,7 +137,6 @@ class Trainer{
                 case 'columngroup':
                     $AIStr.='COLGROUP}||';
                 break;
-                case 'data':
                 case 'datablock':
                     $AIStr.='DATABLOCK}||';
                 break;
@@ -217,6 +218,21 @@ class Trainer{
                 case 'map':
                     $AIStr.='MAP}||';
                 break;
+                case 'mark':
+                    $AIStr.='MARK}||';
+                break;
+                case 'menu':
+                    $AIStr.='MENU}||';
+                break;
+                case 'meter':
+                    $AIStr.='METER}||';
+                break;
+                case 'optgroup':
+                    $AIStr.='OPTGROUP}||';
+                break;
+                case 'option':
+                    $AIStr.='OPTION}||';
+                break;
                 case 'heading':
                     $AIStr.='HEADING}||';
                 break;
@@ -243,12 +259,19 @@ class Trainer{
                 case 'source':
                     $AIStr.='SOURCE}||';
                 break;
+                case 'nav':
+                case 'navigator':
+                    $AIStr.='NAV}||';
+                break;
+                case 'object':
+                    $AIStr.='OBJECT}||';
+                break;
                 # Form elements
                 case 'form':
                     $AIStr.='FORM}||';
                 break;
-                case 'label':
-                    $AIStr.='LABEL}||';
+                case 'labelblock':
+                    $AIStr.='LABELBLOCK}||';
                 break;
                 case 'text':
                     $AIStr.='INPUTTEXT}||';
@@ -321,7 +344,10 @@ class Trainer{
                 case 'inputweek':
                     $AIStr.='INPUTWEEK}||';
                 break;
-
+                case 'select':
+                case 'dropdown':
+                    $AIStr.='SELECTBOX}||';
+                break;
                 default:break;
             } 
             switch(strtolower($this->removeGrammar($str[$i]))){
@@ -347,12 +373,11 @@ class Trainer{
                 case 'name':
                     $AIStr.='{NAME_';
                 break;
+                case 'data':
+                    $AIStr.='{DATA_';
+                break;
                 case 'usemap':
                     $AIStr.='{USEMAP_';
-                break;
-                case 'value':
-                case 'val':
-                    $AIStr.='{VALUE_';
                 break;
                 #attributes
                 case 'url':
@@ -369,6 +394,9 @@ class Trainer{
                 break;
                 case 'title':
                     $AIStr.='{TITLE_';
+                break;
+                case 'label':
+                    $AIStr.='{LABEL_';
                 break;
                 case 'dir':
                 case 'direction':
@@ -414,6 +442,16 @@ class Trainer{
                 break;
                 case 'placeholder':
                     $AIStr.='{PLACEHOLDER_';
+                break;
+                case 'min':
+                    $AIStr.='{MIN_';
+                break;
+                case 'max':
+                    $AIStr.='{MAX_';
+                break;
+                case 'value':
+                case 'val':
+                    $AIStr.='{VALUE_';
                 break;
                 # CSS
                 case 'color':

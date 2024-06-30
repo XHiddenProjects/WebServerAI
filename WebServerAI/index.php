@@ -14,6 +14,7 @@
             let wsc = new WebServerAI({
                 enabled: true,
                 theme: 'dark',
+                codeTheme: 'default',
                 status: 'opened',
                 position: 'bottom right',
                 history:{

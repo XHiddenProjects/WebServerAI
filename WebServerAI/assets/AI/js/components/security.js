@@ -1,3 +1,4 @@
+import Events from '/WebServerAI/assets/AI/js/components/Events.js';
 //validate filters
 const FILTER_VALIDATE_INT = 257,
 FILTER_VALDATE_BOOLEAN = 258,
@@ -351,12 +352,61 @@ filter=(str, removeWords)=>{
         }
     });
     return str;
+},
+caches={
+    /**
+     * Registers a new cache
+     * @returns {void}
+     */
+    register: ()=>{
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./service-worker.js', {
+                    scope: './'
+                  });
+            } 
+    },
+    /**
+     * Clears out the cache
+     * @returns {void}
+     */
+    clear: ()=>{
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations()
+                  .then(function(registrations) {
+                    for(let registration of registrations) {
+                      registration.unregister();
+                    }
+                  });
+              }
+    },
+    /**
+     * Adds a URL to the cache file
+     * @param {String} url URL format to add to cache
+     * @param {Boolean} [includeMsg=false] Return status and the message 
+     * @returns {Boolean|Array<Boolean, String>} Boolean or an Array with a boolean/message
+     */
+    add:(url, includeMsg=false)=>{
+        const e = new Events();
+        const r = e.request(window.location.origin+'/WebServerAI/libs/ai_sender.php?addCache='+url, true);
+       if(r.status){
+            if(includeMsg)
+                return [true, r.msg];
+            else
+                return true;
+       }else{
+        if(includeMsg)
+            return [false, r.msg];
+        else
+            return false;
+       }
+        
+    }
 };
-
 
 export {validate,
     sanitize, 
     filter,
+    caches,
     FILTER_VALIDATE_INT, 
     FILTER_VALDATE_BOOLEAN, 
     FILTER_VALIDATE_FLOAT, 
