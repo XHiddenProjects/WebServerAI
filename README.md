@@ -1,5 +1,5 @@
 # WebServerAI
-An AI that develops and Designs website from any work folder and very little coding experience. This AI will be able to remember what your latest history, clear and etc.
+WebServerAI is an innovative project that integrates advanced tools such as CTE (Cursor-Targeting Elements) to enhance the website development experience. By leveraging sophisticated algorithms, natural language processing, and innovative technologies like CTE, this AI-powered tool enables users to create visually stunning and user-friendly websites with ease. With WebServerAI, individuals and businesses can streamline the design process, eliminating the need for extensive coding knowledge and technical expertise. This project represents a significant advancement in web development, offering a seamless and efficient solution for those looking to establish a professional online presence. Experience the future of web design with WebServerAI and unlock the potential of AI-driven website development.
 
 **(STILL IN DEVELOPMENT)**
 
