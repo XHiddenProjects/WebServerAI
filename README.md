@@ -49,11 +49,11 @@ For example:
 ```
 On hover you will get something like this:
 
-![CTE-Hover](https://github.com/XHiddenProjects/WebServerAI/blob/main/extras/cte-hover.png?raw=true)
+![CTE-Hover](https://github.com/XHiddenProjects/WebServerAI/blob/master/extras/cte-hover.png?raw=true)
 
 If you hold `CTRL+Click` you'll get something like this:
 
-![CTE-Click](https://github.com/XHiddenProjects/WebServerAI/blob/main/extras/cte-click.png?raw=true)
+![CTE-Click](https://github.com/XHiddenProjects/WebServerAI/blob/master/extras/cte-click.png?raw=true)
 
 
 ## Languages
