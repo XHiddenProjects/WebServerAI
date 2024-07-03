@@ -123,9 +123,21 @@ To add your own or share your own interpeded language please do the following:
 ***
 
 ## Installation
-1. Download and take out the **WebServerAI** folder from the _WebServerAI_Master_ folder.
-2. Place the folder in the **ROOT** directory to allow all folders to be accessed.
-3. Go to an project to work with and enter the following instructions to enable it.
+1. NPM installation
+   To use thew NPM installation type
+   ```js
+   npm i webserverai
+   ```
+
+   or
+
+   ```js
+   npm install webserverai
+   ```
+2. Regular download
+   1. Download and take out the **WebServerAI** folder from the _WebServerAI_Master_ folder.
+   2. Place the folder in the **ROOT** directory to allow all folders to be accessed.
+   3. Go to an project to work with and enter the following instructions to enable it.
    
 ### How to enable the AI
 In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
