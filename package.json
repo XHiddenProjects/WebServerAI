@@ -1,0 +1,20 @@
+{
+  "name": "webserverai",
+  "version": "0.0.1-beta",
+  "description": "WebServerAI is an advanced project using AI to revolutionize web development. It empowers users to create visually stunning websites tailored to their needs without extensive coding knowledge. This innovative tool streamlines the design process, offering a seamless solution for establishing a professional online presence.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "webserverai",
+    "ai",
+    "web-development",
+    "javascript-library",
+    "web-design",
+    "multi-language-support",
+    "automated"
+  ],
+  "author": "xhiddenprojects",
+  "license": "MIT"
+}
