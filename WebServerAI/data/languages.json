@@ -24,7 +24,8 @@
                     "help":"Gives the list of commands",
                     "clear":"Clears out the entire history or a certain index",
                     "info":"Returns the AI information",
-                    "connect":"Connects you to another page"
+                    "connect":"Connects you to another page",
+                    "preview": "Previews the page"
                 },
                 "clipboard":{
                     "success":"Copied to clipboard",
@@ -60,7 +61,8 @@
                     "help":"Gibt die Liste der Befehle an",
                     "clear":"Löscht den gesamten Verlauf oder einen bestimmten Index",
                     "info":"Gibt die KI-Informationen zurück",
-                    "connect":"Verbindet Sie mit einer anderen Seite"
+                    "connect":"Verbindet Sie mit einer anderen Seite",
+                    "preview": "Zeigt eine Vorschau der Seite an"
                 },
                 "clipboard":{
                     "success":"In die Zwischenablage kopiert",
@@ -96,7 +98,8 @@
                     "help":"Donne la liste des commandes",
                     "clear":"Efface tout l’historique ou un certain index",
                     "info":"Renvoie les informations de l`IA",
-                    "connect":"Vous connecte à une autre page"
+                    "connect":"Vous connecte à une autre page",
+                    "preview": "Aperçu de la page"
                 },
                 "clipboard":{
                     "success":"Copié dans le presse-papier",
