@@ -171,33 +171,35 @@ if(ext.isAllowed(buildName)){
 
         events.cmdLine(/new source \"(.*?)\"( and set quality to \"(.*?)\")?/g,events.get(e,'input'),(c)=>{
             var useFirstVideo = 0;
-            c.forEach((e)=>{
-                const list = events.statement(e,false),
-                    sendURL = (list[0].match(/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/) ? list[0] : VIDEO_PATH+DS+list[0]),
-                xhr = new XMLHttpRequest(),
-                source = document.createElement('source');
-                xhr.open("GET",sendURL);
-                xhr.responseType = 'arraybuffer';
-                xhr.onload = ()=>{
-                    const blob = new Blob([xhr.response]),
-                    url = URL.createObjectURL(blob);
-                    source.src = url;
-                    (list[1] ? source.setAttribute('size',list[1]) : '');
-                    source.type = 'video/mp4';
-                    if(useFirstVideo==0)
-                        document.querySelector('#'+buildName+'_'+v+' .video-container video').src = document.querySelectorAll('#'+buildName+'_'+v+' .video-container video source')[0].src;
-                    if(useFirstVideo>=c.length-1){
-                        thumbnailLoaded();
-                        qualitySelector();
-                    }
-                    useFirstVideo++;
-                };
-                xhr.send();
-                document.querySelector('#'+buildName+'_'+v+' .video-container video').appendChild(source);
-                
-            });
+            if(c){
+                c.forEach((e)=>{
+                    const list = events.statement(e,false),
+                        sendURL = (list[0].match(/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/) ? list[0] : VIDEO_PATH+DS+list[0]),
+                    xhr = new XMLHttpRequest(),
+                    source = document.createElement('source');
+                    xhr.open("GET",sendURL);
+                    xhr.responseType = 'arraybuffer';
+                    xhr.onload = ()=>{
+                        const blob = new Blob([xhr.response]),
+                        url = URL.createObjectURL(blob);
+                        source.src = url;
+                        (list[1] ? source.setAttribute('size',list[1]) : '');
+                        source.type = 'video/mp4';
+                        if(useFirstVideo==0)
+                            document.querySelector('#'+buildName+'_'+v+' .video-container video').src = document.querySelectorAll('#'+buildName+'_'+v+' .video-container video source')[0].src;
+                        if(useFirstVideo>=c.length-1){
+                            thumbnailLoaded();
+                            qualitySelector();
+                        }
+                        useFirstVideo++;
+                    };
+                    xhr.send();
+                    document.querySelector('#'+buildName+'_'+v+' .video-container video').appendChild(source);
+                });
+            }
         });
-        document.querySelector('#'+buildName+'_'+v+' .video-container video').preload = 'metadata';
+        if(document.querySelector('#'+buildName+'_'+v+' .video-container video'))
+            document.querySelector('#'+buildName+'_'+v+' .video-container video').preload = 'metadata';
         if(subtitles){
             subtitles.forEach((s)=>{
                 const st = events.statement(s,false),

@@ -262,6 +262,13 @@ function getInfo(name){
         d = e.request(window.location.origin+'/WebServerAI/libs/ai_checker.php?name='+name, true);
     return d[navigator.language.toLocaleLowerCase()];
 }
+/**
+ * Checks if WebServerAI is active
+ * @returns {Boolean} TRUE if webserverai is active, else FALSE.
+ */
+function isWSActive(){
+    return (document.documentElement.hasAttribute('wsa-active') ? true : false);
+}
 
 const VIDEO_PATH = window.location.origin+'/WebServerAI/assets/AI/videos',
     AUDIO_PATH = window.location.origin+'/WebServerAI/assets/AI/audios',
@@ -278,6 +285,7 @@ export {
     version_compare,
     isScrollable,
     getInfo,
+    isWSActive,
     //CONST
     VIDEO_PATH,
     AUDIO_PATH,

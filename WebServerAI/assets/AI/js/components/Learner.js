@@ -118,11 +118,12 @@ class Listener{
         AICode = AICode.split(/(?<=})\|\|/g).map((x)=>{return x.replace(/^{|}$/g, '')}).filter((x)=>{return x!==''});
         if(AICode.length>0){
             for(let i=0;i<AICode.length;i++){
-                const action = AICode[i].split('_')[0].toLocaleLowerCase(),
+                const action = AICode[i].split('_')[0].toLocaleLowerCase().replace(/^{/,''),
                     value = AICode[i].split('_')[1];
                 switch(action){
                     case 'add':
                         switch(value.toLocaleLowerCase()){
+                           
                             case 'abbr':
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'abbr',styles:{},scripts:{}});
@@ -330,6 +331,58 @@ class Listener{
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'img',styles:{},scripts:{}});
                             break;
+                            case 'ruby':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'ruby',styles:{},scripts:{}});
+                            break;
+                            case 'rp':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'rp',styles:{},scripts:{}});
+                            break;
+                            case 'rt':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'rt',styles:{},scripts:{}});
+                            break;
+                            case 'samp':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'samp',styles:{},scripts:{}});
+                            break;
+                            case 'section':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'section',styles:{},scripts:{}});
+                            break;
+                            case 'span':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'span',styles:{},scripts:{}});
+                            break;
+                            case 'sub':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'sub',styles:{},scripts:{}});
+                            break;
+                            case 'sup':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'sup',styles:{},scripts:{}});
+                            break;
+                            case 'summary':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'summary',styles:{},scripts:{}});
+                            break;
+                            case 'tblrow':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'tr',styles:{},scripts:{}});
+                            break;
+                            case 'tblhead':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'th',styles:{},scripts:{}});
+                            break;
+                            case 'tblcell':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'td',styles:{},scripts:{}});
+                            break;
+                            case 'table':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'table',styles:{},scripts:{},html:`<thead></thead><tbody></tbody>`});
+                            break;
                             case 'kbd':
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'kbd',styles:{},scripts:{}});
@@ -345,6 +398,10 @@ class Listener{
                             case 'source':
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'source',styles:{},scripts:{}});
+                            break;
+                            case 'picture':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'picture',styles:{},scripts:{}});
                             break;
                             case 'nav':
                                 this.holder+=1;
@@ -366,6 +423,10 @@ class Listener{
                             case 'form':
                                 this.holder+=1;
                                 this.lineCode.push({tagName: 'form',styles:{},scripts:{}});
+                            break;
+                            case 'progress':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'progress',styles:{},scripts:{}});
                             break;
                             case 'labelblock':
                                 this.holder+=1;
@@ -465,7 +526,11 @@ class Listener{
                             break;
                             case 'selectbox':
                                 this.holder+=1;
-                                this.lineCode.push({tagName: 'select',styles:{},scripts:{}, wsaNoSelect:false});
+                                this.lineCode.push({tagName: 'select',styles:{},scripts:{}});
+                            break;
+                            case 'output':
+                                this.holder+=1;
+                                this.lineCode.push({tagName: 'output',styles:{},scripts:{}});
                             break;
                         }
                     break;
@@ -570,8 +635,20 @@ class Listener{
                     case 'value':
                         this.lineCode[this.holder].value = value;
                     break;
+                    case 'contenteditable':
+                        this.lineCode[this.holder].contenteditable = true;
+                    break;
+                    case 'for':
+                        this.lineCode[this.holder].for = value;
+                    break;
                     case 'src':
                         this.lineCode[this.holder].src = value;
+                    break;
+                    case 'srcset':
+                        this.lineCode[this.holder].srcset = value;
+                    break;
+                    case 'media':
+                        this.lineCode[this.holder].media = value;
                     break;
                     case 'pxs':
                         this.lineCode[this.holder].pxs = value;
@@ -668,8 +745,11 @@ class Listener{
                 (this.lineCode[i].dir ? elem.dir = this.#dirName(this.lineCode[i].dir) : '');
                 (this.lineCode[i].cite ? elem.cite = this.lineCode[i].cite : '');
                 (this.lineCode[i].value ? elem.value = this.lineCode[i].value : '');
-                (this.lineCode[i].wsaNoSelect ? elem.setAttribute('wsa-noselect','') : '');
+                (this.lineCode[i].for ? elem.setAttribute('for',this.lineCode[i].for) : '');
+                (this.lineCode[i].contenteditable ? elem.contentEditable = true : '');
                 (this.lineCode[i].src ? elem.src = this.lineCode[i].src : '');
+                (this.lineCode[i].srcset ? elem.srcset = this.lineCode[i].srcset : '');
+                (this.lineCode[i].media ? elem.media = this.lineCode[i].media : '');
                 (this.lineCode[i].controls ? elem.controls = this.lineCode[i].controls : '');
                 (this.lineCode[i].title ? elem.title = this.lineCode[i].title : '');
                 (this.lineCode[i].label ? elem.label = this.lineCode[i].label : '');

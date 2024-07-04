@@ -1,0 +1,5 @@
+@media (pointer:none), (pointer:coarse) {
+    .wsa[wsa-stat="closed"]{
+        height: 12px;
+    }
+}

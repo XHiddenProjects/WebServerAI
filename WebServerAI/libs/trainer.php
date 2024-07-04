@@ -59,6 +59,16 @@ class Trainer{
         $str = preg_replace('/main content/i','main',$str);
         $str = preg_replace('/option group/i','optgroup',$str);
         $str = preg_replace('/label block/i','labelblock',$str);
+        $str = preg_replace('/progress bar/i','progress',$str);
+        $str = preg_replace('/Ruby Fallback Parenthesis/i','rp',$str);
+        $str = preg_replace('/Reliable Totally|Relevant Totally|Ruby Text/i','rt',$str);
+        $str = preg_replace('/Sample output/i','samp',$str);
+        $str = preg_replace('/inline text/i','span',$str);
+        $str = preg_replace('/table row/i','tblrow',$str);
+        $str = preg_replace('/table header|table header cell/i','tblhead',$str);
+        $str = preg_replace('/table cell|table data cell/i','tblcell',$str);
+        $str = preg_replace('/([\d]+) rows?/i','$1_tblrows',$str);
+        $str = preg_replace('/([\d]+) columns?/i','$1_tblcols',$str);
         # Quotations/Apostrophe
         $str = preg_replace('/\\\"/','\\\\qq',$str);
         $str = preg_replace("/\\\'/",'\\\\q',$str);
@@ -243,6 +253,49 @@ class Trainer{
                 case 'image':
                     $AIStr.='IMAGE}||';
                 break;
+                case 'ruby':
+                    $AIStr.='RUBY}||';
+                break;
+                case 'rt':
+                    $AIStr.='RT}||';
+                break;
+                case 'rp':
+                    $AIStr.='RP}||';
+                break;
+                case 'samp':
+                case 'sample':
+                    $AIStr.='SAMP}||';
+                break;
+                case 'section':
+                    $AIStr.='SECTION}||';
+                break;
+                case 'span':
+                    $AIStr.='SPAN}||';
+                break;
+                case 'sub':
+                case 'subscript':
+                    $AIStr.='SUB}||';
+                break;
+                case 'sup':
+                case 'superscript':
+                    $AIStr.='SUB}||';
+                break;
+                case 'summary':
+                    $AIStr.='SUMMARY}||';
+                break;
+                case 'table':
+                    $AIStr.='TABLE}||';
+                break;
+                case 'tblrow':
+                case 'row':
+                    $AIStr.='TBLROW}||';
+                break;
+                case 'tblhead':
+                    $AIStr.='TBLHEAD}||';
+                break;
+                case 'tblcell':
+                    $AIStr.='TBLCELL}||';
+                break;
                 case 'kbd':
                     $AIStr.='KBD}||';
                 break;
@@ -258,6 +311,9 @@ class Trainer{
                 break;
                 case 'source':
                     $AIStr.='SOURCE}||';
+                break;
+                case 'picture':
+                    $AIStr.='PICTURE}||';
                 break;
                 case 'nav':
                 case 'navigator':
@@ -290,6 +346,9 @@ class Trainer{
                 break;
                 case 'checkbox':
                     $AIStr.='CHECKBOX}||';
+                break;
+                case 'progress':
+                    $AIStr.='PROGRESS}||';
                 break;
                 case 'radio':
                 case 'multiplechoice':
@@ -347,6 +406,9 @@ class Trainer{
                 case 'select':
                 case 'dropdown':
                     $AIStr.='SELECTBOX}||';
+                break;
+                case 'output':
+                    $AIStr.='OUTPUT}||';
                 break;
                 default:break;
             } 
@@ -409,6 +471,12 @@ class Trainer{
                 case 'src':
                     $AIStr.='{SRC_';
                 break;
+                case 'srcset':
+                    $AIStr.='{SRCSET_';
+                break;
+                case 'media':
+                    $AIStr.='{MEDIA_';
+                break;
                 case 'pxs':
                     $AIStr.='{PXS_';
                 break;
@@ -453,6 +521,13 @@ class Trainer{
                 case 'val':
                     $AIStr.='{VALUE_';
                 break;
+                case 'for':
+                    $AIStr.='{FOR_';
+                break;
+                case 'contenteditable':
+                case 'editable':
+                    $AIStr.='{CONTENTEDITABLE}||';
+                break;
                 # CSS
                 case 'color':
                     $AIStr.='{COLOR_';
@@ -494,6 +569,22 @@ class Trainer{
                 case 'says':
                     $AIStr.='{TEXT_';
                 break;
+            }
+            if(preg_match('/([\d]+)_(.*?)/',strtolower($this->removeGrammar($str[$i])))){
+                preg_match('/([\d]+)_(.*)/',strtolower($this->removeGrammar($str[$i])),$matches);
+                if($matches[2]==='tblrows') $rows = (int)$matches[1];
+                if($matches[2]==='tblrows'){
+                    for($r=0;$r<(int)$matches[1];$r++){
+                        $AIStr.='{ADD_TBLROW}||{{ID_row'.$r.'}||{LOCATION_table tbody}||';
+                    }
+                }
+                if($matches[2]==='tblcols'){
+                    for($r=0;$r<$rows;$r++){
+                        for($c=0;$c<(int)$matches[1];$c++){
+                            $AIStr.='{ADD_TBLCELL}||{TEXT_Click to edit}||{LOCATION_table tbody tr#row'.$r.'}||';
+                        }
+                    }
+                }
             }
             if(preg_match('/[\"](.*?)[\"]/',$str[$i])){
                 preg_match('/[\"](.*?)[\"]/',$str[$i],$matches);

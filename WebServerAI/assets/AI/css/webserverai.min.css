@@ -44,6 +44,8 @@
     --wsa-dark-copy: #cdcbcb;
     --wsa-dark-scrollbar-bg: #525252;
     --wsa-dark-scrollbar-thumb: #3c3d3b;
+    --wsa-dark-toggleBtn-bg:rgba(71, 71, 71, 0.65);
+    --wsa-dark-toggleBtn-color: rgb(255,255,255);
 
     --wsa-box-width: 60%;
     --wsa-box-height: 280px;
@@ -84,9 +86,11 @@
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
 }
+
 .wsa[wsa-stat="closed"]{
-    height: 0;
+    height: 0px;
 }
+
 .wsa[wsa-stat="closed"] .wsa-container{
     overflow: hidden;
 }
@@ -153,10 +157,13 @@
     right: 0;
 }
 
+
 .wsa .wsa-title{
     padding-top: .5rem;
     text-align: center;
     width: 100%;
+    display: grid;
+    position: relative;
 }
 .wsa .wsa-title .wsa-version{
     font-size: 15px;
@@ -174,7 +181,7 @@
     padding: 1rem;
     height: 75%;
     position: relative;
-    overflow-y: auto;
+    display: contents;
 }
 .wsa .wsa-ui *{
     width: 100%;
