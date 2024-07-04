@@ -79,12 +79,13 @@ Here are some commands you can enter inside the AI, but must always start with `
   `wsa --preview (true|false)?`
 * Info - Returns the AI information
 
-`wsa --info`
+  `wsa --info`
 * Connect - Connect to a different URL/path
 
-`wsa --connect {url/path}`
+  `wsa --connect {url/path}`
 * help - Returns all commands and parameters
-`wsa --help`
+
+  `wsa --help`
 
 ## Languages
 
