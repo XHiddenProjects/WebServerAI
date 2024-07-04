@@ -6,7 +6,7 @@ WebServerAI is an innovative project that integrates advanced tools such as CTE 
 ***
 
 [![GitHub Release](https://img.shields.io/github/v/release/XHiddenProjects/WebServerAI?include_prereleases&style=plastic&label=Version&color=%2323aedc)](https://github.com/XHiddenProjects/WebServerAI/releases)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/XHiddenProjects/WebServerAI/total?style=plastic&label=Downloads&color=%2354a778)
+[![NPM Downloads](https://img.shields.io/npm/dw/webserverai?style=plastic&label=Downloads&color=%2354a778)](https://www.npmjs.com/package/webserverai)
 ![GitHub top language](https://img.shields.io/github/languages/top/XHiddenProjects/WebServerAI?style=plastic)
 [![GitHub Repo stars](https://img.shields.io/github/stars/XHiddenProjects/WebServerAI?style=plastic&label=Stars&color=%23e9ee4e)
 ](https://github.com/XHiddenProjects/WebServerAI/stargazers)
