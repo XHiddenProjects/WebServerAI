@@ -19,6 +19,7 @@ WebServerAI is an innovative project that integrates advanced tools such as CTE 
 ### Table of Contents
    * [What the AI has](#what-the-ai-has)
      * [CTE - Cursor-Targeting Element](#cte)
+     * [WSA Commands](#webserverai-commands)
    * [Languages](#languages)
       * [Available Languages](#available-languages)
       * [Adding Languages](#adding-languages)
@@ -66,6 +67,24 @@ If you hold `CTRL+Click` you'll get something like this:
 
 ![CTE-Click](https://github.com/XHiddenProjects/WebServerAI/blob/master/extras/cte-click.png?raw=true)
 
+### WebServerAI commands
+
+Here are some commands you can enter inside the AI, but must always start with `wsa`
+
+* Clear - _Clears the history number of the panel or all history_
+  
+  `wsa --clear` or `wsa --clear:{number}`
+* Preview - _Previews the page, TRUE/Null preview is active, FALSE if not_
+
+  `wsa --preview (true|false)?`
+* Info - Returns the AI information
+
+`wsa --info`
+* Connect - Connect to a different URL/path
+
+`wsa --connect {url/path}`
+* help - Returns all commands and parameters
+`wsa --help`
 
 ## Languages
 
