@@ -381,7 +381,7 @@ class Listener{
                             break;
                             case 'table':
                                 this.holder+=1;
-                                this.lineCode.push({tagName: 'table',styles:{},scripts:{},html:`<thead></thead><tbody></tbody>`});
+                                this.lineCode.push({tagName: 'table',styles:{},scripts:{}});
                             break;
                             case 'kbd':
                                 this.holder+=1;
@@ -613,6 +613,9 @@ class Listener{
                     break;
                     case 'text':
                         this.lineCode[this.holder].text = this.#replaceCaret(value);
+                    break;
+                    case 'html':
+                        (this.lineCode[this.holder].html ? this.lineCode[this.holder].html += value.replaceAll('&lt;','<').replaceAll('&gt;','>') : this.lineCode[this.holder].html = value.replaceAll('&lt;','<').replaceAll('&gt;','>'));
                     break;
                     case 'class':
                         this.lineCode[this.holder].classes = value;

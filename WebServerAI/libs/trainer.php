@@ -68,7 +68,7 @@ class Trainer{
         $str = preg_replace('/table header|table header cell/i','tblhead',$str);
         $str = preg_replace('/table cell|table data cell/i','tblcell',$str);
         $str = preg_replace('/([\d]+) rows?/i','$1_tblrows',$str);
-        $str = preg_replace('/([\d]+) columns?/i','$1_tblcols',$str);
+        $str = preg_replace('/([\d]+) (columns?|cols?)/i','$1_tblcols',$str);
         # Quotations/Apostrophe
         $str = preg_replace('/\\\"/','\\\\qq',$str);
         $str = preg_replace("/\\\'/",'\\\\q',$str);
@@ -569,20 +569,20 @@ class Trainer{
                 case 'says':
                     $AIStr.='{TEXT_';
                 break;
+                case 'html':
+                    $AIStr.='{HTML_';
+                break;
             }
             if(preg_match('/([\d]+)_(.*?)/',strtolower($this->removeGrammar($str[$i])))){
                 preg_match('/([\d]+)_(.*)/',strtolower($this->removeGrammar($str[$i])),$matches);
                 if($matches[2]==='tblrows') $rows = (int)$matches[1];
-                if($matches[2]==='tblrows'){
-                    for($r=0;$r<(int)$matches[1];$r++){
-                        $AIStr.='{ADD_TBLROW}||{{ID_row'.$r.'}||{LOCATION_table tbody}||';
-                    }
-                }
                 if($matches[2]==='tblcols'){
                     for($r=0;$r<$rows;$r++){
-                        for($c=0;$c<(int)$matches[1];$c++){
-                            $AIStr.='{ADD_TBLCELL}||{TEXT_Click to edit}||{LOCATION_table tbody tr#row'.$r.'}||';
-                        }
+                        $AIStr.=htmlentities('{HTML_<tr>}||');
+                            for($c=0;$c<(int)$matches[1];$c++){
+                                $AIStr.=htmlentities('{HTML_<td></td>}||');
+                            }
+                        $AIStr.=htmlentities('{HTML_</tr>}||');
                     }
                 }
             }
