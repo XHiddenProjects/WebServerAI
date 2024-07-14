@@ -26,7 +26,7 @@ WebServerAI is an innovative project that integrates advanced tools such as CTE 
    * [Installation](#installation)
       * [How to enable the AI](#how-to-enable-the-ai)
       * [Using the AI](#using-the-ai)
-      * [Previewing Content](#preview-content)
+      * [Previewing Content](#previewing-content)
    * [Extensions](#extensions)
       * [Creating the Extensions](#creating-an-extensions)
    * [Components](#components)
