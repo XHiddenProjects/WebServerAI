@@ -236,6 +236,8 @@ To preview content you can use the command line `wsa --preview` or `CTRL+P` shor
 - `wsa --preview` will only preview as a open window dialog.
 - `CTRL+P` will only preview on a IFrame. Use the `preview: ""` to the WebServerAI class
 
+You can use the `wsa-exclude` attribute on a element to ignore the element from being published/previewed
+
 ***
 
 
