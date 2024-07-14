@@ -26,6 +26,7 @@ WebServerAI is an innovative project that integrates advanced tools such as CTE 
    * [Installation](#installation)
       * [How to enable the AI](#how-to-enable-the-ai)
       * [Using the AI](#using-the-ai)
+      * [Previewing Content](#preview-content)
    * [Extensions](#extensions)
       * [Creating the Extensions](#creating-an-extensions)
    * [Components](#components)
@@ -172,15 +173,16 @@ _Note: "wsa-exclude" is required for preview reasons and space saving!_
    if(window.WebServerAI!==undefined){
         let wsc = new WebServerAI({
             enabled: true, // Activate the AI
-            theme: 'dark', // Light/Dark theme
-            status: 'opened', // Opened/Closed status of the UI
-            position: 'bottom right', // Position of the UI: top left, top center, top right, center left, center right, bottom left, bottom center, bottom right
+            theme: 'dark', // Light/Dark theme [Optional]
+            status: 'opened', // Opened/Closed status of the UI [Optional]
+            position: 'bottom right', // Position of the UI: top left, top center, top right, center left, center right, bottom left, bottom center, bottom right [Optional]
             history:{
-                save: 'session' // Save history as a session/local storage
+                save: 'session' // Save history as a session/local storage [Optional]
             },
-            cte: true, // Activates Cursor-Targeting Element
+            cte: true, // Activates Cursor-Targeting Element [Optional]
+            preview: '', // Connect to IFrame to preview the element [Optional]
             extensions:{
-               // Add extensions here
+               // Add extensions here [Optional]
             }
         });
         wsc.load(); // Loads the UI and the necessary scripts
@@ -225,6 +227,17 @@ Using in-text special character must be escaped.
 | <code>\\`</code>   |   `      |
 | `\n`               | new line |
 | `\,`               |   ,      |
+
+
+### Previewing Content
+
+To preview content you can use the command line `wsa --preview` or `CTRL+P` shortcut
+
+- `wsa --preview` will only preview as a open dialog
+- `CTRL+P` will only preview on a IFrame. Use the `preview: ""` to the WebServerAI class
+
+***
+
 
 ![Live Demo](https://github.com/XHiddenProjects/WebServerAI/blob/main/extras/LiveDemo.gif)
 
