@@ -160,8 +160,12 @@ To add your own or share your own interpeded language please do the following:
    3. Go to an project to work with and enter the following instructions to enable it.
    
 ### How to enable the AI
-In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
-```js
+In your _INIT (Inital)_ `HTML` filt. Example: **index.php** or **index.html**
+
+_Note: "wsa-exclude" is required for preview reasons and space saving!_
+
+```html
+<script type="module" wsa-exclude>
   // Import WebServerAI from the location of the WebServerAI folder
   import WebServerAI from '//WebServerAI/assets/AI/js/webserverai.min.js';
   // Access the class from WebServerAI
@@ -191,6 +195,7 @@ In your _INIT (Inital)_ `JavaScript` file. You must enter enter this
          * Checks the commands and then sends it to the AI and to process then execute.
         */
       }
+</script>
 ```
 
 ### Using the AI
