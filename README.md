@@ -74,9 +74,9 @@ Here are some commands you can enter inside the AI, but must always start with `
 * Clear - _Clears the history number of the panel or all history_
   
   `wsa --clear` or `wsa --clear:{number}`
-* Preview - _Previews the page, TRUE/Null preview is active, FALSE if not_
+* Preview - _Previews the page in a new window_
 
-  `wsa --preview (true|false)?`
+  `wsa --preview`
 * Info - Returns the AI information
 
   `wsa --info`
