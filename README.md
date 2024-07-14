@@ -233,7 +233,7 @@ Using in-text special character must be escaped.
 
 To preview content you can use the command line `wsa --preview` or `CTRL+P` shortcut
 
-- `wsa --preview` will only preview as a open dialog
+- `wsa --preview` will only preview as a open window dialog.
 - `CTRL+P` will only preview on a IFrame. Use the `preview: ""` to the WebServerAI class
 
 ***
