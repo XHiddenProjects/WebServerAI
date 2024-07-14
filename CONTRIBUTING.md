@@ -1,5 +1,5 @@
 <!-- omit in toc -->
-# Contributing to XHiddenProjects
+# Contributing to WebServerAI
 
 First off, thanks for taking the time to contribute! ❤️
 
