@@ -1,6 +1,5 @@
 var responce;
 import {version_compare} from '/WebServerAI/assets/AI/js/components/utils.js';
-import { caches } from '/WebServerAI/assets/AI/js/components/security.js';
 class Extensions{
     constructor(){
         this.base = window.location.origin+'/WebServerAI/build';
@@ -182,8 +181,7 @@ class Extensions{
      * @returns {String} Parsed HTML object
      */
     parse(name){
-        const ext = JSON.parse(sessionStorage.getItem('wsa_extensions')),
-        res = caches.add(ext[name]['extension_parse'].replace(window.location.origin,''));
+        const ext = JSON.parse(sessionStorage.getItem('wsa_extensions'));
         const parseBlock = this.#request(ext[name]['extension_parse']),
         dom = new DOMParser(),
         toHTML = dom.parseFromString(parseBlock, 'text/html'),

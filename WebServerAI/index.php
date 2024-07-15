@@ -8,7 +8,9 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     </head>
     <body>
-    <script type="module">
+       <!-- <textarea id="chatbox"></textarea>
+        <button id="chatsubmit">Submit</button>-->
+    <script type="module" wsa-exclude>
         import WebServerAI from '//localhost/WebServerAI/assets/AI/js/webserverai.min.js';
         if(window.WebServerAI!==undefined){
             let wsc = new WebServerAI({
@@ -21,8 +23,12 @@
                     save: 'session'
                 },
                 cte: true,
+               /* ui:{
+                    chatbox: '#chatbox',
+                    submit: '#chatsubmit'
+                },*/
                 extensions:{
-                    clock:{
+                    "clock":{
                         active: true,
                         config:{
                             options:{
@@ -55,6 +61,17 @@
                                 type: 'style',
                                 url: 'https://fonts.googleapis.com/css2?family=Material+Icons',
                             }]
+                        }
+                    },
+                    "tables":{
+                        active: true,
+                        startup:{
+                            styles:[
+                                '/WebServerAI/build/tables/tables.css'
+                            ],
+                            scripts:[
+                                '/WebServerAI/build/tables/tables.js'
+                            ]
                         }
                     }
                 }

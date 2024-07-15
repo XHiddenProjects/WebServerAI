@@ -4,4 +4,16 @@ en-us:
   version: 0.0.1
   play: 'Play'
   pause: 'Pause'
-ai_version: "0.0.2 - Beta"
+de-de:
+  name: Video-Player
+  updated: 6/16/24
+  version: 0.0.1
+  play: 'Spielen'
+  pause: 'Pause'
+fr-fr:
+  name: Lecteur vidéo
+  updated: 6/16/24
+  version: 0.0.1
+  play: 'Jouer'
+  pause: 'Pause'
+ai_version: "0.0.3 - Beta"

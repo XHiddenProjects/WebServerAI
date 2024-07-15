@@ -1,0 +1,48 @@
+:host,
+:root{
+    /*Data Tables var*/
+    --data-table-border:1px solid #000;
+    --data-table-collapse: collapse;
+    --data-table-width:auto;
+    --data-table-height: auto;
+    --data-table-padding: .3rem;
+    --data-table-align: center;
+    --data-table-striped-bg: #c5c5c5;
+    --data-table-striped-color: #000;
+    --data-table-bg: #fff;
+    --data-table-color: #000;
+    --data-table-hover-bg:#a4a4a4;
+    --data-table-hover-color:#fefefe;
+    --data-table-hover-transition: 0.2s;
+}
+
+/*Data tables*/
+.tables-data{
+    width: var(--data-table-width);
+    height: var(--data-table-height);
+    border-collapse: var(--data-table-collapse);
+    background-color: var(--data-table-bg);
+    color: var(--data-table-color);
+}
+.tables-data tr,
+.tables-data td,
+.tables-data th{
+    border:var(--data-table-border);
+}
+.tables-data td,
+.tables-data th{
+    padding: var(--data-table-padding);
+    text-align: var(--data-table-align);
+}
+
+.tables-data.tables-stripped-even tbody tr:nth-child(even),
+.tables-data.tables-stripped-odd tbody tr:nth-child(odd){
+    background-color: var(--data-table-striped-bg);
+    color: var(--data-table-striped-color);
+}
+
+.tables-data.tables-hoverable tbody tr:hover{
+    background-color: var(--data-table-hover-bg);
+    color: var(--data-table-hover-color);
+    transition: var(--data-table-hover-transition);
+}

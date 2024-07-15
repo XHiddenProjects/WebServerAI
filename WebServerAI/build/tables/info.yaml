@@ -1,0 +1,19 @@
+en-us:
+  name: Tables
+  updated: 7/11/2024
+  version: 0.0.1
+  tableInvalidInfo: 'The table doesn`t have valid information!'
+  tableMismatch: 'Table headers and cells don`t match'
+de-de:
+  name: Tabellen
+  updated: 7/11/2024
+  version: 0.0.1
+  tableInvalidInfo: 'Die Tabelle enthält keine gültigen Informationen!'
+  tableMismatch: 'Tabellenüberschriften und Zellen stimmen nicht überein'
+fr-fr:
+  name: les tables
+  updated: 7/11/2024
+  version: 0.0.1
+  tableInvalidInfo: 'Le tableau ne contient pas d`informations valides!'
+  tableMismatch: 'Les en-têtes et les cellules du tableau ne correspondent pas'
+ai_version: "0.0.3 - Beta"

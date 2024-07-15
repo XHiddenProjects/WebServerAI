@@ -1,11 +1,15 @@
 {
     "AI":{
         "Name": "WebServerAI",
-        "Version": "0.0.2 - Beta",
-        "Updated": "07/03/2024",
+        "Version": "0.0.3 - Beta",
+        "Updated": "07/15/2024",
         "ResponceTime": 1000,
         "blockWords":[],
         "blockDomains":[]
+    },
+    "previewBox":{
+        "width":600,
+        "height":600
     },
     "User": "Guest"
 }

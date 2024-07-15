@@ -2,4 +2,12 @@ en-us:
   name: Clock
   updated: 6/11/24
   version: 0.0.1
-ai_version: "0.0.2 - Beta"
+de-de:
+  name: Uhr
+  updated: 6/11/24
+  version: 0.0.1
+fr-fr:
+  name: Horloge
+  updated: 6/11/24
+  version: 0.0.1
+ai_version: "0.0.3 - Beta"

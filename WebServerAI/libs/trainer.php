@@ -590,9 +590,12 @@ class Trainer{
                 preg_match('/[\"](.*?)[\"]/',$str[$i],$matches);
                 $AIStr.=preg_replace('/\\\\a/','`',preg_replace('/\\\\q/',"'",preg_replace('/\\\\qq/','"',preg_replace('/\\\\n/','
 ',$matches[1])))).'}||';
-            }
+            }         
             
         }
+        $AIStr=preg_replace('/\|\|(?!{)(.*?)}/','{"$1"}||',$AIStr);
+        $AIStr=preg_replace('/(}{)/','}||{',$AIStr);
+        $AIStr=preg_replace('/\|\|$/','',$AIStr);
         echo preg_replace('/\|\|$/','',$AIStr);
     }
 }

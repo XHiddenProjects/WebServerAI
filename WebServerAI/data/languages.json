@@ -34,6 +34,11 @@
                 "ai":{
                     "success": "Successfully executed",
                     "error": "There was an error with this statement"
+                },
+                "console":{
+                    "previewNotFound":"Preview box not found!",
+                    "previewBtnNotFound":"Preview button cannot be found",
+                    "chatBoxNotFound":"Chat box not found!"
                 }
             }
         },
@@ -71,6 +76,11 @@
                 "ai":{
                     "success": "Erfolgreich ausgeführt",
                     "error": "Bei dieser Anweisung ist ein Fehler aufgetreten"
+                },
+                "console":{
+                    "previewNotFound":"Vorschaubox nicht gefunden!",
+                    "previewBtnNotFound":"Die Schaltfläche „Vorschau“ wurde nicht gefunden.",
+                    "chatBoxNotFound":"Chatfenster nicht gefunden!"
                 }
             }
         },
@@ -108,6 +118,11 @@
                 "ai":{
                     "success": "Exécuté avec succès",
                     "error": "Il y a eu une erreur avec cette déclaration"
+                },
+                "console":{
+                    "previewNotFound":"Boîte d`aperçu introuvable!",
+                    "previewBtnNotFound":"Le bouton Aperçu est introuvable",
+                    "chatBoxNotFound":"Boîte de discussion introuvable!"
                 }
             }
         }
