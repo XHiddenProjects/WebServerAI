@@ -125,7 +125,8 @@ To add your own or share your own interpeded language please do the following:
                     "help":"Gives the list of commands",
                     "clear":"Clears out the entire history or a certain index",
                     "info":"Returns the AI information",
-                    "connect":"Connects you to another page"
+                    "connect":"Connects you to another page",
+                    "preview": "Previews the page"
                 },
                 "clipboard":{
                     "success":"Copied to clipboard",
@@ -134,6 +135,11 @@ To add your own or share your own interpeded language please do the following:
                 "ai":{
                     "success": "Successfully executed",
                     "error": "There was an error with this statement"
+                },
+                "console":{
+                    "previewNotFound":"Preview box not found!",
+                    "previewBtnNotFound":"Preview button cannot be found",
+                    "chatBoxNotFound":"Chat box not found!"
                 }
             }
         }
@@ -180,6 +186,17 @@ _Note: "wsa-exclude" is required for preview reasons and space saving!_
                 save: 'session' // Save history as a session/local storage [Optional]
             },
             cte: true, // Activates Cursor-Targeting Element [Optional]
+            /*
+            ui:{ // Configures the UI/GUI
+              preview: "", // IFrame to display commands
+              previewBtn: "", //Element to trigger the preview box
+              chatbox: "", //Element to input commands 
+              submit: "", // Element to trigger the submit button
+              history: "", // Element to return the history information
+              rawOutput:true //Returns an array of raw HTML in text format to be displayed
+            },
+
+            */
             preview: '', // Connect to IFrame to preview the element [Optional]
             extensions:{
                // Add extensions here [Optional]
