@@ -27,6 +27,12 @@ WebServerAI is an innovative project that integrates advanced tools such as CTE 
       * [How to enable the AI](#how-to-enable-the-ai)
       * [Using the AI](#using-the-ai)
       * [Previewing Content](#previewing-content)
+   * [Functions](#functions)
+     * [Loading](#loading)
+     * [Submitting Data](#submitting-data-required)
+     * [Adding Commands](#adding-commands-required)
+     * [Sending Data](#sending-data-required)
+     * [Getting Results](#getting-results)
    * [Extensions](#extensions)
       * [Creating the Extensions](#creating-an-extensions)
    * [Components](#components)
@@ -254,6 +260,66 @@ To preview content you can use the command line `wsa --preview` or `CTRL+P` shor
 - `CTRL+P` will only preview on a IFrame. Use the `preview: ""` to the WebServerAI class
 
 You can use the `wsa-exclude` attribute on a element to ignore the element from being published/previewed
+
+***
+
+## Functions
+These are some functions that you can use for the AI
+
+### Loading
+Using this line of code will load the WebServerAI data
+```js
+{variableName}.load()
+```
+
+### Submitting Data (Required)
+To submit the users text use this function
+```js
+/*
+* Submits the users data
+* $input is users information
+*/
+(...).submit(($input)=>{
+  if($input){
+    // Functions go here
+  }
+})
+```
+
+### Adding commands (Required)
+To add a command to the AI. **This must be placed inside of the submit function!**
+```js
+(...).submit(($input)=>{
+  if($input){
+    (...).addCmd($input); // Add command here
+  }
+});
+```
+
+### Sending data (Required)
+To send the command to the AI use this command. **This must be placed inside of the submit function!**
+```js
+...submit(($input)=>{
+  if($input){
+    (...)
+    (...).send($input, true);
+  }
+});
+```
+
+### Getting results
+To get the results you this command. **This must be placed inside of the submit function!**
+```js
+...submit(($input)=>{
+  if($input){
+    (...)
+    (...).results(($o)=>{
+      // Returns an array
+      console.log($o);
+    });
+  }
+});
+```
 
 ***
 
