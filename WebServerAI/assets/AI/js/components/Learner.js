@@ -109,10 +109,12 @@ class Listener{
     /**
      * Executes command
      * @param {String} AICode 
+     * @param {boolean} [rawCode=false] Returns raw HTML
      * @returns {Array<boolean,string>|Boolean} Returns information on success
      */
-    render(AICode){
+    render(AICode,rawCode=false){
         this.lineCode = [];
+        this.endedElem = [];
         this.holder = -1;
         let success=true;
         AICode = AICode.split(/(?<=})\|\|/g).map((x)=>{return x.replace(/^{|}$/g, '')}).filter((x)=>{return x!==''});
@@ -767,27 +769,31 @@ class Listener{
                 elem.style.fontWeight = (this.lineCode[i].styles.fontWeight ? this.lineCode[i].styles.fontWeight : '');
                 elem.style.fontStyle = (this.lineCode[i].styles.fontStyle ? this.lineCode[i].styles.fontStyle : '');
                 elem.style.textDecoration = (this.lineCode[this.holder]&&this.lineCode[this.holder].styles.textDecoration ? this.lineCode[this.holder].styles.textDecoration : '');
+                if(!rawCode){
                 if(this.lineCode[i].location){
                     if(document.querySelector(this.lineCode[i].location).tagName.toLocaleLowerCase()==='body'){
                         document.body.insertBefore(elem,document.body.children[this.placeOver]);
                         this.placeOver+=1;
                     }else
                         document.querySelector(this.lineCode[i].location).appendChild(elem);
+                    }else{
+                        if(elem.tagName.toLocaleLowerCase()==='link')
+                            document.head.appendChild(elem,document.head);
+                        else{
+                            document.body.insertBefore(elem,document.body.children[this.placeOver]);
+                            this.placeOver+=1;
+                        }
+                    }  
                 }else{
-                    if(elem.tagName.toLocaleLowerCase()==='link')
-                        document.head.appendChild(elem,document.head);
-                    else{
-                        document.body.insertBefore(elem,document.body.children[this.placeOver]);
-                        this.placeOver+=1;
-                    }
-                }   
+                    this.endedElem.push(elem.outerHTML);
+                }
             }
             (this.buildEvent!==null ? window.dispatchEvent(this.buildEvent) : ''); this.buildEvent=null;
             document.querySelectorAll('code').forEach((e)=>{
                 e.innerHTML = e.innerHTML.replaceAll('<br>','\n');
             });
             Prism.highlightAll();
-            return this.lineCode;
+            return (this.endedElem.length>0 ? this.endedElem : this.lineCode);
         }else{
             return false;
         }

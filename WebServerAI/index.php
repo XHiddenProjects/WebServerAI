@@ -23,10 +23,9 @@
                     save: 'session'
                 },
                 cte: true,
-               /* ui:{
-                    chatbox: '#chatbox',
-                    submit: '#chatsubmit'
-                },*/
+                ui:{
+                    rawOutput:true
+                },
                 extensions:{
                     "clock":{
                         active: true,

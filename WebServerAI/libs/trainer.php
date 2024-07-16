@@ -32,7 +32,7 @@ class Trainer{
         $str = preg_replace('/input time|time input/i','InputTime',$str);
         $str = preg_replace('/input url|url input/i','InputUrl',$str);
         $str = preg_replace('/input week|week input/i','InputWeek',$str);
-        $str = preg_replace('/title page/i','TitlePage',$str);
+        $str = preg_replace('/title page|webpage title/i','TitlePage',$str);
         $str = preg_replace('/bi-directional isolation|bi directional isolation/i','bdi',$str);
         $str = preg_replace('/bi-directional override|bi directional override/i','bdo',$str);
         $str = preg_replace('/line break|break line/i','br',$str);
