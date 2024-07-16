@@ -264,7 +264,7 @@ You can use the `wsa-exclude` attribute on a element to ignore the element from 
 ***
 
 ## Functions
-These are some functions that you can use for the AI
+Functions that you can use to your script, some are **Required**, and makes this AI more efficient.
 
 ### Loading
 Using this line of code will load the WebServerAI data
