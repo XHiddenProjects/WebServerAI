@@ -80,8 +80,12 @@
                 if($input){
                     wsc.addCmd($input);
                     wsc.send($input, true);
+                    wsc.results(($o)=>{
+                        console.log($o);
+                    });
                 }
             });
+            
         }
     </script>
     </body>
