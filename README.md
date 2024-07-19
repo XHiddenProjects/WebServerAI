@@ -298,7 +298,7 @@ To add a command to the AI. **This must be placed inside of the submit function!
 ### Sending data (Required)
 To send the command to the AI use this command. **This must be placed inside of the submit function!**
 ```js
-...submit(($input)=>{
+(...).submit(($input)=>{
   if($input){
     (...)
     (...).send($input, true);
@@ -309,7 +309,7 @@ To send the command to the AI use this command. **This must be placed inside of 
 ### Getting results
 To get the results you this command. **This must be placed inside of the submit function!**
 ```js
-...submit(($input)=>{
+(...).submit(($input)=>{
   if($input){
     (...)
     (...).results(($o)=>{
