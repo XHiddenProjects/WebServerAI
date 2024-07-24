@@ -24,7 +24,7 @@ if(ext.isAllowed(buildName)){
         const v = ext.update(buildName);
    
 
-        const subtitles = events.cmdLine(/subtitles? \"(.*?)\" and label it as \"(.*?)\"/g,events.get(e,'input')),
+        const subtitles = events.cmdLine(/subtitles?.*?\"(.*?)\" and label it as \"(.*?)\"/g,events.get(e,'input')),
             lang = events.request('/WebServerAI/data/languagesData.json',true);
 
             // Play video
@@ -169,7 +169,7 @@ if(ext.isAllowed(buildName)){
                 });
     };
 
-        events.cmdLine(/new source \"(.*?)\"( and set quality to \"(.*?)\")?/g,events.get(e,'input'),(c)=>{
+        events.cmdLine(/new.*?source.*?\"(.*?)\"( and set quality to \"(.*?)\")?/g,events.get(e,'input'),(c)=>{
             var useFirstVideo = 0;
             if(c){
                 c.forEach((e)=>{
@@ -205,7 +205,7 @@ if(ext.isAllowed(buildName)){
                 const st = events.statement(s,false),
                 t = document.createElement('track');
                 t.label = st[1];
-                t.src = (st[0].match(/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/) ? st[0] : SUBTITLE_PATH+DS+st[0]);
+                t.src = (st[0].match(/^(https?:\/\/)([\da-z\.-]+\.[a-z\.]{2,6}|[\d\.]+)([\/:?=&#]{1}[\da-z\.-]+)*[\/\?]?$/) ? st[0] : SUBTITLE_PATH+DS+st[0]);
                 t.kind = 'subtitles';   
                 for(let i in lang){
                     if(lang[i].name.toLocaleLowerCase()===st[1].toLocaleLowerCase()){

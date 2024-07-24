@@ -1,8 +1,10 @@
 // Import "Extensions" from extension.js to allow usages
-import Extensions from "/WebServerAI/assets/AI/js/components/extenstions.js";
+import Extensions from "../../assets/AI/js/components/extenstions.js";
+import Events from "../../assets/AI/js/components/Events.js";
 // START LOAD-UP (Required)
 const url = new URL(import.meta.url),
 ext = new Extensions(),
+events = new Events(),
 buildName = ext.getBuildName(url),
 buildID = ext.getBuildID(url),
 config = ext.configSearch(url,['options'],[{}]);

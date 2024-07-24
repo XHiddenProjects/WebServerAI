@@ -18,7 +18,8 @@
                     "intxtdbl":"Insert In-Text Double quotes",
                     "intxtsgl":"Insert In-Text Single quotes",
                     "intxtaps":"Insert In-Text Apostrophe",
-                    "intxtnl": "Insert In-Text New Line"
+                    "intxtnl": "Insert In-Text New Line",
+                    "mic": "Toggle Mic"
                 },
                 "cmd":{
                     "help":"Gives the list of commands",
@@ -38,7 +39,12 @@
                 "console":{
                     "previewNotFound":"Preview box not found!",
                     "previewBtnNotFound":"Preview button cannot be found",
-                    "chatBoxNotFound":"Chat box not found!"
+                    "chatBoxNotFound":"Chat box not found!",
+                    "voiceTypeToggleNotFound":"[VoiceType] - Toggle button not found",
+                    "voiceTypeResultsNotFound": "[VoiceType] - Results not found",
+                    "voiceTypeSpeechError": "[VoiceType] - An error has occurred",
+                    "voiceTypeSpeechNotEnabled": "[VoiceType] - SpeechRecognition is not supported",
+                    "elementNotFound": "Element not found"
                 }
             }
         },
@@ -60,7 +66,8 @@
                     "intxtdbl":"Einfügen von doppelten Anführungszeichen im Text",
                     "intxtsgl":"Einfache Anführungszeichen in den Text einfügen",
                     "intxtaps":"Apostroph im Text einfügen",
-                    "intxtnl": "Neue Zeile im Text einfügen"
+                    "intxtnl": "Neue Zeile im Text einfügen",
+                    "mic": "Mikrofon ein-/ausschalten"
                 },
                 "cmd":{
                     "help":"Gibt die Liste der Befehle an",
@@ -80,7 +87,12 @@
                 "console":{
                     "previewNotFound":"Vorschaubox nicht gefunden!",
                     "previewBtnNotFound":"Die Schaltfläche „Vorschau“ wurde nicht gefunden.",
-                    "chatBoxNotFound":"Chatfenster nicht gefunden!"
+                    "chatBoxNotFound":"Chatfenster nicht gefunden!",
+                    "voiceTypeToggleNotFound":"[VoiceType] - Umschaltfläche nicht gefunden",
+                    "voiceTypeResultsNotFound": "[VoiceType] - Ergebnisse nicht gefunden",
+                    "voiceTypeSpeechError": "[VoiceType] - Ein Fehler ist aufgetreten",
+                    "voiceTypeSpeechNotEnabled": "[VoiceType] - Spracherkennung wird nicht unterstützt.",
+                    "elementNotFound": "Element nicht gefunden"
                 }
             }
         },
@@ -102,7 +114,8 @@
                     "intxtdbl":"Insérer des guillemets doubles dans le texte",
                     "intxtsgl":"Insérer des guillemets simples dans le texte",
                     "intxtaps":"Insérer une apostrophe dans le texte",
-                    "intxtnl": "Insérer une nouvelle ligne dans le texte"
+                    "intxtnl": "Insérer une nouvelle ligne dans le texte",
+                    "mic": "Basculer le micro"
                 },
                 "cmd":{
                     "help":"Donne la liste des commandes",
@@ -122,7 +135,12 @@
                 "console":{
                     "previewNotFound":"Boîte d`aperçu introuvable!",
                     "previewBtnNotFound":"Le bouton Aperçu est introuvable",
-                    "chatBoxNotFound":"Boîte de discussion introuvable!"
+                    "chatBoxNotFound":"Boîte de discussion introuvable!",
+                    "voiceTypeToggleNotFound":"[VoiceType] - Bouton bascule introuvable",
+                    "voiceTypeResultsNotFound": "[VoiceType] - Résultats introuvables",
+                    "voiceTypeSpeechError": "[VoiceType] - Une erreur s`est produite",
+                    "voiceTypeSpeechNotEnabled": "[VoiceType] - La reconnaissance vocale n`est pas prise en charge",
+                    "elementNotFound": "Élément introuvable"
                 }
             }
         }

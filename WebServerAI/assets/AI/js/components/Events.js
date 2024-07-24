@@ -1,4 +1,6 @@
 var responce;
+import { filterHTML } from "./security.js";
+import { IS_ENABLED } from "./utils.js";
 class Events{
     constructor(){
 
@@ -65,6 +67,28 @@ class Events{
         req.open("GET", url, async);
         req.send();
         return responce;
+    }
+    /**
+     * Triggers on users input from textarea
+     * @param {Function} callback The function that will activate on submit
+     * @returns {String} The Users input
+     */
+    submit(callback){
+        if(IS_ENABLED()){
+            const txt = document.querySelector('.wsa-userinput'),
+                submitbtn = document.querySelector('.wsa-editor-send');
+            txt.addEventListener('keydown', (e)=>{
+                let key = e.keyCode || e.which;
+                if(key===13){
+                    e.preventDefault();
+                    callback(filterHTML(txt.value));
+                }
+            });
+            submitbtn.addEventListener('click',(e)=>{
+                e.preventDefault();
+                callback(filterHTML(txt.value));
+            });
+        }
     }
 }
 export default Events;

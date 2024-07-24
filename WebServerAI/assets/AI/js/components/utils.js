@@ -109,6 +109,8 @@ function keyboardFocusable(elem){
         return false;
     
 }
+
+
 const matches = {
     '>':'<',
     '<':'>',
@@ -270,13 +272,62 @@ function isWSActive(){
     return (document.documentElement.hasAttribute('wsa-active') ? true : false);
 }
 
+/**
+ * Decode HTML to encoded
+ * @param {Array<String>|String} $items 
+ * @returns {Array<String>|String} Returns the encoded HTML
+ */
+function HTMLEncoder($items){
+    if(Array.isArray($items)){
+        return $items.map((e)=>{
+            return e.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        });
+    }else{
+        return $items.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+}
+/**
+ * Encoded HTML to decoded
+ * @param {Array<String>|String} $items 
+ * @returns {Array<String>|String} Returns the decoded HTML
+ */
+function HTMLDecoder($items){
+    if(Array.isArray($items)){
+        return $items.map((e)=>{
+            return e.replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+        });
+    }else{
+        return $items.replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+    }
+}
+/**
+ * Merges array items with a certain character into 1 item array
+ * @param {Array} Arr Array to merge
+ * @param {String} mergeWith A character to merge items with
+ * @returns {Array} Merges into 1 item array
+ */
+function merge(Arr, mergeWith=''){
+    return [Arr.join(mergeWith)];
+}
+
+/**
+     * Generate a unique id
+     *
+     * @param {string} [prefix=''] Prefix to the start of the ID
+     * @param {boolean} [more_entropy=false] add more to the list
+     * @returns {string}
+     */
+function uniqid(prefix='', more_entropy=false){
+    return prefix+(Date.now().toString(36) + Math.random().toString(36).substr(2)).substr(0,(more_entropy ? 23 : 13));
+}
+
 const VIDEO_PATH = window.location.origin+'/WebServerAI/assets/AI/videos',
     AUDIO_PATH = window.location.origin+'/WebServerAI/assets/AI/audios',
     IMAGE_PATH = window.location.origin+'/WebServerAI/assets/AI/images',
     SUBTITLE_PATH = window.location.origin+'/WebServerAI/assets/AI/subtitles',
     DS = '/',
-    ORGIN = window.location.origin;
-
+    ORGIN = window.location.origin,
+    IS_ENABLED = ()=>{return document.documentElement.hasAttribute('wsa-active')};
 export {
     rgbaToHex, 
     calculateContrastRatio, 
@@ -286,6 +337,11 @@ export {
     isScrollable,
     getInfo,
     isWSActive,
+    HTMLEncoder,
+    HTMLDecoder,
+    merge,
+    uniqid,
+    IS_ENABLED,
     //CONST
     VIDEO_PATH,
     AUDIO_PATH,

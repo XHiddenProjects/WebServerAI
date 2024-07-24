@@ -354,9 +354,23 @@ filter=(str, removeWords)=>{
     return str;
 }
 
+/**
+    * Filters out special characters
+    * @param {String} str String to filter
+    * @returns {String} Filtered string
+*/
+function filterHTML(str){
+    var lt = /</g, 
+        gt = />/g, 
+        ap = /'/g, 
+        ic = /"/g;
+    return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
+}
+
 export {validate,
     sanitize, 
     filter,
+    filterHTML,
     FILTER_VALIDATE_INT, 
     FILTER_VALDATE_BOOLEAN, 
     FILTER_VALIDATE_FLOAT, 

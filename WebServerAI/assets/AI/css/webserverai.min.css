@@ -21,6 +21,7 @@
     --wsa-light-link: #0d0dff;
     --wsa-light-scrollbar-bg: #d5d5d5;
     --wsa-light-scrollbar-thumb: #c0c0c0;
+    --wsa-light-mic-enabled: #ff0000;
 
     --wsa-dark-bg: #000;
     --wsa-dark-color: #dedede;
@@ -46,6 +47,7 @@
     --wsa-dark-scrollbar-thumb: #3c3d3b;
     --wsa-dark-toggleBtn-bg:rgba(71, 71, 71, 0.65);
     --wsa-dark-toggleBtn-color: rgb(255,255,255);
+    --wsa-dark-mic-enabled: #c91414;
 
     --wsa-box-width: 60%;
     --wsa-box-height: 280px;
@@ -446,10 +448,26 @@
     height: 64px;
     border-radius: 50%;
 }
-
 .wsa .wsa-txt{
     width: 410px;
     overflow: auto;
+}
+
+.wsa[wsa-theme="light"] .wsa-mic:not(.wsa-mic-muted){
+    background-color: var(--wsa-light-mic-enabled);
+    animation: flashingMic 0.7s linear alternate infinite;
+}
+.wsa[wsa-theme="dark"] .wsa-mic:not(.wsa-mic-muted){
+    background-color: var(--wsa-dark-mic-enabled);
+    animation: flashingMic 0.7s linear alternate infinite;
+}
+@keyframes flashingMic {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0.5;
+    }
 }
 
 /*[wsa-elemfocus]{

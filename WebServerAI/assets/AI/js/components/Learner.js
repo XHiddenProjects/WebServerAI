@@ -112,7 +112,7 @@ class Listener{
      * @param {boolean} [rawCode=false] Returns raw HTML
      * @returns {Array<boolean,string>|Boolean} Returns information on success
      */
-    render(AICode,rawCode=false){
+    render(AICode){
         this.lineCode = [];
         this.endedElem = [];
         this.holder = -1;
@@ -596,7 +596,7 @@ class Listener{
                     break;
                     case 'list':
                         value.split(/(?<!\\),/).forEach((items)=>{
-                            this.lineCode[this.holder].html = (this.lineCode[this.holder].html ?  this.lineCode[this.holder].html + '<li>'+items.replace(/\\,/g,',')+'</li>' : '<li>'+items.replace(/\\,/g,',')+'</li>');
+                            this.lineCode[this.holder].html = (this.lineCode[this.holder].html ?  this.lineCode[this.holder].html + '<li>'+items.replace(/\\,/g,',').replace(/^ /g,'')+'</li>' : '<li>'+items.replace(/\\,/g,',').replace(/^ /g,'')+'</li>');
                         });
                     break;
                     
@@ -769,7 +769,6 @@ class Listener{
                 elem.style.fontWeight = (this.lineCode[i].styles.fontWeight ? this.lineCode[i].styles.fontWeight : '');
                 elem.style.fontStyle = (this.lineCode[i].styles.fontStyle ? this.lineCode[i].styles.fontStyle : '');
                 elem.style.textDecoration = (this.lineCode[this.holder]&&this.lineCode[this.holder].styles.textDecoration ? this.lineCode[this.holder].styles.textDecoration : '');
-                if(!rawCode){
                 if(this.lineCode[i].location){
                     if(document.querySelector(this.lineCode[i].location).tagName.toLocaleLowerCase()==='body'){
                         document.body.insertBefore(elem,document.body.children[this.placeOver]);
@@ -783,10 +782,7 @@ class Listener{
                             document.body.insertBefore(elem,document.body.children[this.placeOver]);
                             this.placeOver+=1;
                         }
-                    }  
-                }else{
-                    this.endedElem.push(elem.outerHTML);
-                }
+                    }   
             }
             (this.buildEvent!==null ? window.dispatchEvent(this.buildEvent) : ''); this.buildEvent=null;
             document.querySelectorAll('code').forEach((e)=>{
