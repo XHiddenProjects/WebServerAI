@@ -24,6 +24,7 @@ WebServerAI is an innovative project that integrates advanced tools such as CTE 
       * [Adding Languages](#adding-languages)
    * [Installation](#installation)
       * [How to enable the AI](#how-to-enable-the-ai)
+      * [Configuration](#configuration)
       * [Using the AI](#using-the-ai)
       * [Previewing Content](#previewing-content)
    * [Functions](#functions)
@@ -124,7 +125,8 @@ To add your own or share your own interpeded language please do the following:
                     "intxtdbl":"Insert In-Text Double quotes",
                     "intxtsgl":"Insert In-Text Single quotes",
                     "intxtaps":"Insert In-Text Apostrophe",
-                    "intxtnl": "Insert In-Text New Line"
+                    "intxtnl": "Insert In-Text New Line",
+                    "mic": "Toggle Mic"
                 },
                 "cmd":{
                     "help":"Gives the list of commands",
@@ -144,13 +146,25 @@ To add your own or share your own interpeded language please do the following:
                 "console":{
                     "previewNotFound":"Preview box not found!",
                     "previewBtnNotFound":"Preview button cannot be found",
-                    "chatBoxNotFound":"Chat box not found!"
+                    "chatBoxNotFound":"Chat box not found!",
+                    "voiceTypeToggleNotFound":"[VoiceType] - Toggle button not found",
+                    "voiceTypeResultsNotFound": "[VoiceType] - Results not found",
+                    "voiceTypeSpeechError": "[VoiceType] - An error has occurred",
+                    "voiceTypeSpeechNotEnabled": "[VoiceType] - SpeechRecognition is not supported",
+                    "elementNotFound": "Element not found"
                 }
             }
         }
 ```
 3. Translate it
 4. **To share** go to `issues > "New Issue"`
+5.
+```
+      Title: _your_language_name_
+      Message: whatever you want to write
+      Label: "Language"
+      Upload: Your translated file
+```
 
 ***
 
@@ -176,51 +190,62 @@ In your _INIT (Inital)_ `HTML` \ `PHP` file. Example: **index.php** or **index.h
 
 _Note: "wsa-exclude" is required for preview reasons and space saving!_
 
+
+```html
+<script src=".../file.js" type="module" wsa-exclude></script>
+```
+
+**OR**
+
 ```html
 <script type="module" wsa-exclude>
-  // Import WebServerAI from the location of the WebServerAI folder
-  import WebServerAI from '//WebServerAI/assets/AI/js/webserverai.min.js';
-  // Access the class from WebServerAI
-   if(window.WebServerAI!==undefined){
-        let wsc = new WebServerAI({
-            enabled: true, // Activate the AI
-            theme: 'dark', // Light/Dark theme [Optional]
-            status: 'opened', // Opened/Closed status of the UI [Optional]
-            position: 'bottom right', // Position of the UI: top left, top center, top right, center left, center right, bottom left, bottom center, bottom right [Optional]
-            history:{
-                save: 'session' // Save history as a session/local storage [Optional]
-            },
-            cte: true, // Activates Cursor-Targeting Element [Optional]
-            /*
-            ui:{ // Configures the UI/GUI
-              preview: "", // IFrame to display commands
-              previewBtn: "", //Element to trigger the preview box
-              chatbox: "", //Element to input commands 
-              submit: "", // Element to trigger the submit button
-              history: "", // Element to return the history information
-              rawOutput:true //Returns an array of raw HTML in text format to be displayed
-            },
+import WebServerAI from '../assets/AI/js/webserverai.min.js'; // Get WebServerAI from assets
+import Events from '../assets/AI/js/components/Events.js'; // Get Events from the components [Optional]
 
-            */
-            preview: '', // Connect to IFrame to preview the element [Optional]
-            extensions:{
-               // Add extensions here [Optional]
-            }
+if(window.WebServerAI!==undefined){ // Check if WebServerAI is active
+        let wsaEvent = new Events(); // Load the events library
+        let wsc = new WebServerAI({ //Create a new WebServerAI object
+            enabled: true, // Enable the software
+            theme: 'dark', // Change the theme light/dark [Optional]
+            codeTheme: 'default', // Change the theme for prismJS [Optional]
+            status: 'opened', // Set the UI collapse status [Optional]
+            position: 'bottom right', // Sets the position of the UI [Optional]
+            history:{
+                save: 'session' // Saves history as a sessionStorage [Optional]
+            },
+            cte: true, // Enables Click-targeting element
+            extensions:{} // Load build extensions here
         });
-        wsc.load(); // Loads the UI and the necessary scripts
+        wsc.load(); // Load the UI
         wsc.submit(($input)=>{
             if($input){
-               wsc.addCmd($input);
-               wsc.send($input, true);
+                wsc.addCmd($input);
+                wsc.send($input, true);
             }
-        });
-        /*
-         * Waits until user press "enter" on the UI textbox.
-         * Checks the commands and then sends it to the AI and to process then execute.
-        */
-      }
+        }); // Trigger events on submit
+        wsc.clearTextbox(); // Clears the textbox after submitting
+}
 </script>
 ```
+
+### Configuration
+
+|  Name   |   Type    |  Default  |   Allowed values   |        Description         |
+| ------- | --------- | --------- | ------------------ | -------------------------- |
+| enabled | _Boolean_ | `True`    |  `True` / `False`    |  Enables the software      |
+| theme   | _String_  | `"light"` | `"light"` / `"dark"` | Sets the theme for the UI. |
+| codeTheme | _String_| `"default"` | **PrismJS available themes** | Sets the code blocks to the correct PrismJS themes |
+| status | _String_   | `"opened"` | `"Opened"` / `"Closed"` | Sets the UI collapse status |
+| position | _String_ | `"bottom right"` | `"top left"` /` "top center"` / `"top right"` / `"center left"` / `"center right"` / `"bottom left"` / `"bottom center"` / `"bottom right"` | Sets the position of the UI |
+| history.save | _String_ | `"session"` | `"session"` / `"local"` | Saves the users history |
+| ui.preview | _String_ | `null` | `<Element:IFrame>` | Previews your updated page while removing all non-important elements |
+| ui.previewBtn | _String_ | `null` | `<Element:Button>` | A button to update the IFrame with the page update |
+| ui.chatbox | _Stirng_ | `null` | `<Element:Textarea>` / `<Element:Input[type="text"]>` | Uses a custom textbox, except for the UI |
+| ui.submit | _String_ | `null` | `<Element:Button>` | Uses a custom button for submission of users input |
+| ui.history | _String_ | `null` | `<Element:Div>` | Uses a custom container as a history viewer |
+| ui.language | _String_ | `Browsers language` | [`Available language support`](#available-languages) | Sets the UI to a specified language |
+| cte | _Boolean_ | `True` | `True` / `False` | Allows Cursor-Targeting Element | 
+| extensions | _Object_ | `{}` | [**Allowed extensions**](#extensions) | Add _build_ extensions here |
 
 ### Using the AI
 This AI uses _direct quotations_. 
@@ -418,10 +443,17 @@ const info = getInfo(buildName); // All information will be stored here in a JSO
 // END LOAD-UP
 //USE "wsa-build" to trigger on build-submit
 if(ext.isAllowed(buildName)){
+
+/**
+  // Requires Events componement to be imported!
+  // Gets data on submit and does not wait for build function to occur.
+  events.submit((e)=>{
+      console.log(e);
+  });
+*/
+
 window.addEventListener('wsa-build',(e)=>{
     // Your code goes in here
-
-
 
     // Give elements based on your build name a unique ID
     ext.update(buildName);
@@ -557,6 +589,12 @@ import { rgbaToHex,
     version_compare,
     getInfo,
     isScrollable,
+    getInfo,
+    HTMLEncoder,
+    HTMLDecoder,
+    merge,
+    uniqid,
+    IS_ENABLED,
     //CONST
     VIDEO_PATH,
     AUDIO_PATH,
@@ -611,6 +649,64 @@ isScrollable: Checks if element is scrollable
 isScrollable(elem);
 ```
 
+getInfo: Gets information from _info.yaml_ based on extension name
+```js
+/**
+ * Recieves the extensions informations based on language
+ * @param {String} name Extension Name
+ * @returns {String} JSon format of the extension
+ */
+getInfo(name);
+```
+
+HTMLEncoder: Encodes HTML to sanitized string
+```js
+/**
+ * Decode HTML to encoded
+ * @param {Array<String>|String} $items 
+ * @returns {Array<String>|String} Returns the encoded HTML
+ */
+HTMLEncoder(name);
+```
+
+HTMLDecoder: Decodes sanitized string to HTML string
+```js
+/**
+ * Encoded HTML to decoded
+ * @param {Array<String>|String} $items 
+ * @returns {Array<String>|String} Returns the decoded HTML
+ */
+HTMLDecoder($items);
+```
+
+merge: Join array items with a character
+```js
+/**
+ * Merges array items with a certain character into 1 item array
+ * @param {Array} Arr Array to merge
+ * @param {String} mergeWith A character to merge items with
+ * @returns {Array} Merges into 1 item array
+ */
+merge(Arr, mergeWith='');
+```
+
+uniqid: Generatates a uniqueID
+```js
+/**
+  * Generate a unique id
+  * @param {string} [prefix=''] Prefix to the start of the ID
+  * @param {boolean} [more_entropy=false] add more to the list
+  * @returns {string}
+*/
+uniqid(prefix='', more_entropy=false);
+```
+
+IS_ENABLED: Checks if the software is enabled
+```js
+IS_ENABLED();
+```
+
+
 | CONST | VALUE |
 | ----- | ----- |
 | VIDEO_PATH | `/WebServerAI/assets/AI/videos` |
@@ -619,9 +715,3 @@ isScrollable(elem);
 | SUBTITLE_PATH | `/WebServerAI/assets/AI/subtitles` |
 | DS | `/` |
 | ORGIN | `http(s)?//domain/` |
-5. ```
-      Title: _your_language_name_
-      Message: whatever you want to write
-      Label: "Language"
-      Upload: Your translated file 
-   ```
