@@ -16,4 +16,4 @@ fr-fr:
   version: 0.0.1
   tableInvalidInfo: 'Le tableau ne contient pas d`informations valides!'
   tableMismatch: 'Les en-têtes et les cellules du tableau ne correspondent pas'
-ai_version: "0.0.4 - Beta"
+ai_version: "0.0.5 - Beta"
