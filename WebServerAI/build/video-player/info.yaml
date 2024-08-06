@@ -1,19 +1,19 @@
 en-us:
   name: Video-Player
-  updated: 6/16/24
-  version: 0.0.1
+  updated: 7/25/24
+  version: 0.0.2
   play: 'Play'
   pause: 'Pause'
 de-de:
   name: Video-Player
-  updated: 6/16/24
-  version: 0.0.1
+  updated: 7/25/24
+  version: 0.0.2
   play: 'Spielen'
   pause: 'Pause'
 fr-fr:
   name: Lecteur vidéo
-  updated: 6/16/24
-  version: 0.0.1
+  updated: 7/25/24
+  version: 0.0.2
   play: 'Jouer'
   pause: 'Pause'
 ai_version: "0.0.5 - Beta"

@@ -1,0 +1,88 @@
+:root{
+    --soundmeasure-low: green;
+    --soundmeasure-medium: yellow;
+    --soundmeasure-high: red;
+    --soundmeasure-line: gray;
+}
+.wpa-build-soundMeasure{
+    width: auto;
+    height: auto;
+}
+.soundmeasure .meter{
+    position: relative;
+    border-radius: 5px;
+    width: auto;
+    height: auto;
+}
+.soundmeasure .meter.meter-width{
+    width: 100%;
+    height: 120px;
+}
+
+.soundmeasure .meter .line1,
+.soundmeasure .meter .line2,
+.soundmeasure .meter .line3{
+    background-color: var(--soundmeasure-line);
+    position: absolute;
+}
+
+.soundmeasure .meter.meter-width .line1{
+    height: 100%;
+    width: 2px;
+    left:50%
+}
+.soundmeasure .meter.meter-width .line2{
+    height: 100%;
+    width: 2px;
+    left:70%
+}
+.soundmeasure .meter.meter-width .line3{
+    height: 100%;
+    width: 2px;
+    left:100%
+}
+
+.soundmeasure .meter.meter-height{
+    width: 120px;
+    height: calc(100% - 18px);
+    transform: rotate(180deg);
+}
+
+.soundmeasure .meter.meter-height .line1{
+    height: 2px;
+    width: 100%;
+    top:50%
+}
+.soundmeasure .meter.meter-height .line2{
+    height: 2px;
+    width: 100%;
+    top:70%
+}
+.soundmeasure .meter.meter-height .line3{
+    height: 2px;
+    width: 100%;
+    top:100%
+}
+
+.soundmeasure .meter .meter-bar{
+    position: absolute;
+    top:0;
+    left:0;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    transition: background-color 0.3ms;
+}
+.soundmeasure .meter .meter-bar[vol-status="low"]{
+    background-color: var(--soundmeasure-low);
+}
+.soundmeasure .meter .meter-bar[vol-status="medium"]{
+    background-color: var(--soundmeasure-medium);
+}
+.soundmeasure .meter .meter-bar[vol-status="high"]{
+    background-color: var(--soundmeasure-high);
+}
+
+.soundmeasure .sensitivity{
+    display: block;
+}

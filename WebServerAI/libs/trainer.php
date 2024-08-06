@@ -1,9 +1,17 @@
 <?php
 namespace WebServerAI;
+
+use WebServerAI\Dictionary\Dictionary;
+use WebServerAI\Settings\Config;
+
+define('IGNORE_LIST',preg_split('/\n/',file_get_contents(dirname(__DIR__).'/data/ignoreList.txt')));
+
+require_once('ai_dictionary.php');
+require_once('ai_config.php');
 class Trainer{
     protected string $AIStr;
     public function __construct() {
-
+    
     }
     public function decodeURI(string $str){
         $str = preg_replace('/&#34;/','"',$str);
@@ -13,7 +21,28 @@ class Trainer{
     protected function removeGrammar($str){
        return preg_replace('/\.|\,|\;|\:|\?|\!/','',$str);
     }
+
+    protected function fixSpelling(string|array $arr):array{
+        $arr = array_map(function($item){
+            $c = new Config();
+            $configs = $c->get()['AI']['search'];
+            if($configs['language']==='auto')
+                $configs['language'] = (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? preg_split('/,/',$_SERVER['HTTP_ACCEPT_LANGUAGE'])[0] : 'en');
+            else
+                $configs['language'] = $configs;
+        
+            $spell = new Dictionary($configs['language']);
+            $spell->ignore(IGNORE_LIST);
+            if(!$spell->spell_check($item))
+                return $spell->spell_correct($item);
+            else
+                return $item;
+        },(is_array($arr) ? $arr : preg_split('/ /',$arr)));
+        return $arr;
+    }
+
     public function format(string $str){
+        $str = implode(' ',$this->fixSpelling($str));
         # Reframe keywords
         $str = preg_replace('/multiple choice/i','MultipleChoice',$str);
         $str = preg_replace('/input color|color input/i','InputColor',$str);
@@ -74,8 +103,12 @@ class Trainer{
         $str = preg_replace("/\\\'/",'\\\\q',$str);
         $str = preg_replace('/\\\`/','\\\\a',$str);
         $str = preg_split('/\s+(?=(?:(?:[^\'\"`]|[\'\"`][^\'\"`]*[\'\"`])*$))/',$str);
+       
+
+     
         $AIStr='';
         for($i=0;$i<count($str);$i++){
+
             switch(strtolower($this->removeGrammar($str[$i]))){
                 case 'add':
                 case 'added':
@@ -587,9 +620,10 @@ class Trainer{
                 }
             }
             if(preg_match('/[\"](.*?)[\"]/',$str[$i])){
+                
                 preg_match('/[\"](.*?)[\"]/',$str[$i],$matches);
                 $AIStr.=preg_replace('/\\\\a/','`',preg_replace('/\\\\q/',"'",preg_replace('/\\\\qq/','"',preg_replace('/\\\\n/','
-',$matches[1])))).'}||';
+',implode(' ',$this->fixSpelling($matches[1])))))).'}||';
             }         
             
         }

@@ -1,7 +1,7 @@
 // Import "Extensions" from extension.js to allow usages
 import Extensions from "/WebServerAI/assets/AI/js/components/extenstions.js";
 import Events from "/WebServerAI/assets/AI/js/components/Events.js";
-import {VIDEO_PATH, SUBTITLE_PATH, DS, getInfo} from "/WebServerAI/assets/AI/js/components/utils.js";
+import {VIDEO_PATH, SUBTITLE_PATH, DS, getInfo, HTMLDecoder} from "/WebServerAI/assets/AI/js/components/utils.js";
 import {shortcutJS} from "/WebServerAI/assets/AI/js/components/shortcut.min.js";
 // START LOAD-UP (Required)
 const url = new URL(import.meta.url),
@@ -14,8 +14,25 @@ const sc = new shortcutJS();
 
 const info = getInfo(buildName);
 
-
 if(ext.isAllowed(buildName)){
+
+    // STYLING VIDEO-PLAYER
+
+    events.submit((e)=>{
+        e = HTMLDecoder(e);
+        events.cmdLine(/update "(.*?)" progress (bar )?color to "(.*?)"/,e,(progressColor)=>{
+            if(progressColor){
+                const elem = document.querySelector(progressColor[1]),
+                color = progressColor[3];
+                if(elem){
+                    elem.style.setProperty('--video-player-progress',color);
+                }
+            }
+        });
+    });
+
+    // END STYLING
+
     // END LOAD-UP
     //USE "wsa-build" to trigger on build-submit
     window.addEventListener('wsa-build',(e)=>{

@@ -59,6 +59,17 @@ if(window.WebServerAI!==undefined){
                             '/WebServerAI/build/tables/tables.js'
                         ]
                     }
+                },
+                "soundMeasure":{
+                    active: true,
+                    startup:{
+                        styles:[
+                            '/WebServerAI/build/soundMeasure/soundMeasure.css'
+                        ],
+                        scripts:[
+                            '/WebServerAI/build/soundMeasure/soundMeasure.js'
+                        ]
+                    }
                 }
             }
         });
@@ -68,6 +79,9 @@ if(window.WebServerAI!==undefined){
                 wsc.addCmd($input);
                 wsc.send($input, true);
             }
+            setTimeout(()=>{
+                wsc.clearTextbox();
+            },500);
         });   
-        wsc.clearTextbox();
+        
 }

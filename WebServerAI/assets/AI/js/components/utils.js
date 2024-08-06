@@ -264,13 +264,6 @@ function getInfo(name){
         d = e.request(window.location.origin+'/WebServerAI/libs/ai_checker.php?name='+name, true);
     return d[navigator.language.toLocaleLowerCase()];
 }
-/**
- * Checks if WebServerAI is active
- * @returns {Boolean} TRUE if webserverai is active, else FALSE.
- */
-function isWSActive(){
-    return (document.documentElement.hasAttribute('wsa-active') ? true : false);
-}
 
 /**
  * Decode HTML to encoded
@@ -280,10 +273,10 @@ function isWSActive(){
 function HTMLEncoder($items){
     if(Array.isArray($items)){
         return $items.map((e)=>{
-            return e.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            return e.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;').replace(/"/g,'&#34;');
         });
     }else{
-        return $items.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        return $items.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;').replace(/"/g,'&#34;');
     }
 }
 /**
@@ -294,10 +287,10 @@ function HTMLEncoder($items){
 function HTMLDecoder($items){
     if(Array.isArray($items)){
         return $items.map((e)=>{
-            return e.replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+            return e.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&#39;/g,"'").replace(/&#34;/g,'"');
         });
     }else{
-        return $items.replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+        return $items.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&#39;/g,"'").replace(/&#34;/g,'"');
     }
 }
 /**
@@ -336,7 +329,6 @@ export {
     version_compare,
     isScrollable,
     getInfo,
-    isWSActive,
     HTMLEncoder,
     HTMLDecoder,
     merge,

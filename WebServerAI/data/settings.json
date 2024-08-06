@@ -5,7 +5,10 @@
         "Updated": "07/24/2024",
         "ResponceTime": 1000,
         "blockWords":[],
-        "blockDomains":[]
+        "blockDomains":[],
+        "search":{
+            "language": "auto"
+        }
     },
     "previewBox":{
         "width":600,
