@@ -169,7 +169,7 @@ To add your own or share your own interpeded language please do the following:
 
 ## Installation
 1. NPM installation
-   To use thew NPM installation type
+   To use the NPM installation type
    ```js
    npm i webserverai
    ```
