@@ -648,16 +648,6 @@ isScrollable: Checks if element is scrollable
 isScrollable(elem);
 ```
 
-getInfo: Gets information from _info.yaml_ based on extension name
-```js
-/**
- * Recieves the extensions informations based on language
- * @param {String} name Extension Name
- * @returns {String} JSon format of the extension
- */
-getInfo(name);
-```
-
 HTMLEncoder: Encodes HTML to sanitized string
 ```js
 /**
