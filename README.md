@@ -28,6 +28,7 @@ WebServerAI is an innovative project that integrates advanced tools such as CTE 
   * [Install with ZIP](https://github.com/XHiddenProjects/WebServerAI/wiki/Installation#install-by-zip)
   * [How to enable the AI](https://github.com/XHiddenProjects/WebServerAI/wiki/Installation#enabling-the-ai)
   * [Configuration](https://github.com/XHiddenProjects/WebServerAI/wiki/Installation#configuration)
+  * [Python Configuration](https://github.com/XHiddenProjects/WebServerAI/wiki/Installation#configuring-python)
 * [Functions](https://github.com/XHiddenProjects/WebServerAI/wiki/Functions)
   * [Loading](https://github.com/XHiddenProjects/WebServerAI/wiki/Functions#loading-required)
   * [Submitting Data](https://github.com/XHiddenProjects/WebServerAI/wiki/Functions#submitting-data-required)
