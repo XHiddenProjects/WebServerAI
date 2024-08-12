@@ -1,4 +1,4 @@
-#! <Enter Python Compiler Here>
+#! C:\xampp\htdocs\WebServerAI\.venv\Scripts\python.exe
 
 
 

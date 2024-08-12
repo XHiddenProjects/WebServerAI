@@ -1,4 +1,4 @@
-#! <Enter Python Compiler Here>
+#! C:\xampp\htdocs\WebServerAI\.venv\Scripts\python.exe
 import webcolors, json, os
 
 currentPath = os.getcwd()+"/data/colorData.json"

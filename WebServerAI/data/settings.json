@@ -15,7 +15,7 @@
         "height":600
     },
     "pythonConfig":{
-        "execPath":"<Enter Python Compiler Here>"
+        "execPath":"C:\\xampp\\htdocs\\WebServerAI\\.venv\\Scripts\\python.exe"
     },
     "User": "Guest"
 }
