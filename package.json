@@ -1,6 +1,6 @@
 {
   "name": "webserverai",
-  "version": "0.0.5-beta",
+  "version": "0.0.6-beta",
   "description": "WebServerAI is an advanced project using AI to revolutionize web development. It empowers users to create visually stunning websites tailored to their needs without extensive coding knowledge. This innovative tool streamlines the design process, offering a seamless solution for establishing a professional online presence.",
   "main": "index.js",
   "scripts": {
