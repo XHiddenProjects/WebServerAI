@@ -16,5 +16,8 @@
     "automated"
   ],
   "author": "xhiddenprojects",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "webserverai": "file:"
+  }
 }
