@@ -50,22 +50,26 @@ class Events{
      * @param {String} url Location to get the file content
      * @param {Boolean} [isJSON=false] Converts string to JSON object
      * @param {Boolean} [async=false] Wait until page load
-     * @returns {JSON|String}
+     * @returns {JSON|String|Boolean} Returns results, FALSE if nothing was successful
      */
-    request(url, isJSON=false, async=false){   
-        let req = new XMLHttpRequest();
-        req.onreadystatechange = ()=>{
-            if(req.readyState==4&&req.status==200){
-                if(isJSON){
-                    responce = JSON.parse(req.responseText);
-                }
-                else{
-                    responce = req.responseText;
-                }
+    request(url, isJSON=false, async=false){  
+        if(url){
+            let req = new XMLHttpRequest();
+            req.onreadystatechange = ()=>{
+                if(req.readyState==4&&req.status==200){
+                        if(isJSON){
+                            responce = JSON.parse(req.responseText);
+                        }
+                        else{
+                            responce = req.responseText;
+                        }
+                }else
+                    responce = false;
             }
-        }
-        req.open("GET", url, async);
-        req.send();
+            req.open("GET", url, async);
+            req.send();
+        }else
+            responce = false;
         return responce;
     }
     /**

@@ -12,7 +12,7 @@ info = getInfo(buildName);
 
 if(ext.isAllowed(buildName)){
     window.addEventListener('wsa-build',(e)=>{
-        events.cmdLine(/(create(.*?)\"data tables?\"(.*?)(labels|headers)(.*?)\"(.*?)\"(.*?)cells(.*?)\"(.*?)\")((( and is|,|;|\.( )?Make it)(.*?)hoverable( and stripped)?)|(( and is|,|;|\.( )?Make it) stripped( and hoverable)?))?/gi,events.get(e,'input'),(o)=>{
+        events.cmdLine(/(create(.*?)\"data tables?\"(.*?)(labels|headers)(.*?)\"(.*?)\"(.*?)(cells|datasets)(.*?)\"(.*?)\")((( and is|,|;|\.( )?Make it)(.*?)hoverable( and stripped)?)|(( and is|,|;|\.( )?Make it) stripped( and hoverable)?))?/gi,events.get(e,'input'),(o)=>{
             if(o){
                 for(let i=0;i<o.length;i++){
                     const table = document.createElement('table'),

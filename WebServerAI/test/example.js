@@ -1,8 +1,13 @@
 import WebServerAI from '../assets/AI/js/webserverai.min.js';
 import Events from '../assets/AI/js/components/Events.js';
+import { formatColor } from '../assets/AI/js/components/utils.js';
 
 if(window.WebServerAI!==undefined){
         let wsaEvent = new Events();
+
+        let color = formatColor('#e6e6fa','hex','name');
+        console.log(color);
+
         let wsc = new WebServerAI({
             enabled: true,
             theme: 'dark',

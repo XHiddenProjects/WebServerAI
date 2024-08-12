@@ -1,8 +1,8 @@
 {
     "AI":{
         "Name": "WebServerAI",
-        "Version": "0.0.5 - Beta",
-        "Updated": "07/24/2024",
+        "Version": "0.0.6 - Beta",
+        "Updated": "08/11/2024",
         "ResponceTime": 1000,
         "blockWords":[],
         "blockDomains":[],
@@ -13,6 +13,9 @@
     "previewBox":{
         "width":600,
         "height":600
+    },
+    "pythonConfig":{
+        "execPath":"<Enter Python Compiler Here>"
     },
     "User": "Guest"
 }

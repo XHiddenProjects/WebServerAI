@@ -1,4 +1,5 @@
-import Events from '/WebServerAI/assets/AI/js/components/Events.js';
+import Events from "./Events.js";
+
 //validate filters
 const FILTER_VALIDATE_INT = 257,
 FILTER_VALDATE_BOOLEAN = 258,
@@ -366,11 +367,23 @@ function filterHTML(str){
         ic = /"/g;
     return str.toString().replace(lt, "&lt;").replace(gt, "&gt;").replace(ap, "&#39;").replace(ic, "&#34;");
 }
+/**
+ * Validates phone number and checks if it's real or VoIP
+ * @param {String} PhoneNumAPI - Phone number validation/lookup API URL
+ * @api Get API From any Phone number validation/lookup
+ * @returns {JSON} The request from the phone number
+ */
+function checkPhoneNum(PhoneNumAPI){
+    const e = new Events(),
+    res = e.request(PhoneNumAPI,true);
+    return res;
+}
 
 export {validate,
     sanitize, 
     filter,
     filterHTML,
+    checkPhoneNum,
     FILTER_VALIDATE_INT, 
     FILTER_VALDATE_BOOLEAN, 
     FILTER_VALIDATE_FLOAT, 

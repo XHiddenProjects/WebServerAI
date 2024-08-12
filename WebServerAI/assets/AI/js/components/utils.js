@@ -313,6 +313,32 @@ function merge(Arr, mergeWith=''){
 function uniqid(prefix='', more_entropy=false){
     return prefix+(Date.now().toString(36) + Math.random().toString(36).substr(2)).substr(0,(more_entropy ? 23 : 13));
 }
+/**
+ * Build a search query parameter
+ * @param {JSON} params Parameter to the URL. Ex: _{name: "John"}_
+ * @returns {String} Search query string. Ex: _?name=john_
+ */
+function http_build_query(params){
+    let queryStr = '?';
+    for(let p in params){
+        queryStr+=(p+'='+params[p]+'&');
+    }
+    return queryStr.replace(/\&$/,'');
+}
+/**
+ * Formats the color
+ * @param {String} value Color name/hex/rgb
+ * @param {String} from Color starting format _name/hex/rgb_
+ * @param {String} to Color conversion format _name/hex/rgb_
+ * @returns {JSON} The converted color format
+ */
+function formatColor(value='', from='name', to='hex'){
+    const e = new Events();
+    let strify = JSON.stringify({'colorValue':value, 'from': from, 'to':to});
+    e.request(window.location.origin+'/WebServerAI/libs/ai_script_data.php?'+encodeURIComponent('dataname=colorData&datasets='+strify))
+    const getColor = e.request(window.location.origin+'/WebServerAI/scripts/coloridentifier.py',true);
+    return getColor;
+}
 
 const VIDEO_PATH = window.location.origin+'/WebServerAI/assets/AI/videos',
     AUDIO_PATH = window.location.origin+'/WebServerAI/assets/AI/audios',
@@ -333,7 +359,9 @@ export {
     HTMLDecoder,
     merge,
     uniqid,
+    http_build_query,
     IS_ENABLED,
+    formatColor,
     //CONST
     VIDEO_PATH,
     AUDIO_PATH,

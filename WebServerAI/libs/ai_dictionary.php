@@ -1,14 +1,15 @@
 <?php
 namespace WebServerAI\Dictionary;
 
+use WebServerAI\Settings\Config;
+require_once('ai_config.php');
+
 class Dictionary{
     protected $pspell, 
     $autocorrect=TRUE, 
     $api='', 
     $params=array(),
-    $ignoreList = array();
-    
-    
+    $ignoreList = array();  
     
     /**
      * Enables the dictionary function by using the __*Wikipedia search API*__.
