@@ -19,6 +19,7 @@ WebServerAI is an innovative project that integrates advanced tools such as CTE 
 * [About WebServerAI](https://github.com/XHiddenProjects/WebServerAI/wiki#about) 
   * [What the AI has](https://github.com/XHiddenProjects/WebServerAI/wiki#what-does-this-ai-have)
   * [CTE - Cursor-Targeting Element](https://github.com/XHiddenProjects/WebServerAI/wiki#cte)
+  * [Software Diagram](https://github.com/XHiddenProjects/WebServerAI/wiki#diagram)
 * [Commands](https://github.com/XHiddenProjects/WebServerAI/wiki/Commands)
 * [Languages](https://github.com/XHiddenProjects/WebServerAI/wiki/Languages)
   * [Available Languages](https://github.com/XHiddenProjects/WebServerAI/wiki/Languages#available-languages)
