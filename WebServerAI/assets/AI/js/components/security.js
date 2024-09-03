@@ -345,7 +345,7 @@ filter=(str, removeWords)=>{
         if(validate(words,FILTER_VALIDATE_DOMAIN)){
             if(validate(words,FILTER_VALIDATE_DOMAIN)){
                 const removeWWW = validate(words,FILTER_VALIDATE_DOMAIN).replace('www.','');
-                const domain = new RegExp('((http(s)?):\/\/)?(www\.)?'+removeWWW+'([-a-zA-Z0-9@:%_\+.~#?&//=]*)','g');
+                const domain = new RegExp('((http(s)?):\/\/)?(www\.)?'+removeWWW+'([-a-zA-Z0-9@:%_+.~#?&//=]*)','g');
                 str = str.replaceAll(domain,'');
             }
         }else{
