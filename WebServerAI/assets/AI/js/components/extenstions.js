@@ -6,19 +6,7 @@ class Extensions{
         this.ext = {};
     }
     #extensionID(){
-        // Create a buffer to hold random bytes
-        const randomBytes = new Uint8Array(16);
-        // Fill the buffer with cryptographically secure random values
-        window.crypto.getRandomValues(randomBytes);
-    
-        // Replace the placeholders in the UUID template with random hexadecimal characters
-        const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            // Use random bytes to generate hexadecimal digits
-            const r = randomBytes[Math.floor(Math.random() * randomBytes.length)];
-            // Replace 'x' with a random digit and 'y' with a specific digit (4 for UUID version 4)
-            return (c === 'x' ? (r & 0x0f) : (r & 0x3 | 0x8)).toString(16);
-        });
-    
+        const uuid = window.crypto.randomUUID();
         return uuid;
     }
     /**
