@@ -1,0 +1,39 @@
+<div class="pricing-template-2 pricing-container">
+    <div class="pricing-card">
+        <h1 class="plan-name">{{ free_plan }}</h1>
+        <h3 class="plan-amount">{{ free_amount }}</h3>
+        <div>
+            <ul class="plan-availability">
+                {% for free_item in free_items %}
+                <li class="plan-availability-item"><span class="icon {{ 'checkmark' if free_item.access==True else 'x' }}"></span> {{ free_item.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a href="{{ free_link }}"><button class="sign-up">Sign Up</button></a>
+    </div>
+    <div class="pricing-card popular">
+        <div class="popular-banner">Popular</div>
+        <h1 class="plan-name">{{ pro_plan }}</h1>
+        <h3 class="plan-amount">{{ pro_amount }}<span class="plan-amount-per">/{{ pro_per }}</span></h3>
+        <div>
+            <ul class="plan-availability">
+                {% for pro_item in pro_items %}
+                <li class="plan-availability-item"><span class="icon {{ 'checkmark' if pro_item.access==True else 'x'}}"></span> {{ pro_item.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a href="{{ pro_link }}"><button class="sign-up">Buy Now</button></a>
+    </div>
+    <div class="pricing-card">
+        <h1 class="plan-name">{{ enterprise_plan }}</h1>
+        <h3 class="plan-amount">{{ enterprise_amount }}</h3>
+        <div>
+            <ul class="plan-availability">
+                {% for enterprise_item in enterprise_items %}
+                <li class="plan-availability-item"><span class="icon {{ 'checkmark' if enterprise_item.access==True else 'x' }}"></span> {{ enterprise_item.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a href="{{ enterprise_link }}"><button class="sign-up">Contact Us</button></a>
+    </div>
+</div>

@@ -135,6 +135,18 @@ class Logic{
             return 0;
     }
     /**
+     * Solves an equation
+     * @param {String} equation Equation to solve
+     * @returns {Number} The results of the equation
+     */
+    Solve(equation){
+        const filter = (str)=>{
+            return str.replace(/&|,|;|\n\./g,'');
+        };
+        equation = filter(equation);
+        return eval(equation);
+    }
+    /**
      * Save data in a global variable
      * 
      * @param {String} mode Gets the method of what you want to do. _set|get|+_

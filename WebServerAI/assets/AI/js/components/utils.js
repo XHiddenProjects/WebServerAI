@@ -340,6 +340,27 @@ function formatColor(value='', from='name', to='hex'){
     return getColor;
 }
 
+function getLangCode(language){
+    const e = new Events(),
+    lang = e.request(window.location.origin+'/WebServerAI/data/languagesData.json',true);
+    let finalizeLang = '';
+    for(let i in lang){
+        if((lang[i].name.toLocaleLowerCase()===language.toLocaleLowerCase())||(i.toLocaleLowerCase()===language.toLocaleLowerCase())){
+            finalizeLang = {'langName': i.toLocaleLowerCase(), 'langCode': i};
+            break;
+        }
+    }
+    return finalizeLang;
+}
+/**
+ * Calls for a wait time before executing
+ * @param {Function} callback Function to callback after delay
+ * @param {Number} timeout Number, in ms(_milliseconds_), to execute
+ * @returns {Function}
+ */
+function wait(callback, timeout){
+    setTimeout(callback,timeout);
+}
 const VIDEO_PATH = window.location.origin+'/WebServerAI/assets/AI/videos',
     AUDIO_PATH = window.location.origin+'/WebServerAI/assets/AI/audios',
     IMAGE_PATH = window.location.origin+'/WebServerAI/assets/AI/images',
@@ -362,6 +383,8 @@ export {
     http_build_query,
     IS_ENABLED,
     formatColor,
+    getLangCode,
+    wait,
     //CONST
     VIDEO_PATH,
     AUDIO_PATH,

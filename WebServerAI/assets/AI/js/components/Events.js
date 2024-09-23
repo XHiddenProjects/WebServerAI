@@ -1,6 +1,8 @@
 var responce;
-import { filterHTML } from "./security.js";
+import { filterHTML, credits } from "./security.js";
+import { session } from "./storage.js";
 import { IS_ENABLED } from "./utils.js";
+
 class Events{
     constructor(){
 
@@ -78,20 +80,26 @@ class Events{
      * @returns {String} The Users input
      */
     submit(callback){
+        let isNull = session.load('wsa-isnull');
         if(IS_ENABLED()){
-            const txt = document.querySelector('.wsa-userinput'),
-                submitbtn = document.querySelector('.wsa-editor-send');
-            txt.addEventListener('keydown', (e)=>{
-                let key = e.keyCode || e.which;
-                if(key===13){
-                    e.preventDefault();
-                    callback(filterHTML(txt.value));
-                }
-            });
-            submitbtn.addEventListener('click',(e)=>{
-                e.preventDefault();
-                callback(filterHTML(txt.value));
-            });
+            if(credits.get()>0){
+                const txt = document.querySelector('.wsa-userinput'),
+                    submitbtn = document.querySelector('.wsa-editor-send');
+                txt.addEventListener('keydown', (e)=>{
+                    let key = e.keyCode || e.which;
+                    if(key===13&&(!isNull&&txt.value!=='')||(key===13&&isNull)){
+                        e.preventDefault();
+                        callback(filterHTML(txt.value));
+                    }
+                });
+                submitbtn.addEventListener('click',(e)=>{
+                    if((!isNull&&txt.value!=='')||isNull){
+                        e.preventDefault();
+                        callback(filterHTML(txt.value));
+                    }
+                });
+            }else
+                return false;
         }
     }
 }

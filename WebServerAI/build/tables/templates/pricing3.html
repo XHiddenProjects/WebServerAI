@@ -1,0 +1,35 @@
+<table class="pricing-template-3 pricing-container">
+    <thead>
+        <tr>
+            <th></th>
+            {% for plan in plans%}
+                <th>{{ plan.name }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for plan_info as plan_infos %}
+        <tr>
+            <td class="pricing-desc">{{ plan_info.label }}</td>
+            {% for plan_allow as plan_info.responce%}
+            <td>{{<span class="txt">{{ plan_allow.txt }}</span> if plan_allow.txt else <span class="icon {{ 'checkmark' if plan_allow.access==True else 'x' }}"></span> }}</td>
+            {% endfor %}
+        </tr>
+       {% endfor %}
+        <tr class="noHover">
+            <td></td>
+            <td>Free</td>
+            <td>$99/month</td>
+            <td>$179/month</td>
+            <td class="contact-us"><a href="#">Contact us</a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><a href="#"><button>Sign Up</button></a></td>
+            <td><a href="#"><button>Buy Now</button></a></td>
+            <td><a href="#"><button>Buy Now</button></a></td>
+            <td></td>
+        </tr>
+
+    </tbody>
+</table>

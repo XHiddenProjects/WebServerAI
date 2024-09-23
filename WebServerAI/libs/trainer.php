@@ -3,12 +3,19 @@ namespace WebServerAI;
 
 use WebServerAI\Dictionary\Dictionary;
 use WebServerAI\Settings\Config;
-
-define('IGNORE_LIST',preg_split('/\n/',file_get_contents(dirname(__DIR__).'/data/ignoreList.txt')));
+use WebServerAI\Trainee\Trainee;
 
 require_once('ai_dictionary.php');
 require_once('ai_config.php');
-class Trainer{
+require_once('ai_trainee.php');
+/**
+ * ML that compiles and translates to render out the code
+ * @author XHiddenProjects
+ * @version 0.0.6
+ * @copyright 2024 XHiddenProjects
+ * @extends WebServerAI\Trainee\Trainee
+ */
+class Trainer extends Trainee{
     protected string $AIStr;
     public function __construct() {
     
@@ -32,7 +39,6 @@ class Trainer{
                 $configs['language'] = $configs;
         
             $spell = new Dictionary($configs['language']);
-            $spell->ignore(IGNORE_LIST);
             if(!$spell->spell_check($item))
                 return $spell->spell_correct($item);
             else
@@ -42,9 +48,21 @@ class Trainer{
     }
 
     public function format(string $str){
-        $str = implode(' ',$this->fixSpelling($str));
+        $str = str_replace('
+','\\\\n',$str);
+       // $str = implode(' ',$this->fixSpelling($str));
         # Reframe keywords
         $str = preg_replace('/multiple choice/i','MultipleChoice',$str);
+        $str = preg_replace_callback('/size (of|is) ([\d]+(em|ex|%|px|cm|mm|in|pt|pc|))( ?x ?| ?by ?)([\d]+(em|ex|%|px|cm|mm|in|pt|pc|))/i',function($e){
+            return 'width "'.$e[2].'" and height "'.$e[5].'"';
+        },$str);
+        $str = preg_replace_callback('/image.*?\"(.*?)\"/i',function($e){
+            return 'image with src of "'.$e[1].'"';
+        },$str);
+        $str = preg_replace('/picture of|pic of/i','src',$str);
+        $str = preg_replace('/font style|font-style/i','family',$str);
+        $str = preg_replace('/alternative text/i','alt',$str);
+        $str = preg_replace('/class name/i','classname',$str);
         $str = preg_replace('/input color|color input/i','InputColor',$str);
         $str = preg_replace('/input date|date input/i','InputDate',$str);
         $str = preg_replace('/input datetime-local|datetime-local input/i','InputDateTimeLocal',$str);
@@ -121,6 +139,9 @@ class Trainer{
                 break;
                 case 'build':
                     $AIStr.='{BUILD_';
+                break;
+                case 'calculate':
+                    $AIStr.='{CALCULATE_';
                 break;
                 default:break;
             }   
@@ -349,6 +370,7 @@ class Trainer{
                     $AIStr.='PICTURE}||';
                 break;
                 case 'nav':
+                case 'navbar':
                 case 'navigator':
                     $AIStr.='NAV}||';
                 break;
@@ -436,7 +458,7 @@ class Trainer{
                 case 'inputweek':
                     $AIStr.='INPUTWEEK}||';
                 break;
-                case 'select':
+                case 'selectbox':
                 case 'dropdown':
                     $AIStr.='SELECTBOX}||';
                 break;
@@ -447,9 +469,11 @@ class Trainer{
             } 
             switch(strtolower($this->removeGrammar($str[$i]))){
                 case 'select':
+                case 'query':
                     $AIStr.='{QUERY_';
                 break;
                 case 'selectall':
+                case 'queryall':
                     $AIStr.='{QUERYALL_';
                 break;
                 case 'list':
@@ -479,6 +503,7 @@ class Trainer{
                 case 'href':
                 case 'goes':
                 case 'redirects':
+                case 'redirect':
                 case 'locates':
                     $AIStr.='{HURL_';
                 break;
@@ -528,6 +553,7 @@ class Trainer{
                     $AIStr.='{COORDS_';
                 break;
                 case 'alt':
+                case 'alternative':
                     $AIStr.='{ALT_';
                 break;
                 case 'type':
@@ -584,6 +610,15 @@ class Trainer{
                 case 'align':
                     $AIStr.='{ALIGN_';
                 break;
+                case 'width':
+                    $AIStr.='{WIDTH_';
+                break;
+                case 'height':
+                    $AIStr.='{HEIGHT_';
+                break;
+                case 'family':
+                    $AIStr.='{FAMILY_';
+                break;
                 default:break;
             }
             switch(strtolower($str[$i])){
@@ -600,12 +635,16 @@ class Trainer{
             }
             switch(strtolower($this->removeGrammar($str[$i]))){
                 case 'says':
+                case 'saying':
                     $AIStr.='{TEXT_';
                 break;
                 case 'html':
                     $AIStr.='{HTML_';
                 break;
             }
+            if($this->__matches($this->removeGrammar($str[$i])))
+                $AIStr.=$this->__replace(strtolower($this->removeGrammar($str[$i])));
+
             if(preg_match('/([\d]+)_(.*?)/',strtolower($this->removeGrammar($str[$i])))){
                 preg_match('/([\d]+)_(.*)/',strtolower($this->removeGrammar($str[$i])),$matches);
                 if($matches[2]==='tblrows') $rows = (int)$matches[1];
@@ -619,17 +658,25 @@ class Trainer{
                     }
                 }
             }
-            if(preg_match('/[\"](.*?)[\"]/',$str[$i])){
-                
+            if(preg_match('/[\"](.*?)[\"]/',$str[$i])){ 
                 preg_match('/[\"](.*?)[\"]/',$str[$i],$matches);
                 $AIStr.=preg_replace('/\\\\a/','`',preg_replace('/\\\\q/',"'",preg_replace('/\\\\qq/','"',preg_replace('/\\\\n/','
-',implode(' ',$this->fixSpelling($matches[1])))))).'}||';
-            }         
-            
+',$matches[1])))).'}||';
+            }
         }
+
+        $AIStr = preg_replace_callback('/_{/',function(){
+            return '_NULL}||{';
+        },$AIStr);
+        $AIStr = preg_replace_callback('/_$/',function(){
+            return '_NULL}';
+        },$AIStr);
+
         $AIStr=preg_replace('/\|\|(?!{)(.*?)}/','{"$1"}||',$AIStr);
         $AIStr=preg_replace('/(}{)/','}||{',$AIStr);
         $AIStr=preg_replace('/\|\|$/','',$AIStr);
+
+
         echo preg_replace('/\|\|$/','',$AIStr);
     }
 }

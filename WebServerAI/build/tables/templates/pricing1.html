@@ -1,0 +1,42 @@
+<div class="pricing-template-1 pricing-container">
+    <div class="plan plan-free">
+        <h1 class="plan-name">{{ free_plan }}</h1>
+        <p class="plan-amount"><span class="plan-amount-val">{{ free_amount }}</span></p>
+        <div class="plan-info">
+            <p class="plan-description">{{ free_description }}</p>
+            <ul class="plan-availability">
+                {% for free_item in free_items %}
+                <li class="plan-availability-item"><span class="icon {{ 'checkmark' if free_item.access==True else 'x' }}"></span> {{free_item.name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a class="btn-buy-link" href="{{ free_link }}"><button class="btn-buy">Sign up</button></a>
+    </div>
+    <div class="plan plan-advanced plan-popular">
+        <div class="popular-banner">Popular</div>
+        <h1 class="plan-name">{{ standard_plan }}</h1>
+        <p class="plan-amount"><span class="plan-amount-val">{{ standard_amount }}</span><span class="plan-amount-per">/{{ standard_per }}</span></p>
+        <div class="plan-info">
+            <p class="plan-description">{{ standard_description }}</p>
+            <ul class="plan-availability">
+                {% for standard_item in standard_items %}
+                <li class="plan-availability-item"><span class="icon {{ 'checkmark' if standard_item.access==True else 'x' }}"></span> {{standard_item.name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a class="btn-buy-link" href="{{ standard_link }}"><button class="btn-buy">Sign up</button></a>
+    </div>
+    <div class="plan plan-pro">
+        <h1 class="plan-name">{{ pro_plan }}</h1>
+        <p class="plan-amount"><span class="plan-amount-val">{{ pro_amount }}</span><span class="plan-amount-per">/{{ pro_per }}</span></p>
+        <div class="plan-info">
+            <p class="plan-description">{{ pro_description }}</p>
+            <ul class="plan-availability">
+                {% for pro_item in pro_items %}
+                <li class="plan-availability-item"><span class="icon {{ 'checkmark' if pro_item.access==True else 'x' }}"></span> {{ pro_item.name }}</li>
+                {% endfor %}
+            </ul>
+            <a class="btn-buy-link" href="{{ pro_link }}"><button class="btn-buy">Sign up</button></a>
+        </div>
+    </div>
+</div>

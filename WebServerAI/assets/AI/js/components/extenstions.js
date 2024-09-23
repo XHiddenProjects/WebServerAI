@@ -1,5 +1,6 @@
 var responce;
 import {version_compare} from '/WebServerAI/assets/AI/js/components/utils.js';
+
 class Extensions{
     constructor(){
         this.base = window.location.origin+'/WebServerAI/build';
@@ -40,6 +41,7 @@ class Extensions{
     /**
      * Activates an WebServerAI extension
      * @param {String} name Extension name
+     * @param {null} [config=null] Configuration settings
      * @returns {void}
      */
     activate(name, config=null){
@@ -48,7 +50,7 @@ class Extensions{
         this.ext[name]['extension_path'] = this.base+'/'+name;
         this.ext[name]['extension_config'] = (config!==null ? config : {});
         this.ext[name]['extension_id'] = this.#extensionID();
-        this.ext[name]['extension_parse'] = this.base+'/'+name+'/'+name+'.html';
+        this.ext[name]['extension_parse'] =  this.base+'/'+name+'/'+name+'.html';
         this.ext[name]['extension_temp'] = '';
     }
     /**
@@ -122,6 +124,19 @@ class Extensions{
         sessionStorage.setItem('wsa_extensions',JSON.stringify(ext));
     }
     /**
+     * Loads template if it doesn't load Immediately
+     * @param {String} name Name of extension
+     * @return {void}
+     */
+    loadTemplate(name){
+        document.querySelectorAll('.wpa-build-'+name).forEach((el)=>{
+            if(el.innerHTML===''){
+                el.innerHTML = JSON.parse(sessionStorage.getItem('wsa_extensions'))[name]['extension_temp'];
+                return;
+            }
+        });
+    }
+    /**
      * Returns all loaded extensions
      * @returns {Object} List/Configuration of extensions
      */
@@ -170,9 +185,22 @@ class Extensions{
      * @param {String} name Name of extension
      * @returns {String} Parsed HTML object
      */
-    parse(name){
+    parse(name, url=null){
         const ext = JSON.parse(sessionStorage.getItem('wsa_extensions'));
         const parseBlock = this.#request(ext[name]['extension_parse']),
+        dom = new DOMParser(),
+        toHTML = dom.parseFromString(parseBlock, 'text/html'),
+        html = toHTML.documentElement.querySelector('body').innerHTML;
+        return html;
+    }
+    /**
+     * Returns parsed object
+     * @param {String} name Name of extension
+     * @param {String} url URL to parse
+     * @returns {String} Parsed HTML object
+     */
+    parseURL(url){
+        const parseBlock = this.#request(url),
         dom = new DOMParser(),
         toHTML = dom.parseFromString(parseBlock, 'text/html'),
         html = toHTML.documentElement.querySelector('body').innerHTML;
@@ -217,7 +245,7 @@ class Extensions{
     }
     isAllowed(name){
         const elem = this.request(window.location.origin+'/WebServerAI/libs/ai_checker.php?name='+name, true);
-        const settings = this.request(window.location.origin+'/WebServerAI/data/settings.json',true);
+        const settings = this.request(window.location.origin+'/WebServerAI/libs/usersInfo.php',true);
         if(version_compare(settings['AI']['Version'],elem['ai_version'],'=='))
             return true;
         else

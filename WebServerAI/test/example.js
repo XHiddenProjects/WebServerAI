@@ -1,5 +1,4 @@
 import WebServerAI from '../assets/AI/js/webserverai.min.js';
-
 if(window.WebServerAI!==undefined){
         let wsc = new WebServerAI({
             enabled: true,
@@ -7,9 +6,12 @@ if(window.WebServerAI!==undefined){
             codeTheme: 'default',
             status: 'opened',
             position: 'bottom right',
-            history:{
-                save: 'session'
-            },
+            /*ui:{
+                preview: '.wsa-previewer',
+                previewBtn: '.wsa-exec',
+                chatbox: '.wsa-editor',
+                submit: '.wsa-exec'
+            },*/
             cte: true,
             extensions:{
                 "clock":{
@@ -75,11 +77,8 @@ if(window.WebServerAI!==undefined){
         wsc.submit(($input)=>{
             if($input){
                 wsc.addCmd($input);
-                wsc.send($input, true);
+                wsc.send($input);
+                wsc.generate_recommendations();
             }
-            setTimeout(()=>{
-                wsc.clearTextbox();
-            },500);
-        });   
-        
+        });
 }

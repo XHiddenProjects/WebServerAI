@@ -14,6 +14,20 @@ class Config{
         return json_decode(file_get_contents($path),true);
     }
     /**
+     * Sets the default timezone
+     * @param string $tz TimezoneID
+     */
+    public function setTimeZone(string $tz):void{
+        date_default_timezone_set($tz);
+    }
+    /**
+     * Get the default timezone
+     * @return string Timezone ID
+     */
+    public function getTimeZone():string{
+        return date_default_timezone_get();
+    }
+    /**
      * Saves the configuration of the settings
      * 
      * @param string|null $path File to get JSON data, NULL if kept to _settings.json_

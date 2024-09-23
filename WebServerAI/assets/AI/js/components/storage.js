@@ -16,6 +16,14 @@ var session = {
         return sessionStorage.getItem(name);
     },
     /**
+     * Checks if session storage exists
+     * @param {String} name Name of the session storage
+     * @returns {Boolean} TRUE if session storage exists, else FALSE
+     */
+    check: (name)=>{
+        return sessionStorage.getItem(name) ? true : false;
+    },
+    /**
      * Delete item from the Session storage
      * @param {String} name Item from Session storage
      */
@@ -39,6 +47,14 @@ local = {
      */
     load: (name)=>{
         return localStorage.getItem(name);
+    },
+    /**
+     * Checks if local storage exists
+     * @param {String} name Name of the local storage
+     * @returns {Boolean} TRUE if local storage exists, else FALSE
+     */
+    check: (name)=>{
+        return localStorage.getItem(name) ? true : false;
     },
     /**
      * Delete item from the Local storage

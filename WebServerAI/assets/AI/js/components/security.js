@@ -10,6 +10,8 @@ FILTER_VALIDATE_URL = 273,
 FILTER_VALIDATE_EMAIL = 274,
 FILTER_VALIDATE_IP = 275,
 FILTER_VALIDATE_MAC = 276,
+FILTER_VALIDATE_SSN = 278,
+FILTER_VALIDATE_PHONE = 279,
 //sanitize
 FILTER_SANITIZE_ADD_SLASHES = 523,
 FILTER_SANITIZE_EMAIL = 517,
@@ -73,10 +75,19 @@ var floatExtend='',
             name: 'validate_mac',
             exp: /(([0-9A-Fa-f]{2}[-:]){5}[0-9A-Fa-f]{2})|(([0-9A-Fa-f]{4}\.){2}[0-9A-Fa-f]{4})/
         },
+        278:{
+            name: 'validate_ssn',
+            exp: /^\b(((?!000|666)(?:[0-6]\d{2}|7[0-2][0-9]|73[0-3]|7[5-6][0-9]|77[0-2]))[-.]+?((?!00)\d{2})[-.]+?(((?!0000)\d{4})))\b$/
+        },
+        279:{
+            name: 'validate_phone',
+            exp: /(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})/
+        },
         513:{
             name: 'string',
             exp: /(([0-9A-Fa-f]{2}[-:]){5}[0-9A-Fa-f]{2})|(([0-9A-Fa-f]{4}\.){2}[0-9A-Fa-f]{4})/
         }
+        
     },
     sanitizeList = {
         523:{
@@ -369,21 +380,60 @@ function filterHTML(str){
 }
 /**
  * Validates phone number and checks if it's real or VoIP
- * @param {String} PhoneNumAPI - Phone number validation/lookup API URL
- * @api Get API From any Phone number validation/lookup
+ * @param {String} number - Users phone number
  * @returns {JSON} The request from the phone number
  */
-function checkPhoneNum(PhoneNumAPI){
+function phoneNumber(number){
     const e = new Events(),
-    res = e.request(PhoneNumAPI,true);
+    strify = {
+        phoneNumber: number
+    };
+    e.request(window.location.origin+'/WebServerAI/libs/ai_script_data.php?'+encodeURIComponent('dataname=phonenumber&datasets='+JSON.stringify(strify)));
+    const res = e.request(window.location.origin+'/WebServerAI/scripts/phonenumber.py',true);
     return res;
+}
+const credits = {
+    /**
+     * Removes a credit once you use
+     */ 
+    use:()=>{
+        const e = new Events();
+        e.request(window.location.origin+'/WebServerAI/libs/ai_credits.php?credit_usage=1');
+    },
+    /**
+     * Recives the current amount of credits
+     * @returns {Number} Amount of credits
+     */
+    get:()=>{
+        const e = new Events(),
+        credits = e.request(window.location.origin+'/WebServerAI/libs/ai_credits.php?get_credits=1',true);
+        return credits['credits'];
+    },
+    /**
+     * Recive the max amount of credits
+     * @returns {Number} Max amount of credits
+     */
+    max:()=>{
+        const e = new Events(),
+        credits = e.request(window.location.origin+'/WebServerAI/libs/ai_credits.php?max_credits=1',true);
+        return credits['max_credits'];
+    },
+    /**
+     * Return the next updated time
+     */
+    renew(){
+        const e = new Events(),
+        credits = e.request(window.location.origin+'/WebServerAI/libs/ai_credits.php?get_credits=1',true);
+        return credits['renew_date'];
+    }
 }
 
 export {validate,
     sanitize, 
     filter,
     filterHTML,
-    checkPhoneNum,
+    phoneNumber,
+    credits,
     FILTER_VALIDATE_INT, 
     FILTER_VALDATE_BOOLEAN, 
     FILTER_VALIDATE_FLOAT, 
@@ -393,6 +443,8 @@ export {validate,
     FILTER_VALIDATE_EMAIL, 
     FILTER_VALIDATE_IP, 
     FILTER_VALIDATE_MAC,
+    FILTER_VALIDATE_SSN,
+    FILTER_VALIDATE_PHONE,
     FILTER_SANITIZE_ADD_SLASHES,
     FILTER_SANITIZE_EMAIL,
     FILTER_SANITIZE_ENCODED,

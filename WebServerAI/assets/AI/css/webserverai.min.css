@@ -20,8 +20,16 @@
     --wsa-light-boxShadow: #a7b8c7;
     --wsa-light-link: #0d0dff;
     --wsa-light-scrollbar-bg: #d5d5d5;
-    --wsa-light-scrollbar-thumb: #c0c0c0;
+    --wsa-light-scrollbar-thumb: #b6b6b6;
     --wsa-light-mic-enabled: #ff0000;
+    --wsa-light-smart-bg: rgb(95,21,199);
+    --wsa-light-smart-bg-linear: linear-gradient(90deg, rgba(95,21,199,1) 0%, rgba(152,25,210,1) 50%, rgba(171,0,255,1) 100%);
+    --wsa-light-smart-color: #d5d5d5;
+    --wsa-light-smart-accept-border: #1ab91a;
+    --wsa-light-smart-accept-color: #000;
+    --wsa-light-smart-decline-border: #c5c5c5;
+    --wsa-light-smart-decline-color: #000;
+    --wsa-light-credits-low: #ff0000;
 
     --wsa-dark-bg: #000;
     --wsa-dark-color: #dedede;
@@ -44,13 +52,22 @@
     --wsa-dark-link: #9c9cfc;
     --wsa-dark-copy: #cdcbcb;
     --wsa-dark-scrollbar-bg: #525252;
-    --wsa-dark-scrollbar-thumb: #3c3d3b;
+    --wsa-dark-scrollbar-thumb: #747474;
     --wsa-dark-toggleBtn-bg:rgba(71, 71, 71, 0.65);
     --wsa-dark-toggleBtn-color: rgb(255,255,255);
     --wsa-dark-mic-enabled: #c91414;
+    --wsa-dark-smart-bg: rgb(55 15 112);
+    --wsa-dark-smart-bg-linear: linear-gradient(90deg, rgb(55 15 112) 0%, rgb(49 9 67) 50%, rgb(20 2 28) 100%);
+    --wsa-dark-smart-color: #a1a1a1;
+    --wsa-dark-smart-accept-border: #1d851d;
+    --wsa-dark-smart-accept-color: #dcdcdc;
+    --wsa-dark-smart-decline-border: #6c6c6c;
+    --wsa-dark-smart-decline-color: #dcdcdc;
+    --wsa-dark-credits-low: #c61515;
 
-    --wsa-box-width: 60%;
-    --wsa-box-height: 280px;
+
+    --wsa-box-width: calc(100% - 53%);
+    --wsa-box-height: calc(100% - 60%);
 
     --wsa-txtarea-size: 20px;
     --wsa-txtarea-disabled: rgba(147,147,147, 0.65);
@@ -166,10 +183,24 @@
     display: grid;
     position: relative;
 }
-.wsa .wsa-title .wsa-version{
+.wsa .wsa-title .wsa-subtitle{
+    display: inline-block;
+}
+.wsa .wsa-title .wsa-version,
+.wsa .wsa-title .wsa-credits{
     font-size: 15px;
     font-weight: bold;
     cursor: help;
+}
+.wsa .wsa-title .wsa-credits .current{
+    font-size: 18px;
+    text-decoration: underline;
+}
+.wsa[wsa-theme="light"] .wsa-title .wsa-credits .current.low{
+    color: var(--wsa-light-credits-low);
+}
+.wsa[wsa-theme="dark"] .wsa-title .wsa-credits .current.low{
+    color: var(--wsa-dark-credits-low);
 }
 .wsa .wsa-container{
     position: relative;
@@ -247,9 +278,11 @@
     color: var(--wsa-dark-txtarea-color);
 }
 .wsa .wsa-ui textarea:disabled,
-.wsa .wsa-ui textarea[disabled]{
+.wsa .wsa-ui textarea[disabled],
+.wsa .wsa-ui textarea.disabled{
     background-color: var(--wsa-txtarea-disabled);
     cursor: auto;
+    pointer-events: none;
 }
 
 .wsa[wsa-theme="light"] .wsa-ui .wsa-history [wsa-cmdtype="danger"]{
@@ -405,16 +438,21 @@
     padding: .3rem 0 .3rem 0;
     transition: 0.3s all;
 }
+.wsa .wsa-btn:disabled,
+.wsa .wsa-btn[disabled],
+.wsa .wsa-btn.disabled{
+    cursor: auto;
+    opacity: .5;}
 .wsa[wsa-theme="light"] .wsa-btn{
     color: var(--wsa-light-btn-color);
 }
 .wsa[wsa-theme="dark"] .wsa-btn{
     color: var(--wsa-dark-btn-color);
 }
-.wsa[wsa-theme="light"] .wsa-btn:hover{
+.wsa[wsa-theme="light"] .wsa-btn:not(:disabled,[disabled],.disabled):hover{
     background-color: var(--wsa-light-btn-bgHover);
 }
-.wsa[wsa-theme="dark"] .wsa-btn:hover{
+.wsa[wsa-theme="dark"] .wsa-btn:not(:disabled,[disabled],.disabled):hover{
     background-color: var(--wsa-dark-btn-bgHover);
 }
 .wsa .wsa-btn-group{
@@ -515,4 +553,99 @@
 .wsa-target-attr{
     color: var(--wsa-target-attr);
     font-weight: 600;
+}
+/*Smart AI*/
+.wsa_smart_prompt{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    font-size: 28px;
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: .5rem;
+    border-radius: 5px;
+    top:0;
+    left: calc(0px + 30%);
+}
+.wsa_smart_prompt div{
+    margin: auto 0 auto 0;
+}
+.wsa_smart_prompt div h1{
+    margin: 0;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 7vh;
+}
+.wsa_smart_prompt div h1::after{
+    content: '!';
+}
+
+.wsa_smart_prompt .ai_smart_recommended{
+    font-style: italic;
+    font-size: 18px;
+    text-decoration: underline;
+    font-weight: 200;
+}
+.wsa_smart_prompt .ai_smart_recommended::before{
+    content: '> ';
+}
+[wsa-theme="light"] .wsa_smart_prompt{
+    background-color: var(--wsa-light-smart-bg);
+    background: var(--wsa-light-smart-bg-linear);
+    color:var(--wsa-light-smart-color);
+   
+}
+[wsa-theme="dark"] .wsa_smart_prompt{
+    background-color: var(--wsa-dark-smart-bg);
+    background: var(--wsa-dark-smart-bg-linear);
+    color:var(--wsa-dark-smart-color);
+}
+
+.wsa_smart_prompt .ai_smart_opt{
+    margin-top: 5px;
+}
+.wsa_smart_prompt .ai_smart_opt button{
+    background: transparent;
+    border: 0;
+    font-size: 4vh;
+    cursor: pointer;
+    padding: .5rem;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+[wsa-theme="light"] .wsa_smart_prompt .ai_smart_opt button.ai_smart_accept{
+    border: 3px solid var(--wsa-light-smart-accept-border);
+    color: var(--wsa-light-smart-accept-color);
+}
+[wsa-theme="light"] .wsa_smart_prompt .ai_smart_opt button.ai_smart_decline{
+    border: 3px solid var(--wsa-light-smart-decline-border);
+    color: var(--wsa-light-smart-decline-color);
+}
+[wsa-theme="light"] .wsa_smart_prompt .ai_smart_opt button.ai_smart_accept:hover{
+    background-color: var(--wsa-light-smart-accept-border);
+    opacity: .8;
+}
+[wsa-theme="light"] .wsa_smart_prompt .ai_smart_opt button.ai_smart_decline:hover{
+    background-color: var(--wsa-light-smart-decline-border);
+    opacity: .8;
+}
+
+[wsa-theme="dark"] .wsa_smart_prompt .ai_smart_opt button.ai_smart_accept{
+    border: 3px solid var(--wsa-dark-smart-accept-border);
+    color: var(--wsa-dark-smart-accept-color);
+}
+[wsa-theme="dark"] .wsa_smart_prompt .ai_smart_opt button.ai_smart_decline{
+    border: 3px solid var(--wsa-dark-smart-decline-border);
+    color: var(--wsa-dark-smart-decline-color);
+}
+[wsa-theme="dark"] .wsa_smart_prompt .ai_smart_opt button.ai_smart_accept:hover{
+    background-color: var(--wsa-dark-smart-accept-border);
+    opacity: .8;
+}
+[wsa-theme="dark"] .wsa_smart_prompt .ai_smart_opt button.ai_smart_decline:hover{
+    background-color: var(--wsa-dark-smart-decline-border);
+    opacity: .8;
 }
