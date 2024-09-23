@@ -1,5 +1,5 @@
 {
-    "colorValue": "#e6e6fa",
-    "from": "hex",
-    "to": "name"
+    "colorValue": "blue",
+    "from": "name",
+    "to": "hex"
 }

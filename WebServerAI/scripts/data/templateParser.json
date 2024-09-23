@@ -1,0 +1,115 @@
+{
+    "path": "/WebServerAI/build/tables/templates/pricing2.html",
+    "outputPath": "/WebServerAI/build/tables/pricing-table.html",
+    "data": {
+        "free_plan": "Free",
+        "free_amount": "Free",
+        "free_link": "#",
+        "free_description": "Free plan",
+        "free_items": [
+            {
+                "name": "5 Websites",
+                "access": true
+            },
+            {
+                "name": "1 User",
+                "access": true
+            },
+            {
+                "name": "100MB Space/website",
+                "access": true
+            },
+            {
+                "name": "Continuous Deployment",
+                "access": false
+            },
+            {
+                "name": "No priority support",
+                "access": false
+            }
+        ],
+        "standard_plan": "Standard",
+        "standard_amount": "$200",
+        "standard_per": "year",
+        "standard_link": "#",
+        "standard_description": "Standard plan",
+        "standard_items": [
+            {
+                "name": "25 Websites",
+                "access": true
+            },
+            {
+                "name": "5 Users",
+                "access": true
+            },
+            {
+                "name": "500MB Space/website",
+                "access": true
+            },
+            {
+                "name": "Continuous Deployment",
+                "access": true
+            },
+            {
+                "name": "No priority support",
+                "access": false
+            }
+        ],
+        "pro_plan": "Pro",
+        "pro_amount": "$500",
+        "pro_per": "year",
+        "pro_link": "#",
+        "pro_description": "Pro plan",
+        "pro_items": [
+            {
+                "name": "Unlimited Websites",
+                "access": true
+            },
+            {
+                "name": "20 Users",
+                "access": true
+            },
+            {
+                "name": "10GB Space/website",
+                "access": true
+            },
+            {
+                "name": "Continuous Deployment",
+                "access": true
+            },
+            {
+                "name": "Email support",
+                "access": true
+            }
+        ],
+        "enterprise_plan": "Enterprise",
+        "enterprise_amount": "Contact us",
+        "enterprise_link": "#",
+        "enterprise_items": [
+            {
+                "name": "Unlimited Websites",
+                "access": true
+            },
+            {
+                "name": "Unlimited Users",
+                "access": true
+            },
+            {
+                "name": "Unlimited Users",
+                "access": true
+            },
+            {
+                "name": "Unlimited Space/website",
+                "access": true
+            },
+            {
+                "name": "Continuous Deployment",
+                "access": true
+            },
+            {
+                "name": "24/7 Email Support",
+                "access": true
+            }
+        ]
+    }
+}
