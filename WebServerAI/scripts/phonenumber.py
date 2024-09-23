@@ -63,4 +63,5 @@ if 'error' not in phoneNumberResults:
     phoneNumberResults['is_mobile'] = (True if numType(number)==1 else False)
     phoneNumberResults['type'] = numType(number, True)
 print("Content-Type: application/json\n")
-print(json.dumps(phoneNumberResults))
+sanitizedResults = {key: phoneNumberResults[key] for key in phoneNumberResults if key not in ['phoneNumber', 'national_num']}
+print(json.dumps(sanitizedResults))
