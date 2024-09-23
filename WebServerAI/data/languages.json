@@ -33,8 +33,11 @@
                     "error":"Error writing to clipboard"
                 },
                 "ai":{
-                    "success": "Successfully executed",
-                    "error": "There was an error with this statement"
+                    "success": "Successfully {{task_info}}",
+                    "error": "There was an error with this statement",
+                    "noCredits":"Sorry, you have no credits left. Wait until: ",
+                    "credits": "Credits",
+                    "creditsInfo": "This is how much request you can do per day."
                 },
                 "console":{
                     "previewNotFound":"Preview box not found!",
@@ -44,7 +47,8 @@
                     "voiceTypeResultsNotFound": "[VoiceType] - Results not found",
                     "voiceTypeSpeechError": "[VoiceType] - An error has occurred",
                     "voiceTypeSpeechNotEnabled": "[VoiceType] - SpeechRecognition is not supported",
-                    "elementNotFound": "Element not found"
+                    "elementNotFound": "Element not found",
+                    "TextMatchesValidationError": "[Text] - Validation Error: "
                 }
             }
         },
@@ -81,8 +85,11 @@
                     "error":"Fehler beim Schreiben in die Zwischenablage"
                 },
                 "ai":{
-                    "success": "Erfolgreich ausgeführt",
-                    "error": "Bei dieser Anweisung ist ein Fehler aufgetreten"
+                    "success": "Erfolgreich {{task_info}}",
+                    "error": "Bei dieser Anweisung ist ein Fehler aufgetreten",
+                    "noCredits":"Leider sind Ihre Credits aufgebraucht. Warten Sie, bis: ",
+                    "credits": "Credits",
+                    "creditsInfo": "Dies ist die Anzahl der Anfragen, die Sie pro Tag stellen können."
                 },
                 "console":{
                     "previewNotFound":"Vorschaubox nicht gefunden!",
@@ -92,7 +99,8 @@
                     "voiceTypeResultsNotFound": "[VoiceType] - Ergebnisse nicht gefunden",
                     "voiceTypeSpeechError": "[VoiceType] - Ein Fehler ist aufgetreten",
                     "voiceTypeSpeechNotEnabled": "[VoiceType] - Spracherkennung wird nicht unterstützt.",
-                    "elementNotFound": "Element nicht gefunden"
+                    "elementNotFound": "Element nicht gefunden",
+                    "TextMatchesValidationError": "[Text] - Validierungsfehler: "
                 }
             }
         },
@@ -119,7 +127,7 @@
                 },
                 "cmd":{
                     "help":"Donne la liste des commandes",
-                    "clear":"Efface tout l’historique ou un certain index",
+                    "clear":"Efface tout l`historique ou un certain index",
                     "info":"Renvoie les informations de l`IA",
                     "connect":"Vous connecte à une autre page",
                     "preview": "Aperçu de la page"
@@ -129,8 +137,11 @@
                     "error":"Erreur d'écriture dans le presse-papiers"
                 },
                 "ai":{
-                    "success": "Exécuté avec succès",
-                    "error": "Il y a eu une erreur avec cette déclaration"
+                    "success": "{{task_info}} avec succès",
+                    "error": "Il y a eu une erreur avec cette déclaration",
+                    "noCredits":"Désolé, vous n'avez plus de crédits. Attendez jusqu'à: ",
+                    "credits": "Crédits",
+                    "creditsInfo": "Voici le nombre de requêtes que vous pouvez effectuer par jour."
                 },
                 "console":{
                     "previewNotFound":"Boîte d`aperçu introuvable!",
@@ -140,7 +151,8 @@
                     "voiceTypeResultsNotFound": "[VoiceType] - Résultats introuvables",
                     "voiceTypeSpeechError": "[VoiceType] - Une erreur s`est produite",
                     "voiceTypeSpeechNotEnabled": "[VoiceType] - La reconnaissance vocale n`est pas prise en charge",
-                    "elementNotFound": "Élément introuvable"
+                    "elementNotFound": "Élément introuvable",
+                    "TextMatchesValidationError": "[Texte] - Erreur de validation: "
                 }
             }
         }

@@ -1,21 +1,28 @@
 {
-    "AI":{
+    "AI": {
         "Name": "WebServerAI",
-        "Version": "0.0.6 - Beta",
-        "Updated": "08/11/2024",
+        "timezone": "America/New_York",
+        "Version": "0.0.7 - Beta",
+        "Updated": "09/23/2024",
         "ResponceTime": 1000,
-        "blockWords":[],
-        "blockDomains":[],
-        "search":{
+        "blockWords": [],
+        "blockDomains": [],
+        "search": {
             "language": "auto"
         }
     },
-    "previewBox":{
-        "width":600,
-        "height":600
+    "previewBox": {
+        "width": 600,
+        "height": 600
     },
-    "pythonConfig":{
-        "execPath":"C:\\xampp\\htdocs\\WebServerAI\\.venv\\Scripts\\python.exe"
+    "pythonConfig": {
+        "execPath": "C:\\xampp\\htdocs\\WebServerAI\\.venv\\Scripts\\python.exe"
     },
-    "User": "Guest"
+    "User": {
+        "label": "Guest",
+        "password": ""
+    },
+    "apis": {
+        "exchangerateAPI": "b40df46b229d886b4fad090c"
+    }
 }
