@@ -11,6 +11,7 @@ $db = new Database(dirname(__DIR__).'/db/credits.db',SQLITE3_OPEN_READWRITE|SQLI
 if(isset($_REQUEST['credit_usage'])){
     $select = json_decode($db->selectData($table,'*','WHERE user="'.$f['User']['label'].'"'),true);
     $currentCredit = (int)$select[0]['credits'];
+    if(strtotime((new DateTime())->format('Y-m-d H:i:s')))
     $db->updateData($table,['credits'],[($currentCredit-1)],'WHERE user="'.$f['User']['label'].'"');
 }
 if(isset($_REQUEST['get_credits'])){

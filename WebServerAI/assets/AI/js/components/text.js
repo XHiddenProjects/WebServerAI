@@ -50,6 +50,16 @@ class Text{
         }
     }
     /**
+     * Returns the dictionary
+     * @returns {string|boolean|JSON}
+     */
+    getDictionary(){
+        const e = new Events(),
+        dict = e.request(window.location.origin+'/WebServerAI/data/languages.json',true);
+        return dict;
+    }
+
+    /**
      * Translates your entire text
      * @param {String} [translateTo='en'] The language that you would like to return as
      * @param {String} [translateFrom='auto'] The original language, use **"auto"** to _autodetect_

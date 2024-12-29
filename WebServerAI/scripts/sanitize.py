@@ -13,6 +13,7 @@ class SensitiveFilter(logging.Filter):
 def mask_sensitive_data(log_data):
     # Tokenize sensitive information (e.g., passwords, credit card numbers)
     log_data['phoneNumber'] = 'REDACTED'
+    log_data['national_num'] = 'REDACTED'
     return log_data
 
 

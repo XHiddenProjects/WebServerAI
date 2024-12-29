@@ -2,7 +2,7 @@ var responce;
 import { filterHTML, credits } from "./security.js";
 import { session } from "./storage.js";
 import { IS_ENABLED } from "./utils.js";
-
+import Text from "./text.js";
 class Events{
     constructor(){
 
@@ -55,6 +55,8 @@ class Events{
      * @returns {JSON|String|Boolean} Returns results, FALSE if nothing was successful
      */
     request(url, isJSON=false, async=false){  
+        if(!url.match(/(http\:\/\/localhost\/(.*))|(https\:\/\/(.*))/)) throw new URIError('Security: URL is not secured or it`s not SELF-ORIGIN!');
+        
         if(url){
             let req = new XMLHttpRequest();
             req.onreadystatechange = ()=>{

@@ -16,17 +16,6 @@ if(window.WebServerAI!==undefined){
             extensions:{
                 "clock":{
                     active: true,
-                    config:{
-                        options:{
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                            hour: "2-digit",
-                            minute: "numeric",
-                            second: "numeric",
-                            hour12: true
-                        }
-                    },
                     startup:{
                         styles:[],
                         scripts:[
@@ -68,6 +57,14 @@ if(window.WebServerAI!==undefined){
                         ],
                         scripts:[
                             '/WebServerAI/build/soundMeasure/soundMeasure.js'
+                        ]
+                    }
+                },
+                "drawings":{
+                    active: true,
+                    startup:{
+                        scripts:[
+                            '/WebServerAI/build/drawing/drawing.js'
                         ]
                     }
                 }

@@ -121,9 +121,7 @@ class Trainer extends Trainee{
         $str = preg_replace("/\\\'/",'\\\\q',$str);
         $str = preg_replace('/\\\`/','\\\\a',$str);
         $str = preg_split('/\s+(?=(?:(?:[^\'\"`]|[\'\"`][^\'\"`]*[\'\"`])*$))/',$str);
-       
 
-     
         $AIStr='';
         for($i=0;$i<count($str);$i++){
 
@@ -135,7 +133,7 @@ class Trainer extends Trainee{
                 break;
                 case 'remove':
                 case 'delete':
-                     $AIStr .= '{REMOVE_';
+                    $AIStr .= '{REMOVE_';
                 break;
                 case 'build':
                     $AIStr.='{BUILD_';
@@ -602,6 +600,7 @@ class Trainer extends Trainee{
                     $AIStr.='{ITALIC}||';
                 break;
                 case 'underline':
+                case 'underlined':
                     $AIStr.='{UNDERLINE}||';
                 break;
                 case 'strikethrough':
@@ -675,7 +674,9 @@ class Trainer extends Trainee{
         $AIStr=preg_replace('/\|\|(?!{)(.*?)}/','{"$1"}||',$AIStr);
         $AIStr=preg_replace('/(}{)/','}||{',$AIStr);
         $AIStr=preg_replace('/\|\|$/','',$AIStr);
-
+        $AIStr=preg_replace_callback('/^(?!{)(.*?)}/',function($matches){
+            return '{"'.$matches[1].'"}';
+        },$AIStr);
 
         echo preg_replace('/\|\|$/','',$AIStr);
     }

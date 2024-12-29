@@ -1,0 +1,13 @@
+en-us:
+  name: Drawing
+  updated: 10/11/24
+  version: 1.0.0
+de-de:
+  name: Zeichnung
+  updated: 10/11/24
+  version: 1.0.0
+fr-fr:
+  name: Dessin
+  updated: 10/11/24
+  version: 1.0.0
+ai_version: "0.0.7 - Beta"

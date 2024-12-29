@@ -48,7 +48,8 @@
                     "voiceTypeSpeechError": "[VoiceType] - An error has occurred",
                     "voiceTypeSpeechNotEnabled": "[VoiceType] - SpeechRecognition is not supported",
                     "elementNotFound": "Element not found",
-                    "TextMatchesValidationError": "[Text] - Validation Error: "
+                    "TextMatchesValidationError": "[Text] - Validation Error: ",
+                    "noSupport": " is not supported for this browser!"
                 }
             }
         },
@@ -100,7 +101,8 @@
                     "voiceTypeSpeechError": "[VoiceType] - Ein Fehler ist aufgetreten",
                     "voiceTypeSpeechNotEnabled": "[VoiceType] - Spracherkennung wird nicht unterstützt.",
                     "elementNotFound": "Element nicht gefunden",
-                    "TextMatchesValidationError": "[Text] - Validierungsfehler: "
+                    "TextMatchesValidationError": "[Text] - Validierungsfehler: ",
+                    "noSupport": " wird für diesen Browser nicht unterstützt!"
                 }
             }
         },
@@ -152,7 +154,8 @@
                     "voiceTypeSpeechError": "[VoiceType] - Une erreur s`est produite",
                     "voiceTypeSpeechNotEnabled": "[VoiceType] - La reconnaissance vocale n`est pas prise en charge",
                     "elementNotFound": "Élément introuvable",
-                    "TextMatchesValidationError": "[Texte] - Erreur de validation: "
+                    "TextMatchesValidationError": "[Texte] - Erreur de validation: ",
+                    "noSupport": " n`est pas pris en charge pour ce navigateur!"
                 }
             }
         }

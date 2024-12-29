@@ -1,6 +1,6 @@
 import Logic from "./logic.js";
 import Events from "./Events.js";
-import Trainee from "../trinee/trainee.js";
+import Trainee from "../trainee/trainee.js";
 var responce;
 class Listener extends Trainee{
     constructor(){
@@ -118,7 +118,8 @@ class Listener extends Trainee{
      * @returns {String} Fixed carets
      */
     #replaceCaret(str){
-        return str.replaceAll('&lt;','<').replaceAll('&gt;','>');
+        if(typeof str!=='undefined')
+            return str.replaceAll('&lt;','<').replaceAll('&gt;','>');
     }
     /**
      * Filters out special characters
@@ -145,6 +146,9 @@ class Listener extends Trainee{
             case 'text':
                 reformed = 'written';
             break;
+            case 'build':
+                reformed = 'built';
+            break;
             default:
                 reformed = action;
             break;
@@ -162,12 +166,13 @@ class Listener extends Trainee{
         this.endedElem = [];
         this.holder = -1;
         let success=true;
-        AICode = AICode.split(/(?<=})\|\|/g).map((x)=>{return x.replace(/^{|}$/g, '')}).filter((x)=>{return x!==''});
+        AICode = AICode.split(/(?<=})\|\|/g).map((x)=>{
+            return x.replace(/^{|}$/g, '');
+        }).filter((x)=>{return x!==''});
         if(AICode.length>0){
             for(let i=0;i<AICode.length;i++){
                 const action = AICode[i].split('_')[0].toLocaleLowerCase().replace(/^{/,''),
                     value = AICode[i].split('_')[1];
-                   
                 switch(action){
                     case 'add':
                         switch(value.toLocaleLowerCase()){
@@ -586,6 +591,7 @@ class Listener extends Trainee{
                         }
                     break;
                     case 'build':
+                        this.holder+=1;
                         this.lineCode.push({tagName: 'div', classes: "wpa-build-"+value ,html: JSON.parse(sessionStorage.getItem('wsa_extensions'))[value]['extension_temp'],styles:{},scripts:{},task_info:[]});
                         this.buildEvent = new CustomEvent("wsa-build",{detail: {type:value, input:document.querySelector('.wsa-userinput').value}});
                     break;
@@ -787,7 +793,7 @@ class Listener extends Trainee{
                         this.lineCode[this.holder].styles.fontWeight = 'bold';
                     break;
                     case 'italic':
-                        this.lineCode[this.holder].styles.fontStyle += 'italic';
+                        this.lineCode[this.holder].styles.fontStyle = (this.lineCode[this.holder].styles.fontStyle  ? this.lineCode[this.holder].styles.fontStyle+'italic ' : 'italic ');
                     break;
                     case 'underline':
                         this.lineCode[this.holder].styles.textDecoration = (this.lineCode[this.holder].styles.textDecoration ? this.lineCode[this.holder].styles.textDecoration + 'underline ' : 'underline ');
@@ -811,8 +817,10 @@ class Listener extends Trainee{
                         this.lineCode[this.holder].styles.family = value;
                     break;
                 }
-                let parseAction = this.#parseAction(action);
-                this.lineCode[this.holder].task_info.push({task_id:parseAction,task_name:value});
+                if(this.lineCode.hasOwnProperty(this.holder)&&this.lineCode[this.holder].hasOwnProperty('task_info')){
+                    let parseAction = this.#parseAction(action);
+                    this.lineCode[this.holder].task_info.push({task_id:parseAction,task_name:value});
+                }
             }
             this.currentTarget = null;
             let e = new Events(),

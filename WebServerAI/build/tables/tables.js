@@ -186,7 +186,7 @@ if(ext.isAllowed(buildName)){
         });
 
          //Enterprise plan
-         events.cmdLine(/set.*?enterprise( plan)? to \"(.*?)\"/i,e,(enterprisePlan)=>{
+        events.cmdLine(/set.*?enterprise( plan)? to \"(.*?)\"/i,e,(enterprisePlan)=>{
             if(enterprisePlan){
                 if(enterprisePlan[2]){
                     template_2_plans['enterprise_plan'] = enterprisePlan[2];
@@ -288,7 +288,7 @@ if(ext.isAllowed(buildName)){
                     table.appendChild(tbody);
                     target.appendChild(table);
                 }
-               
+            
             }
         });
         ext.update(buildName); 

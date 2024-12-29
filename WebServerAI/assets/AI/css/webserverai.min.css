@@ -1,5 +1,16 @@
 :host, 
 :root{
+
+    /*Extra*/
+    --wsa-none: none;
+    --wsa-auto: auto;
+    --wsa-pointer: pointer;
+    --wsa-transparent: transparent;
+    --wsa-0: 0;
+    --wsa-50: 50;
+    --wsa-100:100;
+
+    /*Light mode*/
     --wsa-light-bg: #dedede;
     --wsa-light-color: #000;
     --wsa-light-txtarea-bg: #f6f6f6;
@@ -30,7 +41,7 @@
     --wsa-light-smart-decline-border: #c5c5c5;
     --wsa-light-smart-decline-color: #000;
     --wsa-light-credits-low: #ff0000;
-
+    /*Dark Mode*/
     --wsa-dark-bg: #000;
     --wsa-dark-color: #dedede;
     --wsa-dark-txtarea-bg: #292929;
@@ -64,37 +75,62 @@
     --wsa-dark-smart-decline-border: #6c6c6c;
     --wsa-dark-smart-decline-color: #dcdcdc;
     --wsa-dark-credits-low: #c61515;
-
-
-    --wsa-box-width: calc(100% - 53%);
-    --wsa-box-height: calc(100% - 60%);
-
+    /*UI*/
+    --wsa-ui-box-width: calc(100% - 53%);
+    --wsa-ui-box-height: calc(100% - 60%);
+    --wsa-ui-radius: 5px;
+    --wsa-ui-shadow: var(--wsa-0) var(--wsa-0) 8px 6px;
+    --wsa-ui-padding: 1rem;
+    /*UI.textbox*/
     --wsa-txtarea-size: 20px;
     --wsa-txtarea-disabled: rgba(147,147,147, 0.65);
-
+    /*UI.bubble*/
     --wsa-bubble-color: #587bda;
     --wsa-bubble-border: #cfcfcf;
-    --wsa-element-focus: #124254;
+    /*UI.target*/
     --wsa-target-tag: rgba(149,0,209,0.70);
     --wsa-target-attr: rgba(14,37,227,0.70);
-    --wsa-elemName-bg: rgb(212, 212, 212);
     --wsa-target-size: #6e6d6d;
+    /*UI.element*/
+    --wsa-element-focus: #124254;
+    --wsa-elemName-bg: rgb(212, 212, 212);
+    /*UI.title*/
+    --wsa-title-padding:.5rem;
+    --wsa-title-size: 15px;
+    /*UI.credits*/
+    --wsa-credits-current-size: 18px;
+    --wsa-credits-current-decor: underline;
+    /*UI.container*/
+    --wsa-container-width:100%;
+    --wsa-container-height:100%;
+    /*UI.history*/
+    --wsa-history-height: calc(100% - 75px);
+    --wsa-history-width: calc(100% - 10px);
+    --wsa-history-wrap: break-word;
+    --wsa-history-overflow: auto;
+    --wsa-history-padding: 5px;
+    --wsa-history-size: 20px;
+    --wsa-history-margin: 3px;
+    --wsa-history-user-size: 18px;
+    --wsa-history-user-style: italic;
+    --wsa-history-decor: none;
+    --wsa-history-cmd-size: 25px;
 }
 
 .wsa,
 .wsa *{
-    margin: 0;
-    padding: 0;
+    margin: var(--wsa-0);
+    padding: var(--wsa-0);
     box-sizing: content-box;
 }
 .wsa{
     display: block;
     position: fixed;
     z-index: 2000;
-    width: var(--wsa-box-width);
-    height: var(--wsa-box-height);
+    width: var(--wsa-ui-box-width);
+    height: var(--wsa-ui-box-height);
     transition: height 0.3s;
-    border-radius: 5px;
+    border-radius: var(--wsa-ui-radius);
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
@@ -106,7 +142,7 @@
 }
 
 .wsa[wsa-stat="closed"]{
-    height: 0px;
+    height: var(--wsa-0);
 }
 
 .wsa[wsa-stat="closed"] .wsa-container{
@@ -115,69 +151,69 @@
 .wsa[wsa-theme="light"]{
     background-color: var(--wsa-light-bg);
     color: var(--wsa-light-color);
-    box-shadow: 0 0 8px 6px var(--wsa-light-boxShadow);
+    box-shadow: var(--wsa-ui-shadow) var(--wsa-light-boxShadow);
 }
 .wsa[wsa-theme="dark"]{
     background-color: var(--wsa-dark-bg);
     color: var(--wsa-dark-color);
-    box-shadow: 0 0 8px 6px var(--wsa-dark-boxShadow);
+    box-shadow: var(--wsa-ui-shadow) var(--wsa-dark-boxShadow);
 }
 
 .wsa[wsa-position="top left"],
 .wsa-drop-bubble[landing-pos="top left"]{
-    top:0;
-    left: 0;
+    top: var(--wsa-0);
+    left: var(--wsa-0);
 }
 
 .wsa[wsa-position="top center"],
 .wsa-drop-bubble[landing-pos="top center"]{
-    top:0;
+    top: var(--wsa-0);
     left: 50%;
     transform: translateX(-50%);
 }
 
 .wsa[wsa-position="top right"],
 .wsa-drop-bubble[landing-pos="top right"]{
-    top:0;
-    right: 0;
+    top: var(--wsa-0);
+    right: var(--wsa-0);
 }
 
 .wsa[wsa-position="center left"],
 .wsa-drop-bubble[landing-pos="center left"]{
     top:50%;
-    left: 0;
+    left: var(--wsa-0);
     transform: translateY(-50%);
 }
 
 .wsa[wsa-position="center right"],
 .wsa-drop-bubble[landing-pos="center right"]{
     top:50%;
-    right: 0;
+    right: var(--wsa-0);
     transform: translateY(-50%);
 }
 
 .wsa[wsa-position="bottom left"],
 .wsa-drop-bubble[landing-pos="bottom left"]{
-    bottom:0;
-    left: 0;
+    bottom: var(--wsa-0);
+    left: var(--wsa-0);
 }
 
 .wsa[wsa-position="bottom center"],
 .wsa-drop-bubble[landing-pos="bottom center"]{
-    bottom:0;
+    bottom: var(--wsa-0);
     left: 50%;
     transform: translateX(-50%);
 }
 
 .wsa[wsa-position="bottom right"],
 .wsa-drop-bubble[landing-pos="bottom right"]{
-    bottom:0;
-    right: 0;
+    bottom: var(--wsa-0);
+    right: var(--wsa-0);
 }
 
 
 .wsa .wsa-title{
-    padding-top: .5rem;
+    padding-top: var(--wsa-title-padding);
     text-align: center;
     width: 100%;
     display: grid;
@@ -188,13 +224,13 @@
 }
 .wsa .wsa-title .wsa-version,
 .wsa .wsa-title .wsa-credits{
-    font-size: 15px;
+    font-size: var(--wsa-title-size);
     font-weight: bold;
     cursor: help;
 }
 .wsa .wsa-title .wsa-credits .current{
-    font-size: 18px;
-    text-decoration: underline;
+    font-size: var(--wsa-credits-current-size);
+    text-decoration: var(--wsa-credits-current-decor);
 }
 .wsa[wsa-theme="light"] .wsa-title .wsa-credits .current.low{
     color: var(--wsa-light-credits-low);
@@ -205,12 +241,12 @@
 .wsa .wsa-container{
     position: relative;
     display: flex;
-    width: 100%;
-    height: 100%;
+    width: var(--wsa-container-width);
+    height: var(--wsa-container-height);
     flex-direction: column;
 }
 .wsa .wsa-ui{
-    padding: 1rem;
+    padding: var(--wsa-ui-padding);
     height: 75%;
     position: relative;
     display: contents;
@@ -219,22 +255,22 @@
     width: 100%;
 }
 .wsa .wsa-ui .wsa-history{
-    height: calc(100% - 75px);
-    overflow: auto;
+    height: var(--wsa-history-height);
+    overflow: var(--wsa-history-overflow);
 }
 .wsa .wsa-ui .wsa-history .wsa-history-item{
-    word-wrap: break-word;
-    font-size: 20px;
-    width: calc(100% - 10px);
-    padding: 5px;
-    border-radius: 5px;
-    margin-top:3px;
-    margin-bottom: 3px;
+    word-wrap: var(--wsa-history-wrap);
+    font-size: var(--wsa-history-size);
+    width: var(--wsa-history-width);
+    padding: var(--wsa-history-padding);
+    border-radius: var(--wsa-ui-radius);
+    margin-top:var(--wsa-history-margin);
+    margin-bottom: var(--wsa-history-margin);
     
 }
 .wsa .wsa-ui .wsa-history .wsa-history-item .wsa-user{
-    font-size: 18px;
-    font-style: italic;
+    font-size: var(--wsa-history-user-size);
+    font-style: var(--wsa-history-user-style);
 }
 .wsa[wsa-theme="light"] .wsa-ui .wsa-history .wsa-history-item .wsa-user{
     color: var(--wsa-light-usertag);
@@ -244,7 +280,7 @@
 }
 
 .wsa .wsa-ui .wsa-history .wsa-history-item a{
-    text-decoration: none;
+    text-decoration: var(--wsa-history-decor);
 }
 .wsa[wsa-theme="light"] .wsa-ui .wsa-history .wsa-history-item a{
     color: var(--wsa-light-link);
@@ -263,11 +299,11 @@
 }
 
 .wsa .wsa-ui textarea{
-    border:0;
-    outline: none;
-    resize: none;
+    border:var(--wsa-0);
+    outline: var(--wsa-none);
+    resize: var(--wsa-none);
     font-size: var(--wsa-txtarea-size);
-    padding: 5px;
+    padding: var(--wsa-history-padding);
 }
 .wsa[wsa-theme="light"] .wsa-ui textarea{
     background-color: var(--wsa-light-txtarea-bg);
@@ -281,8 +317,8 @@
 .wsa .wsa-ui textarea[disabled],
 .wsa .wsa-ui textarea.disabled{
     background-color: var(--wsa-txtarea-disabled);
-    cursor: auto;
-    pointer-events: none;
+    cursor: var(--wsa-auto);
+    pointer-events: var(--wsa-none);
 }
 
 .wsa[wsa-theme="light"] .wsa-ui .wsa-history [wsa-cmdtype="danger"]{
@@ -331,11 +367,11 @@
     align-items: center;
 }
 .wsa .wsa-ui .wsa-history .wsa-cmd .wsa-copymsg{
-    width: auto;
-    background-color: transparent;
-    font-size: 25px;
-    cursor: pointer;
-    border:0;
+    width: var(--wsa-auto);
+    background-color: var(--wsa-transparent);
+    font-size: var(--wsa-history-cmd-size);
+    cursor: var(--wsa-pointer);
+    border: var(--wsa-0);
 }
 .wsa[wsa-theme="dark"] .wsa-ui .wsa-history .wsa-cmd .wsa-copymsg{
     color: var(--wsa-dark-copy);
@@ -361,7 +397,7 @@
     border: none; /* Remove the default border */
     width: 16px; /* Adjust the width of the arrow */
     height: 16px; /* Adjust the height of the arrow */
-    cursor: pointer; /* Make the arrow clickable */
+    cursor: var(--wsa-pointer); /* Make the arrow clickable */
 }
 .wsa[wsa-theme="light"] ::-webkit-scrollbar-button:vertical:start{
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3C!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath fill='%23000000' d='M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z'/%3E%3C/svg%3E");
@@ -391,7 +427,7 @@
     border: none; /* Remove the default border */
     width: 16px; /* Adjust the width of the arrow */
     height: 16px; /* Adjust the height of the arrow */
-    cursor: pointer; /* Make the arrow clickable */
+    cursor: var(--wsa-pointer); /* Make the arrow clickable */
 }
 .wsa[wsa-theme="dark"] ::-webkit-scrollbar-button:vertical:start{
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3C!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath fill='%23ffffff' d='M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z'/%3E%3C/svg%3E");
@@ -430,19 +466,20 @@
     color: var(--wsa-dark-editor-controller-color);
 }
 .wsa .wsa-btn{
-    border:0;
-    background-color: transparent;
-    cursor: pointer;
+    border:var(--wsa-0);
+    background-color: var(--wsa-transparent);
+    cursor: var(--wsa-pointer);
     font-size: 2.8vh;
     border-radius: 5px;
-    padding: .3rem 0 .3rem 0;
+    padding: .3rem var(--wsa-0);
     transition: 0.3s all;
 }
 .wsa .wsa-btn:disabled,
 .wsa .wsa-btn[disabled],
 .wsa .wsa-btn.disabled{
     cursor: auto;
-    opacity: .5;}
+    opacity: .5;
+}
 .wsa[wsa-theme="light"] .wsa-btn{
     color: var(--wsa-light-btn-color);
 }
@@ -467,14 +504,14 @@
     border-bottom-left-radius: 5px;
 }
 .wsa .wsa-editor-actions button{
-    background: transparent;
+    background: var(--wsa-transparent);
     height: 100%;
-    border: 0;
-    cursor: pointer;
+    border: var(--wsa-0);
+    cursor: var(--wsa-pointer);
     font-size: 5vh;
-    padding: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    padding: var(--wsa-0);
+    border-top-right-radius: var(--wsa-0);
+    border-bottom-right-radius: var(--wsa-0);
 }
 .wsa-drop-bubble{
     position: fixed;
@@ -567,14 +604,14 @@
     height: auto;
     padding: .5rem;
     border-radius: 5px;
-    top:0;
+    top: var(--wsa-0);
     left: calc(0px + 30%);
 }
 .wsa_smart_prompt div{
-    margin: auto 0 auto 0;
+    margin: auto var(--wsa-0);
 }
 .wsa_smart_prompt div h1{
-    margin: 0;
+    margin: var(--wsa-0);
     font-weight: 800;
     text-transform: uppercase;
     font-size: 7vh;
@@ -596,7 +633,6 @@
     background-color: var(--wsa-light-smart-bg);
     background: var(--wsa-light-smart-bg-linear);
     color:var(--wsa-light-smart-color);
-   
 }
 [wsa-theme="dark"] .wsa_smart_prompt{
     background-color: var(--wsa-dark-smart-bg);
@@ -608,10 +644,10 @@
     margin-top: 5px;
 }
 .wsa_smart_prompt .ai_smart_opt button{
-    background: transparent;
-    border: 0;
+    background: var(--wsa-transparent);
+    border: var(--wsa-0);
     font-size: 4vh;
-    cursor: pointer;
+    cursor: var(--wsa-pointer);
     padding: .5rem;
     border-radius: 5px;
     transition: all 0.3s;

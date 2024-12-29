@@ -9,7 +9,8 @@
         "blockDomains": [],
         "search": {
             "language": "auto"
-        }
+        },
+        "modal": "system"
     },
     "previewBox": {
         "width": 600,
